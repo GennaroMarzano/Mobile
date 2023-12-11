@@ -1,1 +1,67 @@
+MOBILE LOGIN E REGISTRAZIONE
 
+Fase di Login      -                
+Email e password    |
+                    |
+COMPLETATA         -
+
+
+Fase di Registazione
+
+FASE 1
+
+Cognome                     -
+Nome                         |
+Codice Fiscale (CF)          |
+Luogo di Nascita             |
+Data di Nascita              |
+Nazione di Nascita           |
+Nazione/Luogo di residenza   |
+Indirizzo di residenza       |
+Cellulare                    |
+Email                       -
+
+COMPLETATA       
+
+
+FASE 2
+
+Fumi?                                                        -
+Fai uso di sostanze stupefacenti?                             |			
+Bevi?                                                         |			
+                                                              |                 
+Usi qualche medicinale?                                       |
+Sei stato sottoposto ad operazioni in passato?                |
+Qualcuno della tua famiglia ha avuto qualche malattia?        |
+                                                              |
+Fai attività fisica?                                          |
+Hai un'alimentazione sana?                                    |
+Dormi abbastanza?                                             |
+                                                              |
+Soffri di qualche allergia?                                   |
+Quanta acqua bevi al giorno?                                  |
+Quanti pasti fai al giorno?                                   |
+Consumi molta frutta e verdura?                               |
+Che tipo di dieta segui? (es. vegetariana, vegana, ecc...)   -
+
+COMPLETATA
+
+Domande con risposte Si/No:
+
+Fumi?
+Fai uso di sostanze stupefacenti?
+Soffri di qualche allergia?
+Sei stato sottoposto ad operazioni in passato?
+Fai attività fisica?
+Hai un'alimentazione sana?
+Bevi?
+Usi qualche medicinale?
+Dormi abbastanza?
+Qualcuno della tua famiglia ha avuto qualche malattia?
+Consumi molta frutta e verdura?
+Domande con risposte più dettagliate o numeriche:
+
+Quanto ti senti stressato da 1 a 10?
+Quanta acqua bevi al giorno?
+Quanti pasti fai al giorno?
+Che tipo di dieta segui? (es. vegetariana, vegana, ecc...)
