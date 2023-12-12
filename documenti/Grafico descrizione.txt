@@ -1,0 +1,12 @@
+Grafico a torta:
+- Rappresenta il totale delle spese
+- Ogni fetta di grafico rappresenta il servizio su cui sono state effettuate spese:
+	° cibo    (rosso)
+	° farmaci (verde)
+	° altro   (blu)
+- Pulsante (3 pallini) per selezionare il corso del tempo interessato (interrogazioni sul grafico)
+- Punto interrogativo per aiuto alla pagina: far sapere all'utente che può selezionare un range di tempo
+- Cliccando il grafico si naviga sulla sezione modifica, dove si può scegliere di aggiungere o eliminare acquisti di prodotto con annesso inserimento
+   del costo relativo:
+		° aggiunta col tasto "+"
+		° eliminazione col tasto "x"
