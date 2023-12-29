@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         user = auth.getCurrentUser();
         if (user == null){
             Intent intent = new Intent(getApplicationContext(), Login.class);
-            startActivities(intent);
+            startActivities(new Intent[]{intent});
             finish();
         } else {
             textView.setText(user.getEmail());
@@ -39,13 +39,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(getApplicationContext(), Login.class);
-                startActivities(intent);
+                startActivities(new Intent[]{intent});
                 finish();
 
             }
         });
-    }
-    private void startActivities(Intent intent) {
     }
 
 }
