@@ -28,8 +28,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.auth.User;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -189,16 +191,14 @@ public class Register extends AppCompatActivity {
 
                                     UserData(userId);
 
+                                    List<Double> dbInitialValue = Arrays.asList(0.0, 0.0, 0.0);
+
                                     Map<String, Object> note =  new HashMap<>();
 
-                                    note.put(KEY_FOOD_PIE, 0);
-                                    note.put(KEY_MEDICINES_PIE, 0);
-                                    note.put(KEY_OTHER_PIE, 0);
+                                    note.put(formattedDate, dbInitialValue);
 
                                     db.collection("Chart Pie Data")
-                                            .document(userId + " Charges")
-                                            .collection("Dates")
-                                            .document(formattedDate)
+                                            .document(userId + " FMO")
                                             .set(note)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override

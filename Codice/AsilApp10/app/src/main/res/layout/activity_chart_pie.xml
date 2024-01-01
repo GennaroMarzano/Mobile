@@ -12,54 +12,42 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Total Charges"
-        android:textStyle="bold"
-        android:textColor="#000000"
         android:shadowColor="#AFAFAF"
         android:shadowDx="0"
         android:shadowDy="10"
         android:shadowRadius="5"
+        android:text="Total Charges"
+        android:textColor="#000000"
         android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.037" />
+        app:layout_constraintVertical_bias="0.024" />
 
     <com.anychart.AnyChartView
         android:id="@+id/any_chart_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="200dp"
         android:layout_marginBottom="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="1.0" >
+        app:layout_constraintVertical_bias="1.0">
 
         <Button
             android:id="@+id/b_edit_chart_pie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add" />
+
     </com.anychart.AnyChartView>
 
-    <Button
-        android:id="@+id/three_dots"
-        android:layout_width="63dp"
-        android:layout_height="63dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/ic_calendar"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/infoButton"
@@ -75,26 +63,17 @@
 
     <DatePicker
         android:id="@+id/d_pie_start"
-        android:layout_width="169dp"
-        android:layout_height="94dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="236dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="-625dp"
         android:calendarViewShown="false"
         android:datePickerMode="spinner"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <DatePicker
-        android:id="@+id/d_pie_end"
-        android:layout_width="171dp"
-        android:layout_height="92dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="16dp"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.518"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -103,6 +82,20 @@
         android:layout_height="wrap_content"
         android:text="@string/apply"
         tools:layout_editor_absoluteY="16dp"
+        tools:ignore="MissingConstraints" />
+
+    <DatePicker
+        android:id="@+id/d_pie_end"
+        android:layout_width="236dp"
+        android:layout_height="94dp"
+        android:layout_marginTop="6dp"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        app:layout_constraintBottom_toTopOf="@+id/any_chart_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/d_pie_start"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints" />
 
 

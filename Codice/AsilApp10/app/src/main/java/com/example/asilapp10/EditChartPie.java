@@ -20,8 +20,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -81,38 +83,40 @@ public class EditChartPie extends AppCompatActivity {
 
                 String userId = user.getUid();
                 DocumentReference docRef = db.collection("Chart Pie Data")
-                                             .document(userId + " Charges")
-                                             .collection("Dates")
-                                             .document(formattedDate);
+                                             .document(userId + " FMO");
 
                 docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
-                            Double foodValue = documentSnapshot.getDouble("Food");
-                            Double medicinesValue = documentSnapshot.getDouble("Medicines");
-                            Double otherValue = documentSnapshot.getDouble("Other");
+                            List<Double> values = (List<Double>) documentSnapshot.get(formattedDate);
 
-                            // Verifica se i valori sono diversi da null prima di convertirli in int
+                            Double foodValue = 0.0;
+                            Double medicinesValue = 0.0;
+                            Double otherValue = 0.0;
+
+                            if (values != null && values.size() >= 3) {
+                                foodValue = values.get(0);
+                                medicinesValue = values.get(1);
+                                otherValue = values.get(2);
+
+                                // Utilizza i valori ottenuti
+                            }
+
+                            // Verifica se i valori sono diversi da null prima di convertirli in double
                             if (foodValue != null && medicinesValue != null && otherValue != null) {
 
                                 food[0] += foodValue.doubleValue();
                                 medicines[0] += medicinesValue.doubleValue();
                                 other[0] += otherValue.doubleValue();
 
-                                Map<String, Object> note =  new HashMap<>();
+                                List<Double> updatedValues = Arrays.asList(food[0], medicines[0], other[0]);
 
-                                note.put(KEY_FOOD, food[0]);
-                                note.put(KEY_MEDICINES, medicines[0]);
-                                note.put(KEY_OTHER, other[0]);
-
-                                db.collection("Chart Pie Data")
-                                        .document(userId + " Charges").collection("Dates")
-                                        .document(formattedDate)
-                                        .set(note)
+                                // Aggiorna l'array nel documento Firestore utilizzando il riferimento docRef
+                                docRef.update(formattedDate, updatedValues)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
-                                            public void onSuccess(Void unused) {
+                                            public void onSuccess(Void aVoid) {
                                                 Toast.makeText(EditChartPie.this, "Data saved!", Toast.LENGTH_SHORT).show();
                                             }
                                         })
@@ -120,7 +124,6 @@ public class EditChartPie extends AppCompatActivity {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
                                                 Toast.makeText(EditChartPie.this, "Error!", Toast.LENGTH_SHORT).show();
-                                                Log.d(TAG, e.toString());
                                             }
                                         });
 
