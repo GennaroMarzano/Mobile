@@ -10,7 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,7 +26,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,9 +47,19 @@ public class FragmentUserData extends Fragment {
     private String mParam2;
     TextView tfName, tlName, tCF, tbPlace, tdBirth, tNationality, tpResidence, tAddress, tpNumber,
              tEmail, tPassword;
+    Button buttonEdit, buttonApplyEdit;
     FirebaseUser user;
     FirebaseAuth mAuth;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public static final String KEY_FIRST_NAME = "First name";
+    public static final String KEY_LAST_NAME = "Last name";
+    public static final String KEY_TAX_ID_CODE = "Tax ID Code";
+    public static final String KEY_BIRTH_PLACE = "Birth place";
+    public static final String KEY_DATE_OF_BIRTH = "Date of birth";
+    public static final String KEY_NATIONALITY = "Nationality";
+    public static final String KEY_PLACE_OF_RESIDENCE = "Place of residence";
+    public static final String KEY_ADDRESS = "Address";
+    public static final String KEY_PHONE_NUMBER = "Phone number";
 
     public FragmentUserData() {
         // Required empty public constructor
@@ -102,11 +116,39 @@ public class FragmentUserData extends Fragment {
         tEmail = getView().findViewById(R.id.t_email);
         tPassword = getView().findViewById(R.id.t_password);
 
+        buttonEdit = getView().findViewById(R.id.btn_edit_data);
+        buttonApplyEdit = getView().findViewById(R.id.btn_apply_edit_data);
+
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 
         String userId = user.getUid();
         queryFireStore(userId);
+
+        buttonEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tfName.setEnabled(true);
+                tlName.setEnabled(true);
+                tCF.setEnabled(true);
+                tbPlace.setEnabled(true);
+                tdBirth.setEnabled(true);
+                tNationality.setEnabled(true);
+                tpResidence.setEnabled(true);
+                tAddress.setEnabled(true);
+                tpNumber.setEnabled(true);
+
+                
+
+            }
+        });
+
+        buttonApplyEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveNewDataUser(userId);
+            }
+        });
     }
 
     private void queryFireStore(String userId) {
@@ -131,14 +173,11 @@ public class FragmentUserData extends Fragment {
                         tbPlace.setText(documentSnapshot.getString("Birth place"));
                         tdBirth.setText(documentSnapshot.getString("Date of birth"));
                         tNationality.setText(documentSnapshot.getString("Nationality"));
-                        tpResidence.setText(documentSnapshot.getString("Place pf residence"));
+                        tpResidence.setText(documentSnapshot.getString("Place of residence"));
                         tAddress.setText(documentSnapshot.getString("Address"));
-                        tpNumber.setText(documentSnapshot.getString("Phone Number"));
+                        tpNumber.setText(documentSnapshot.getString("Phone number"));
                         tEmail.setText(user.getEmail());
                         // tPassword non dovrebbe essere recuperata o mostrata per questioni di sicurezza
-
-
-
                     } else {
                         // Il documento non esiste
                         Log.d("FirestoreError", "Document does not exist");
@@ -154,5 +193,42 @@ public class FragmentUserData extends Fragment {
 
             }
         });
+    }
+
+    public void saveNewDataUser(String userId){
+        String firstName = tfName.getText().toString();
+        String lastName = tlName.getText().toString();
+        String taxIdCode = tCF.getText().toString();
+        String birthPlace = tbPlace.getText().toString();
+        //String dateOfBirth = day + "/" + month + "/" + year;
+        String nationality = tNationality.getText().toString();
+        String placeOfResidence =  tpResidence.getText().toString();
+        String address = tAddress.getText().toString();
+        String phoneNumber = tpNumber.getText().toString();
+
+        Map<String, Object> note = new HashMap<>();
+
+        note.put(KEY_FIRST_NAME, firstName);
+        note.put(KEY_LAST_NAME, lastName);
+        note.put(KEY_TAX_ID_CODE, taxIdCode);
+        note.put(KEY_BIRTH_PLACE, birthPlace);
+        //note.put(KEY_DATE_OF_BIRTH, dateOfBirth);
+        note.put(KEY_NATIONALITY, nationality);
+        note.put(KEY_PLACE_OF_RESIDENCE, placeOfResidence);
+        note.put(KEY_ADDRESS, address);
+        note.put(KEY_PHONE_NUMBER, phoneNumber);
+
+        db.collection("Users Data")
+                .document(userId + " Personal Data").set(note)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (getActivity() != null) {
+                            Toast.makeText(getActivity(), "User data saved!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
     }
 }

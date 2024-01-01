@@ -193,7 +193,7 @@ public class Register extends AppCompatActivity {
 
                                     List<Double> dbInitialValue = Arrays.asList(0.0, 0.0, 0.0);
 
-                                    Map<String, Object> note =  new HashMap<>();
+                                    Map<String, Object> note = new HashMap<>();
 
                                     note.put(formattedDate, dbInitialValue);
 

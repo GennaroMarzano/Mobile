@@ -1,125 +1,366 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentUserData">
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Riga per Nome -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/label_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Name:" />
+
+        <EditText
+            android:id="@+id/tf_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:enabled="false"
+            android:padding="8dp"
+            android:textSize="14sp"
+            android:minHeight="30dp"/>
+
+    </LinearLayout>
+
+    <!-- Spaziatura -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp"> <!-- Aggiunto padding per il layout interno -->
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <!-- Prima riga di TextView -->
-        <LinearLayout
-            android:layout_width="match_parent"
+        <!-- Riga per Cognome -->
+        <TextView
+            android:id="@+id/label_surname"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_weight="2"
+            android:text="Last name:" />
 
-            <TextView
-                android:id="@+id/tf_name"
-                android:hint="@string/first_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Dato 1" />
-
-            <TextView
-                android:id="@+id/tl_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Dato 2" />
-
-            <TextView
-                android:id="@+id/tCF"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Dato 3" />
-
-        </LinearLayout>
-
-        <!-- Seconda riga di TextView -->
-        <LinearLayout
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/tl_name"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tb_place"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Dato 1" />
-
-            <TextView
-                android:id="@+id/td_birth"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Dato 2" />
-
-            <TextView
-                android:id="@+id/t_nationality"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Dato 3" />
-
-        </LinearLayout>
-
-        <!-- Terza riga di TextView -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tp_residence"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Dato 1" />
-
-            <TextView
-                android:id="@+id/t_address"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Dato 2" />
-
-            <TextView
-                android:id="@+id/tp_number"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Dato 3" />
-
-        </LinearLayout>
-
-        <!-- Quarta riga di TextView -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/t_email"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Dato 1" />
-
-            <TextView
-                android:id="@+id/t_password"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Dato 2" />
-
-        </LinearLayout>
+            android:layout_weight="2"
+            android:enabled="false"
+            android:padding="8dp"
+            android:textSize="14sp"
+            android:minHeight="30dp"/>
 
     </LinearLayout>
-</FrameLayout>
+
+    <!-- Spaziatura -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Riga per Codice Fiscale -->
+        <TextView
+            android:id="@+id/label_cf"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Tax ID COde:" />
+
+        <EditText
+            android:id="@+id/tCF"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:enabled="false"
+            android:padding="8dp"
+            android:textSize="14sp"
+            android:minHeight="30dp"/>
+
+    </LinearLayout>
+
+    <!-- Spaziatura -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Riga per Luogo di Nascita -->
+        <TextView
+            android:id="@+id/label_birth_place"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Birth place:" />
+
+        <EditText
+            android:id="@+id/tb_place"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:enabled="false"
+            android:padding="8dp"
+            android:textSize="14sp"
+            android:minHeight="30dp"/>
+
+    </LinearLayout>
+
+    <!-- Spaziatura -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Riga per Data di Nascita -->
+        <TextView
+            android:id="@+id/label_birth_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Date of birth"/>
+
+        <EditText
+            android:id="@+id/td_birth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:enabled="false"
+            android:padding="8dp"
+            android:textSize="14sp"
+            android:minHeight="30dp"/>
+
+    </LinearLayout>
+
+    <!-- Spaziatura -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Riga per Nazionalità -->
+        <TextView
+            android:id="@+id/label_nationality"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Nationality:" />
+
+        <EditText
+            android:id="@+id/t_nationality"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:enabled="false"
+            android:padding="8dp"
+            android:textSize="14sp"
+            android:minHeight="30dp"/>
+
+    </LinearLayout>
+
+    <!-- Spaziatura -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Riga per Residenza -->
+        <TextView
+            android:id="@+id/label_residence"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Place of residence:" />
+
+        <EditText
+            android:id="@+id/tp_residence"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:enabled="false"
+            android:padding="8dp"
+            android:textSize="14sp"
+            android:minHeight="30dp"/>
+
+    </LinearLayout>
+
+    <!-- Spaziatura -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Riga per Indirizzo -->
+        <TextView
+            android:id="@+id/label_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Address:" />
+
+        <EditText
+            android:id="@+id/t_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:enabled="false"
+            android:padding="8dp"
+            android:textSize="14sp"
+            android:minHeight="30dp"/>
+
+    </LinearLayout>
+
+    <!-- Spaziatura -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Riga per Numero di Telefono -->
+        <TextView
+            android:id="@+id/label_phone_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Phone number:" />
+
+        <EditText
+            android:id="@+id/tp_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:enabled="false"
+            android:padding="8dp"
+            android:textSize="14sp"
+            android:minHeight="30dp"/>
+
+    </LinearLayout>
+
+    <!-- Spaziatura -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Riga per Email -->
+        <TextView
+            android:id="@+id/label_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Email:" />
+
+        <EditText
+            android:id="@+id/t_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:enabled="false"
+            android:padding="8dp"
+            android:textSize="14sp"
+            android:minHeight="30dp"/>
+
+    </LinearLayout>
+
+    <!-- Spaziatura -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Riga per Password -->
+        <TextView
+            android:id="@+id/label_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Password:" />
+
+        <EditText
+            android:id="@+id/t_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:enabled="false"
+            android:padding="8dp"
+            android:textSize="14sp"
+            android:minHeight="30dp"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_edit_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_apply_edit_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Apply changes"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
+
