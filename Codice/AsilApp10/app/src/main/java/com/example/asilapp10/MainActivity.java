@@ -1,6 +1,8 @@
 package com.example.asilapp10;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +16,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
-    Button button;
+    Button button, buttonF;
     TextView textView;
     FirebaseUser user;
     @Override
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         button = findViewById(R.id.logout);
+        buttonF = findViewById(R.id.button);
         textView = findViewById(R.id.user_details);
         user = auth.getCurrentUser();
         if (user == null){
@@ -41,9 +44,22 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivities(new Intent[]{intent});
                 finish();
+            }
+        });
+
+        buttonF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                FragmentUserData userFragment = new FragmentUserData(); // Sostituisci con il tuo Fragment
+                fragmentTransaction.add(R.id.fragment_container, userFragment);
+                fragmentTransaction.commit();
+
 
             }
         });
     }
-
 }
