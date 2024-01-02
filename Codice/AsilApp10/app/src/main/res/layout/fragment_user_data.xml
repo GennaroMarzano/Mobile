@@ -260,6 +260,7 @@
 
         <EditText
             android:id="@+id/tp_number"
+            android:inputType="numberDecimal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -336,29 +337,48 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_edit_data"
-            android:layout_width="match_parent"
+        <!-- Primo FrameLayout per i primi due bottoni -->
+        <FrameLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Edit" />
+            android:layout_weight="1">
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/btn_edit_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edit" />
 
+            <Button
+                android:id="@+id/btn_back_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                android:visibility="gone" />
+        </FrameLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_apply_edit_data"
-            android:layout_width="match_parent"
+        <!-- Secondo FrameLayout per gli altri due bottoni -->
+        <FrameLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Apply changes"
-            />
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btn_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Logout" />
+
+            <Button
+                android:id="@+id/btn_apply_edit_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apply"
+                android:visibility="gone" />
+        </FrameLayout>
 
     </LinearLayout>
 

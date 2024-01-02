@@ -1,5 +1,6 @@
 package com.example.asilapp10;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +49,7 @@ public class FragmentUserData extends Fragment {
     private String mParam2;
     TextView tfName, tlName, tCF, tbPlace, tdBirth, tNationality, tpResidence, tAddress, tpNumber,
              tEmail, tPassword;
-    Button buttonEdit, buttonApplyEdit;
+    Button buttonEdit, buttonApplyEdit, buttonLogout, buttonBack;
     FirebaseUser user;
     FirebaseAuth mAuth;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -61,6 +63,9 @@ public class FragmentUserData extends Fragment {
     public static final String KEY_ADDRESS = "Address";
     public static final String KEY_PHONE_NUMBER = "Phone number";
 
+
+    //MANCA VISUALIZZARE LA DATA, LA PASSWORD ( O FORSE NO  PER MOTIVI DI SICUREZZA )
+    // E ABBASSARE IL LAYOUT DOVE SI TROVANO I BOTTONI PERCHE' LI TAGLIA
     public FragmentUserData() {
         // Required empty public constructor
     }
@@ -118,6 +123,8 @@ public class FragmentUserData extends Fragment {
 
         buttonEdit = getView().findViewById(R.id.btn_edit_data);
         buttonApplyEdit = getView().findViewById(R.id.btn_apply_edit_data);
+        buttonLogout = getView().findViewById(R.id.btn_logout);
+        buttonBack = getView().findViewById(R.id.btn_back_edit);
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -138,15 +145,67 @@ public class FragmentUserData extends Fragment {
                 tAddress.setEnabled(true);
                 tpNumber.setEnabled(true);
 
-                
+                buttonEdit.setVisibility(View.GONE);
+                buttonLogout.setVisibility(View.GONE);
 
+                buttonBack.setVisibility(View.VISIBLE);
+                buttonApplyEdit.setVisibility(View.VISIBLE);
+            }
+        });
+
+        buttonLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+
+                Intent intent = new Intent(getActivity(), Login.class);
+                startActivity(intent);
+
+                getActivity().finish();
             }
         });
 
         buttonApplyEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tfName.setEnabled(false);
+                tlName.setEnabled(false);
+                tCF.setEnabled(false);
+                tbPlace.setEnabled(false);
+                tdBirth.setEnabled(false);
+                tNationality.setEnabled(false);
+                tpResidence.setEnabled(false);
+                tAddress.setEnabled(false);
+                tpNumber.setEnabled(false);
+
+                buttonEdit.setVisibility(View.VISIBLE);
+                buttonLogout.setVisibility(View.VISIBLE);
+
+                buttonBack.setVisibility(View.GONE);
+                buttonApplyEdit.setVisibility(View.GONE);
+
                 saveNewDataUser(userId);
+            }
+        });
+
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tfName.setEnabled(false);
+                tlName.setEnabled(false);
+                tCF.setEnabled(false);
+                tbPlace.setEnabled(false);
+                tdBirth.setEnabled(false);
+                tNationality.setEnabled(false);
+                tpResidence.setEnabled(false);
+                tAddress.setEnabled(false);
+                tpNumber.setEnabled(false);
+
+                buttonEdit.setVisibility(View.VISIBLE);
+                buttonLogout.setVisibility(View.VISIBLE);
+
+                buttonBack.setVisibility(View.GONE);
+                buttonApplyEdit.setVisibility(View.GONE);
             }
         });
     }
@@ -200,35 +259,52 @@ public class FragmentUserData extends Fragment {
         String lastName = tlName.getText().toString();
         String taxIdCode = tCF.getText().toString();
         String birthPlace = tbPlace.getText().toString();
-        //String dateOfBirth = day + "/" + month + "/" + year;
+        //String dateOfBirth = day + "/" + month + "/" + year; // Assicurati di gestire questa parte in base alla tua logica
         String nationality = tNationality.getText().toString();
-        String placeOfResidence =  tpResidence.getText().toString();
+        String placeOfResidence = tpResidence.getText().toString();
         String address = tAddress.getText().toString();
         String phoneNumber = tpNumber.getText().toString();
 
         Map<String, Object> note = new HashMap<>();
 
-        note.put(KEY_FIRST_NAME, firstName);
-        note.put(KEY_LAST_NAME, lastName);
-        note.put(KEY_TAX_ID_CODE, taxIdCode);
-        note.put(KEY_BIRTH_PLACE, birthPlace);
-        //note.put(KEY_DATE_OF_BIRTH, dateOfBirth);
-        note.put(KEY_NATIONALITY, nationality);
-        note.put(KEY_PLACE_OF_RESIDENCE, placeOfResidence);
-        note.put(KEY_ADDRESS, address);
-        note.put(KEY_PHONE_NUMBER, phoneNumber);
+        if (!firstName.isEmpty()) {
+            note.put(KEY_FIRST_NAME, firstName);
+        }
+        if (!lastName.isEmpty()) {
+            note.put(KEY_LAST_NAME, lastName);
+        }
+        if (!taxIdCode.isEmpty()) {
+            note.put(KEY_TAX_ID_CODE, taxIdCode);
+        }
+        if (!birthPlace.isEmpty()) {
+            note.put(KEY_BIRTH_PLACE, birthPlace);
+        }
+        // Gestisci dateOfBirth qui se necessario
+        if (!nationality.isEmpty()) {
+            note.put(KEY_NATIONALITY, nationality);
+        }
+        if (!placeOfResidence.isEmpty()) {
+            note.put(KEY_PLACE_OF_RESIDENCE, placeOfResidence);
+        }
+        if (!address.isEmpty()) {
+            note.put(KEY_ADDRESS, address);
+        }
+        if (!phoneNumber.isEmpty()) {
+            note.put(KEY_PHONE_NUMBER, phoneNumber);
+        }
 
-        db.collection("Users Data")
-                .document(userId + " Personal Data").set(note)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (getActivity() != null) {
-                            Toast.makeText(getActivity(), "User data saved!", Toast.LENGTH_SHORT).show();
+        // Aggiorna solo i campi non vuoti
+        if (!note.isEmpty()) {
+            db.collection("Users Data")
+                    .document(userId + " Personal Data").set(note, SetOptions.merge())
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (getActivity() != null) {
+                                Toast.makeText(getActivity(), "Changes saved!", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
-
-
+                    });
+        }
     }
 }

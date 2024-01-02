@@ -151,6 +151,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phone_number"
             android:hint="Phone number"
+            android:inputType="numberDecimal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
