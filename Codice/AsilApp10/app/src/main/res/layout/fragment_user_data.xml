@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -76,7 +84,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Tax ID COde:" />
+            android:text="Tax ID Code:" />
 
         <EditText
             android:id="@+id/tCF"
@@ -337,7 +345,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="108dp"
         android:orientation="horizontal">
 
         <!-- Primo FrameLayout per i primi due bottoni -->
@@ -380,7 +388,21 @@
                 android:visibility="gone" />
         </FrameLayout>
 
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btn_share"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/share" />
+
+        </FrameLayout>
+
     </LinearLayout>
 
 </LinearLayout>
 
+</ScrollView>

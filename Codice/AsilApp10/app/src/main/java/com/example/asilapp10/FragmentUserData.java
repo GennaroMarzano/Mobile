@@ -1,5 +1,7 @@
 package com.example.asilapp10;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -49,7 +51,7 @@ public class FragmentUserData extends Fragment {
     private String mParam2;
     TextView tfName, tlName, tCF, tbPlace, tdBirth, tNationality, tpResidence, tAddress, tpNumber,
              tEmail, tPassword;
-    Button buttonEdit, buttonApplyEdit, buttonLogout, buttonBack;
+    Button buttonEdit, buttonApplyEdit, buttonLogout, buttonBack, buttonShare;
     FirebaseUser user;
     FirebaseAuth mAuth;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -121,10 +123,12 @@ public class FragmentUserData extends Fragment {
         tEmail = getView().findViewById(R.id.t_email);
         tPassword = getView().findViewById(R.id.t_password);
 
+
         buttonEdit = getView().findViewById(R.id.btn_edit_data);
         buttonApplyEdit = getView().findViewById(R.id.btn_apply_edit_data);
         buttonLogout = getView().findViewById(R.id.btn_logout);
         buttonBack = getView().findViewById(R.id.btn_back_edit);
+        buttonShare = getView().findViewById(R.id.btn_share);
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -147,6 +151,7 @@ public class FragmentUserData extends Fragment {
 
                 buttonEdit.setVisibility(View.GONE);
                 buttonLogout.setVisibility(View.GONE);
+                buttonShare.setVisibility(View.GONE);
 
                 buttonBack.setVisibility(View.VISIBLE);
                 buttonApplyEdit.setVisibility(View.VISIBLE);
@@ -180,6 +185,7 @@ public class FragmentUserData extends Fragment {
 
                 buttonEdit.setVisibility(View.VISIBLE);
                 buttonLogout.setVisibility(View.VISIBLE);
+                buttonShare.setVisibility(View.VISIBLE);
 
                 buttonBack.setVisibility(View.GONE);
                 buttonApplyEdit.setVisibility(View.GONE);
@@ -203,9 +209,36 @@ public class FragmentUserData extends Fragment {
 
                 buttonEdit.setVisibility(View.VISIBLE);
                 buttonLogout.setVisibility(View.VISIBLE);
+                buttonShare.setVisibility(View.VISIBLE);
 
                 buttonBack.setVisibility(View.GONE);
                 buttonApplyEdit.setVisibility(View.GONE);
+            }
+        });
+
+        buttonShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Confirm sharing");
+                builder.setMessage("Do you want to share your personal data?");
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        shareDataUser();
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
     }
@@ -305,6 +338,35 @@ public class FragmentUserData extends Fragment {
                             }
                         }
                     });
+        }
+    }
+
+    public void shareDataUser(){
+
+        StringBuilder dataBuilder = new StringBuilder();
+        dataBuilder.append("Name: ").append(tfName.getText().toString()).append("\n");
+        dataBuilder.append("Last name: ").append(tlName.getText().toString()).append("\n");
+        dataBuilder.append("Tax ID Code: ").append(tCF.getText().toString()).append("\n");
+        dataBuilder.append("Birth place: ").append(tbPlace.getText().toString()).append("\n");
+        dataBuilder.append("Date of Birth: ").append(tdBirth.getText().toString()).append("\n");
+        dataBuilder.append("Nationality: ").append(tNationality.getText().toString()).append("\n");
+        dataBuilder.append("Place of residence: ").append(tpResidence.getText().toString()).append("\n");
+        dataBuilder.append("Address: ").append(tAddress.getText().toString()).append("\n");
+        dataBuilder.append("Phone number: ").append(tpNumber.getText().toString()).append("\n");
+        dataBuilder.append("Email: ").append(tEmail.getText().toString()).append("\n");
+
+        String allData = dataBuilder.toString();
+
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, allData);
+        sendIntent.setType("text/plain");
+        sendIntent.setPackage("com.whatsapp");
+
+        try {
+            startActivity(sendIntent);
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(getContext(), "WhatsApp is not installed.", Toast.LENGTH_SHORT).show();
         }
     }
 }
