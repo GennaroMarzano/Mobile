@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
-
-
-
-<LinearLayout
-    android:layout_width="match_parent"
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Riga per Nome -->
     <LinearLayout
@@ -28,6 +21,7 @@
 
         <EditText
             android:id="@+id/tf_name"
+            android:textColor="@color/black"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -58,6 +52,7 @@
 
         <EditText
             android:id="@+id/tl_name"
+            android:textColor="@color/black"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -88,6 +83,7 @@
 
         <EditText
             android:id="@+id/tCF"
+            android:textColor="@color/black"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -118,6 +114,7 @@
 
         <EditText
             android:id="@+id/tb_place"
+            android:textColor="@color/black"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -148,6 +145,7 @@
 
         <EditText
             android:id="@+id/td_birth"
+            android:textColor="@color/black"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -178,6 +176,7 @@
 
         <EditText
             android:id="@+id/t_nationality"
+            android:textColor="@color/black"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -208,6 +207,7 @@
 
         <EditText
             android:id="@+id/tp_residence"
+            android:textColor="@color/black"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -238,6 +238,7 @@
 
         <EditText
             android:id="@+id/t_address"
+            android:textColor="@color/black"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -268,6 +269,7 @@
 
         <EditText
             android:id="@+id/tp_number"
+            android:textColor="@color/black"
             android:inputType="numberDecimal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -299,6 +301,7 @@
 
         <EditText
             android:id="@+id/t_email"
+            android:textColor="@color/black"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -329,6 +332,7 @@
 
         <EditText
             android:id="@+id/t_password"
+            android:textColor="@color/black"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -356,12 +360,14 @@
 
             <Button
                 android:id="@+id/btn_edit_data"
+                android:backgroundTint="#4CAF50"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Edit" />
 
             <Button
                 android:id="@+id/btn_back_edit"
+                android:backgroundTint="#4CAF50"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Back"
@@ -376,12 +382,14 @@
 
             <Button
                 android:id="@+id/btn_logout"
+                android:backgroundTint="#4CAF50"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Logout" />
 
             <Button
                 android:id="@+id/btn_apply_edit_data"
+                android:backgroundTint="#4CAF50"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Apply"
@@ -395,6 +403,7 @@
 
             <Button
                 android:id="@+id/btn_share"
+                android:backgroundTint="#4CAF50"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/share" />
@@ -404,5 +413,3 @@
     </LinearLayout>
 
 </LinearLayout>
-
-</ScrollView>
