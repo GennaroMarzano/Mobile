@@ -102,7 +102,7 @@
                     android:paddingVertical="10dp"/>
 
                 <Button
-                    android:id="@+id/button7"
+                    android:id="@+id/btn_health"
                     android:layout_width="95dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

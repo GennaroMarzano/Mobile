@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
-    Button buttonFragmentUser, buttonFragmentQR;
+    Button buttonFragmentUser, buttonFragmentQR, buttonFragmentHealth;
     FirebaseUser user;
 
     @Override
@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         buttonFragmentUser = findViewById(R.id.btn_profile);
         buttonFragmentQR = findViewById(R.id.btn_qr);
+        buttonFragmentHealth = findViewById(R.id.btn_health);
         user = auth.getCurrentUser();
         if (user == null){
             Intent intent = new Intent(getApplicationContext(), Login.class);
@@ -56,6 +57,18 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.fragment_container, codeQRFragment);
                 fragmentTransaction.commit();
 
+            }
+        });
+
+        buttonFragmentHealth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                FragmentHealthProfile healthProfileFragment = new FragmentHealthProfile();
+                fragmentTransaction.replace(R.id.fragment_container, healthProfileFragment);
+                fragmentTransaction.commit();
             }
         });
     }

@@ -1,14 +1,260 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FragmentHealthProfile">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-</FrameLayout>
+        <!-- Sezione 1 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_1_medical_measurement"
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:textColor="@color/black"/>
+
+            <!-- EditText disposti verticalmente -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Esempio di EditText affiancati -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Heartbeat rate:"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/t_heart"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="EditText 2B"/>
+
+                    <TextView
+                        android:id="@+id/heart_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Measurement date"/>
+
+                    <TextView
+                        android:id="@+id/t_heart_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="EditText 2B"/>
+
+                    <TextView
+                        android:id="@+id/data_measure_heart"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:visibility="gone"/>
+
+                    <Button
+                        android:id="@+id/btn_measure_heart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"/>
+                </LinearLayout>
+
+                <!-- Esempio di EditText affiancati -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Pressure:"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/t_pressure"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="EditText 2B"/>
+
+                    <TextView
+                        android:id="@+id/pressure_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Measurement date"/>
+
+                    <TextView
+                        android:id="@+id/t_pressure_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="EditText 2B"/>
+
+                    <TextView
+                        android:id="@+id/data_measure_pressure"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:visibility="gone"/>
+
+                    <Button
+                        android:id="@+id/btn_measure_pressure"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"/>
+                </LinearLayout>
+
+                <!-- Esempio di EditText affiancati -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Diabetes:"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/t_diabetes"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="EditText 2B"/>
+
+                    <TextView
+                        android:id="@+id/diabetes_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Measurement date"/>
+
+                    <TextView
+                        android:id="@+id/t_diabetes_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="EditText 2B"/>
+
+                    <TextView
+                        android:id="@+id/data_measure_diabetes"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:visibility="gone"/>
+
+                    <Button
+                        android:id="@+id/btn_measure_diabetes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"/>
+                </LinearLayout>
+
+                <!-- Esempio di EditText affiancati -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Respiratory rate:"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/t_respiratory_rate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="EditText 2B"/>
+
+                    <TextView
+                        android:id="@+id/respratory_rate_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Measurement date"/>
+
+                    <TextView
+                        android:id="@+id/t_respiratory_rate_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="EditText 2B"/>
+
+                    <TextView
+                        android:id="@+id/data_measure_respiratory_rate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:visibility="gone"/>
+
+                    <Button
+                        android:id="@+id/btn_measure_respiratory_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Bottoni disposti orizzontalmente -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btn_share_measurement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Share"/>
+
+                <Button
+                    android:id="@+id/btn_measure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Measure"/>
+
+                <Button
+                    android:id="@+id/btn_back_measurement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:text="back"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Sezione 2 (replica la struttura di Sezione 1) -->
+        <!-- Sezione 3 (replica la struttura di Sezione 1) -->
+    </LinearLayout>
+</ScrollView>
+
