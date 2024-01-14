@@ -63,9 +63,14 @@ public class Register extends AppCompatActivity {
     private static final String KEY_MEALS_EAT_DAY = "How many meals do you eat in a day?";
     private static final String KEY_VEGETABLES_FRUIT = "Do you eat enough vegetables and fruit?";
     private static final String KEY_DIET_ON = "Which diet are you on?";
-    public static final String KEY_FOOD_PIE = "Food";
-    public static final String KEY_MEDICINES_PIE = "Medicines";
-    private static final String KEY_OTHER_PIE = "Other";
+    private static final String KEY_HEART = "Heartbeat rate";
+    public static final String KEY_PRESSURE = "Pressure";
+    public static final String KEY_DIABETES = "Diabetes";
+    public static final String KEY_RESPIRATORY_RATE = "Respiratory rate";
+    public static final String KEY_PRESSURE_DATE = "Pressure measurement data";
+    public static final String KEY_DIABETES_DATE = "Diabetes measurement data";
+    public static final String KEY_RESPIRATORY_RATE_DATE = "Respiratory rate measurement data";
+    public static final String KEY_HEARTBEAT_DATE = "Heartbeat measurement data";
     private RadioGroup radioGroup1;
     private RadioGroup radioGroup2;
     private RadioGroup radioGroup3;
@@ -137,11 +142,6 @@ public class Register extends AppCompatActivity {
         radioGroup13 = findViewById(R.id.radioGroup13);
         radioGroup14 = findViewById(R.id.radioGroup14);
 
-        //datePicker.setCalendarViewShown(false);
-        //datePicker.setSpinnersShown(true);
-
-        //dateOfBirth.setBackgroundColor(Integer.parseInt("0xFF_FF_00_00"));
-
         editTextFirstName = findViewById(R.id.f_name);
         editTextLastName = findViewById(R.id.l_name);
         editTextTaxIdCode = findViewById(R.id.cf);
@@ -190,6 +190,8 @@ public class Register extends AppCompatActivity {
                                     UsersLifestyleData(userId);
 
                                     UserData(userId);
+
+                                    HealthData(userId);
 
                                     List<Double> dbInitialValue = Arrays.asList(0.0, 0.0, 0.0);
 
@@ -325,6 +327,27 @@ public class Register extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(Register.this, "Error!", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, e.toString());
+                    }
+                });
+    }
+
+    public void HealthData(String userId){
+        Map<String, Object> note =  new HashMap<>();
+
+        note.put(KEY_HEART, "No Data");
+        note.put(KEY_PRESSURE, "No Data");
+        note.put(KEY_DIABETES, "No Data");
+        note.put(KEY_RESPIRATORY_RATE, "No Data");
+        note.put(KEY_HEARTBEAT_DATE, "No Data");
+        note.put(KEY_RESPIRATORY_RATE_DATE, "No Data");
+        note.put(KEY_DIABETES_DATE, "No Data");
+        note.put(KEY_PRESSURE_DATE, "No Data");
+
+        db.collection("User Measurement Data").document(userId + " Health Data")
+                .set(note).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+
                     }
                 });
     }
