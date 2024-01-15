@@ -51,4 +51,5 @@
     <string name="click_to_register_two">Click to register</string>
     <string name="_1_medical_measurement">1 - Medical measurement</string>
     <string name="place_your_finger_on_the_top_part_of_the_phone_as_shown_in_the_picture_keep_sliding_your_finger_until_the_flashlight_turns_off_once_done_keep_your_finger_still_for_3_seconds">Place your finger on the top part of the phone as shown in the picture, keep sliding your finger until the flashlight turns off, once done keep your finger still for 3 seconds</string>
+    <string name="_2_pathologies">2 - Pathologies</string>
 </resources>

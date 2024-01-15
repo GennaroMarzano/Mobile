@@ -1,6 +1,8 @@
 package com.example.asilapp10;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -11,13 +13,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.InputType;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,10 +61,15 @@ public class FragmentHealthProfile extends Fragment {
     public static final String KEY_PRESSURE = "Pressure";
     public static final String KEY_DIABETES = "Diabetes";
     public static final String KEY_RESPIRATORY_RATE = "Respiratory rate";
+    public static final String KEY_OXYGENATION = "Oxygenation";
+    public static final String KEY_TEMPERATURE = "Temperature";
     public static final String KEY_PRESSURE_DATE = "Pressure measurement data";
     public static final String KEY_DIABETES_DATE = "Diabetes measurement data";
     public static final String KEY_RESPIRATORY_RATE_DATE = "Respiratory rate measurement data";
     public static final String KEY_HEARTBEAT_DATE = "Heartbeat measurement data";
+    public static final String KEY_OXYGENATION_DATE = "Oxygenation data";
+    public static final String KEY_TEMPERATURE_DATE = "Temperature data";
+
     FirebaseUser user;
     FirebaseAuth mAuth;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -67,11 +77,16 @@ public class FragmentHealthProfile extends Fragment {
              tMeasureDataDiabetes, tMeasureDataRespiratory, tMeasureDataPressure, tDateHeart,
             tDatePressure, tDateDiabetes, tDateRespiratory, tDataMeasureHeartGone, tDataMeasurePressureGone,
             tDataMeasureDiabetesGone, tDataMeasureRespiratoryGone, heartbeat, diabetes, respiratory,
-            pressure, tInfoSensor;
+            pressure, tInfoSensor, tOxygenationData, tMeasureDataOxygenation, tDateOxygenation,
+            tDataMeasureOxygenationGone, oxygenation, tTemperatureData, tMeasureDataTemperature,
+            tDateTemperature, tDataMeasureTemperature, temperature, tDataMeasureTemperatureGone;
     ImageView imageViewSensorLocation;
 
     Button buttonShare, buttonBack, buttonMeasure, buttonMeasureHeart, buttonMeasurePressure,
-           buttonMeasureDiabetes, buttonMeasureRespiratory, buttonBackMeasureHeart;
+           buttonMeasureDiabetes, buttonMeasureRespiratory, buttonBackMeasureHeart,
+           buttonMeasureOxygenation, buttonMeasureTemperature, buttonAddEditText;
+
+    LinearLayout container;
     SensorEventListener proximitySensorListener;
 
     public FragmentHealthProfile() {
@@ -116,7 +131,6 @@ public class FragmentHealthProfile extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 
@@ -124,17 +138,23 @@ public class FragmentHealthProfile extends Fragment {
 
         queryHealthData(userId);
 
+        container = getView().findViewById(R.id.container);
+
         imageViewSensorLocation = getView().findViewById(R.id.imageViewSensorLocation);
         tInfoSensor = getView().findViewById(R.id.info_sensor);
 
         buttonShare = getView().findViewById(R.id.btn_share_measurement);
         buttonBack =  getView().findViewById(R.id.btn_back_measurement);
+        buttonAddEditText = getView().findViewById(R.id.btn_add_edit_text);
+
         buttonBackMeasureHeart = getView().findViewById(R.id.btn_back_measurement_heart);
         buttonMeasure = getView().findViewById(R.id.btn_measure);
         buttonMeasureHeart = getView().findViewById(R.id.btn_measure_heart);
         buttonMeasurePressure = getView().findViewById(R.id.btn_measure_pressure);
         buttonMeasureDiabetes = getView().findViewById(R.id.btn_measure_diabetes);
         buttonMeasureRespiratory = getView().findViewById(R.id.btn_measure_respiratory_rate);
+        buttonMeasureOxygenation = getView().findViewById(R.id.btn_measure_oxygenation);
+        buttonMeasureTemperature = getView().findViewById(R.id.btn_measure_temperature);
 
         tDataMeasureHeartGone = getView().findViewById(R.id.data_measure_heart);
         tHeartData = getView().findViewById(R.id.t_heart);
@@ -160,6 +180,18 @@ public class FragmentHealthProfile extends Fragment {
         tDateRespiratory = getView().findViewById(R.id.t_respiratory_rate_date);
         respiratory = getView().findViewById(R.id.respiratory);
 
+        tDataMeasureOxygenationGone = getView().findViewById(R.id.data_measure_oxygenation);
+        tOxygenationData = getView().findViewById(R.id.t_oxygenation);
+        tMeasureDataOxygenation = getView().findViewById(R.id.oxygenation_date);
+        tDateOxygenation = getView().findViewById(R.id.t_oxygenation_date);
+        oxygenation = getView().findViewById(R.id.oxygenation);
+
+        tDataMeasureTemperatureGone = getView().findViewById(R.id.data_measure_temperature);
+        tTemperatureData = getView().findViewById(R.id.t_temperature);
+        tMeasureDataTemperature = getView().findViewById(R.id.temperature_date);
+        tDateTemperature = getView().findViewById(R.id.t_temperature_date);
+        temperature = getView().findViewById(R.id.temperature);
+
         buttonMeasure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -184,6 +216,16 @@ public class FragmentHealthProfile extends Fragment {
                 tMeasureDataRespiratory.setVisibility(View.GONE);
                 tDateRespiratory.setVisibility(View.GONE);
 
+                tDataMeasureOxygenationGone.setVisibility(View.VISIBLE);
+                tOxygenationData.setVisibility(View.GONE);
+                tMeasureDataOxygenation.setVisibility(View.GONE);
+                tDateOxygenation.setVisibility(View.GONE);
+
+                tDataMeasureTemperatureGone.setVisibility(View.VISIBLE);
+                tTemperatureData.setVisibility(View.GONE);
+                tMeasureDataTemperature.setVisibility(View.GONE);
+                tDateTemperature.setVisibility(View.GONE);
+
                 // Impostare la visibilità a VISIBLE
                 buttonShare.setVisibility(View.GONE);
                 buttonBack.setVisibility(View.VISIBLE);
@@ -192,6 +234,8 @@ public class FragmentHealthProfile extends Fragment {
                 buttonMeasurePressure.setVisibility(View.VISIBLE);
                 buttonMeasureDiabetes.setVisibility(View.VISIBLE);
                 buttonMeasureRespiratory.setVisibility(View.VISIBLE);
+                buttonMeasureOxygenation.setVisibility(View.VISIBLE);
+                buttonMeasureTemperature.setVisibility(View.VISIBLE);
 
             }
         });
@@ -224,6 +268,16 @@ public class FragmentHealthProfile extends Fragment {
                 tDateRespiratory.setVisibility(View.VISIBLE);
                 respiratory.setVisibility(View.VISIBLE);
 
+                tDataMeasureOxygenationGone.setVisibility(View.GONE);
+                tOxygenationData.setVisibility(View.VISIBLE);
+                tMeasureDataOxygenation.setVisibility(View.VISIBLE);
+                tDateOxygenation.setVisibility(View.VISIBLE);
+
+                tDataMeasureTemperatureGone.setVisibility(View.GONE);
+                tTemperatureData.setVisibility(View.VISIBLE);
+                tMeasureDataTemperature.setVisibility(View.VISIBLE);
+                tDateTemperature.setVisibility(View.VISIBLE);
+
                 imageViewSensorLocation.setVisibility(View.GONE);
                 tInfoSensor.setVisibility(View.GONE);
 
@@ -235,6 +289,8 @@ public class FragmentHealthProfile extends Fragment {
                 buttonMeasurePressure.setVisibility(View.GONE);
                 buttonMeasureDiabetes.setVisibility(View.GONE);
                 buttonMeasureRespiratory.setVisibility(View.GONE);
+                buttonMeasureOxygenation.setVisibility(View.GONE);
+                buttonMeasureTemperature.setVisibility(View.GONE);
 
                 queryHealthData(userId);
             }
@@ -275,6 +331,27 @@ public class FragmentHealthProfile extends Fragment {
             public void onClick(View v) {
 
                 simulateAndDisplayRespiratoryRate(userId);
+            }
+        });
+
+        buttonMeasureOxygenation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                simulateAndDisplayOxygenation(userId);
+            }
+        });
+
+        buttonMeasureTemperature.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                simulateAndDisplayTemperature(userId);
+            }
+        });
+
+        buttonAddEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addEditText();
             }
         });
     }
@@ -366,13 +443,25 @@ public class FragmentHealthProfile extends Fragment {
         tDateRespiratory.setVisibility(View.GONE);
         respiratory.setVisibility(View.GONE);
 
+        tDataMeasureOxygenationGone.setVisibility(View.GONE);
+        tOxygenationData.setVisibility(View.GONE);
+        tMeasureDataOxygenation.setVisibility(View.GONE);
+        tDateOxygenation.setVisibility(View.GONE);
+        oxygenation.setVisibility(View.GONE);
+
+        tDataMeasureTemperatureGone.setVisibility(View.GONE);
+        tTemperatureData.setVisibility(View.GONE);
+        tMeasureDataTemperature.setVisibility(View.GONE);
+        tDateTemperature.setVisibility(View.GONE);
+        temperature.setVisibility(View.GONE);
+
         // Impostare la visibilità a VISIBLE
         buttonMeasureHeart.setVisibility(View.GONE);
         buttonMeasurePressure.setVisibility(View.GONE);
         buttonMeasureDiabetes.setVisibility(View.GONE);
         buttonMeasureRespiratory.setVisibility(View.GONE);
-
-
+        buttonMeasureOxygenation.setVisibility(View.GONE);
+        buttonMeasureTemperature.setVisibility(View.GONE);
     }
 
     public void showOtherMeasurement(){
@@ -404,6 +493,18 @@ public class FragmentHealthProfile extends Fragment {
         tDateRespiratory.setVisibility(View.GONE);
         respiratory.setVisibility(View.VISIBLE);
 
+        tDataMeasureOxygenationGone.setVisibility(View.VISIBLE);
+        tOxygenationData.setVisibility(View.GONE);
+        tMeasureDataOxygenation.setVisibility(View.GONE);
+        tDateOxygenation.setVisibility(View.GONE);
+        oxygenation.setVisibility(View.VISIBLE);
+
+        tDataMeasureTemperatureGone.setVisibility(View.VISIBLE);
+        tTemperatureData.setVisibility(View.GONE);
+        tMeasureDataTemperature.setVisibility(View.GONE);
+        tDateTemperature.setVisibility(View.GONE);
+        temperature.setVisibility(View.VISIBLE);
+
         // Impostare la visibilità a VISIBLE
         buttonShare.setVisibility(View.GONE);
         buttonBack.setVisibility(View.VISIBLE);
@@ -413,6 +514,8 @@ public class FragmentHealthProfile extends Fragment {
         buttonMeasurePressure.setVisibility(View.VISIBLE);
         buttonMeasureDiabetes.setVisibility(View.VISIBLE);
         buttonMeasureRespiratory.setVisibility(View.VISIBLE);
+        buttonMeasureOxygenation.setVisibility(View.VISIBLE);
+        buttonMeasureTemperature.setVisibility(View.VISIBLE);
     }
 
     public void simulateAndDisplayBloodPressure(String userId){
@@ -534,6 +637,82 @@ public class FragmentHealthProfile extends Fragment {
                 });
     }
 
+    public void simulateAndDisplayOxygenation(String userId){
+        Random rand = new Random();
+
+        // Genera un valore casuale per la frequenza respiratoria
+        int oxygenation = rand.nextInt(11) + 90; // Intervallo: 90% - 100%
+
+        String oxygenationText = oxygenation + " %";
+
+        LocalDate currentDate = LocalDate.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        String formattedDate = currentDate.format(formatter);
+
+        // Mostra la stringa nella TextView
+        tDataMeasureOxygenationGone.setText(oxygenationText);
+        tDateOxygenation.setText(formattedDate);
+
+        Map<String, Object> note =  new HashMap<>();
+
+        note.put(KEY_OXYGENATION, oxygenationText);
+        note.put(KEY_OXYGENATION_DATE, formattedDate);
+
+        db.collection("User Measurement Data").document(userId + " Health Data")
+                .update(note).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(getActivity(), "User data saves!", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity(), "Error!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    public void simulateAndDisplayTemperature(String userId){
+        Random rand = new Random();
+
+        // Genera un valore casuale per la frequenza respiratoria
+        float temperature = (4.5f * rand.nextFloat()) + 35.5f;   //Intervallo: 90% - 100%
+
+        String temperatureText = temperature + " °C";
+
+        LocalDate currentDate = LocalDate.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        String formattedDate = currentDate.format(formatter);
+
+        // Mostra la stringa nella TextView
+        tDataMeasureTemperatureGone.setText(temperatureText);
+        tDateTemperature.setText(formattedDate);
+
+        Map<String, Object> note =  new HashMap<>();
+
+        note.put(KEY_TEMPERATURE, temperatureText);
+        note.put(KEY_TEMPERATURE_DATE, formattedDate);
+
+        db.collection("User Measurement Data").document(userId + " Health Data")
+                .update(note).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(getActivity(), "User data saves!", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity(), "Error!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
     public void queryHealthData(String userId){
         DocumentReference docRef = db.collection("User Measurement Data")
                 .document(userId + " Health Data");
@@ -548,12 +727,15 @@ public class FragmentHealthProfile extends Fragment {
                         String heart = document.getString(KEY_HEART);
                         String pressure = document.getString(KEY_PRESSURE);
                         String diabetes = document.getString(KEY_DIABETES);
+                        String oxygenation = document.getString(KEY_OXYGENATION);
+                        String temperature = document.getString(KEY_TEMPERATURE);
                         String respiratoryRate = document.getString(KEY_RESPIRATORY_RATE);
                         String heartDate = document.getString(KEY_HEARTBEAT_DATE);
                         String pressureDate = document.getString(KEY_PRESSURE_DATE);
                         String diabetesDate = document.getString(KEY_DIABETES_DATE);
                         String respiratoryRateDate = document.getString(KEY_RESPIRATORY_RATE_DATE);
-
+                        String oxygenationDate = document.getString(KEY_OXYGENATION_DATE);
+                        String temperatureDate = document.getString(KEY_TEMPERATURE_DATE);
 
                         tHeartData.setText(heart);
                         tDateHeart.setText(heartDate);
@@ -563,6 +745,10 @@ public class FragmentHealthProfile extends Fragment {
                         tDateDiabetes.setText(diabetesDate);
                         tRespiratoryData.setText(respiratoryRate);
                         tDateRespiratory.setText(respiratoryRateDate);
+                        tOxygenationData.setText(oxygenation);
+                        tDateOxygenation.setText(oxygenationDate);
+                        tTemperatureData.setText(temperature);
+                        tDateTemperature.setText(temperatureDate);
                     } else {
                         Log.d("Firestore", "Nessun documento trovato");
                     }
@@ -571,5 +757,37 @@ public class FragmentHealthProfile extends Fragment {
                 }
             }
         });
+    }
+
+    public void addEditText(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Add Text");
+
+        final EditText inputField = new EditText(getContext());
+        inputField.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(inputField);
+
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                EditText editText = new EditText(getContext());
+                editText.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT));
+                editText.setText(inputField.getText().toString());
+
+                container.addView(editText);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+
     }
 }

@@ -67,10 +67,14 @@ public class Register extends AppCompatActivity {
     public static final String KEY_PRESSURE = "Pressure";
     public static final String KEY_DIABETES = "Diabetes";
     public static final String KEY_RESPIRATORY_RATE = "Respiratory rate";
+    public static final String KEY_OXYGENATION = "Oxygenation";
+    public static final String KEY_TEMPERATURE = "Body temperature";
     public static final String KEY_PRESSURE_DATE = "Pressure measurement data";
     public static final String KEY_DIABETES_DATE = "Diabetes measurement data";
     public static final String KEY_RESPIRATORY_RATE_DATE = "Respiratory rate measurement data";
     public static final String KEY_HEARTBEAT_DATE = "Heartbeat measurement data";
+    public static final String KEY_OXYGENATION_DATE = "Oxygenation data";
+    public static final String KEY_TEMPERATURE_DATE = "Body temperature data";
     private RadioGroup radioGroup1;
     private RadioGroup radioGroup2;
     private RadioGroup radioGroup3;
@@ -338,16 +342,19 @@ public class Register extends AppCompatActivity {
         note.put(KEY_PRESSURE, "No Data");
         note.put(KEY_DIABETES, "No Data");
         note.put(KEY_RESPIRATORY_RATE, "No Data");
+        note.put(KEY_OXYGENATION, "No Data");
+        note.put(KEY_TEMPERATURE, "No Data");
         note.put(KEY_HEARTBEAT_DATE, "No Data");
         note.put(KEY_RESPIRATORY_RATE_DATE, "No Data");
         note.put(KEY_DIABETES_DATE, "No Data");
         note.put(KEY_PRESSURE_DATE, "No Data");
+        note.put(KEY_OXYGENATION_DATE, "No Data");
+        note.put(KEY_TEMPERATURE_DATE, "No Data");
 
         db.collection("User Measurement Data").document(userId + " Health Data")
                 .set(note).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-
                     }
                 });
     }
