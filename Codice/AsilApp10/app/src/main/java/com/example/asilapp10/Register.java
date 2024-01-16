@@ -75,6 +75,7 @@ public class Register extends AppCompatActivity {
     public static final String KEY_HEARTBEAT_DATE = "Heartbeat measurement data";
     public static final String KEY_OXYGENATION_DATE = "Oxygenation data";
     public static final String KEY_TEMPERATURE_DATE = "Body temperature data";
+    public static final String KEY_NUMBER_EDIT_TEXT = "Number Edit Text";
     private RadioGroup radioGroup1;
     private RadioGroup radioGroup2;
     private RadioGroup radioGroup3;
@@ -353,6 +354,21 @@ public class Register extends AppCompatActivity {
 
         db.collection("User Measurement Data").document(userId + " Health Data")
                 .set(note).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                    }
+                });
+
+        Map<String, Object> notePathologies = new HashMap<>();
+
+        for (int i = 1; i <= 30; i++){
+            notePathologies.put(String.valueOf(i), "No Data");
+        }
+
+        notePathologies.put(KEY_NUMBER_EDIT_TEXT, 0);
+
+        db.collection("Pathologies").document(userId)
+                .set(notePathologies).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                     }

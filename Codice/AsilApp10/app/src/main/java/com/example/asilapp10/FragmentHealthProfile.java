@@ -3,6 +3,7 @@ package com.example.asilapp10;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -13,9 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +42,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -69,6 +73,8 @@ public class FragmentHealthProfile extends Fragment {
     public static final String KEY_HEARTBEAT_DATE = "Heartbeat measurement data";
     public static final String KEY_OXYGENATION_DATE = "Oxygenation data";
     public static final String KEY_TEMPERATURE_DATE = "Temperature data";
+    public static final String KEY_NUMBER_EDIT_TEXT = "Number Edit Text";
+    public static final String KEY_ID_DOCUMENT = "LsYRSc0yPM8h7PoN9Pmy";
 
     FirebaseUser user;
     FirebaseAuth mAuth;
@@ -84,10 +90,12 @@ public class FragmentHealthProfile extends Fragment {
 
     Button buttonShare, buttonBack, buttonMeasure, buttonMeasureHeart, buttonMeasurePressure,
            buttonMeasureDiabetes, buttonMeasureRespiratory, buttonBackMeasureHeart,
-           buttonMeasureOxygenation, buttonMeasureTemperature, buttonAddEditText;
+           buttonMeasureOxygenation, buttonMeasureTemperature, buttonAddEditText, buttonEditEditText,
+           buttonBackEditText, buttonSaveEditText;
 
     LinearLayout container;
     SensorEventListener proximitySensorListener;
+    int countEditText;
 
     public FragmentHealthProfile() {
         // Required empty public constructor
@@ -136,9 +144,28 @@ public class FragmentHealthProfile extends Fragment {
 
         String userId = user.getUid();
 
-        queryHealthData(userId);
+        DocumentReference docRef = db.collection("Pathologies")
+                .document(userId);
+
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        countEditText = document.getLong(KEY_NUMBER_EDIT_TEXT).intValue();
+                    } else {
+                        Log.d("Firestore", "Nessun documento trovato");
+                    }
+                } else {
+                    Log.d("Firestore", "Errore nel recupero del documento", task.getException());
+                }
+            }
+        });
 
         container = getView().findViewById(R.id.container);
+
+        queryHealthData(userId);
 
         imageViewSensorLocation = getView().findViewById(R.id.imageViewSensorLocation);
         tInfoSensor = getView().findViewById(R.id.info_sensor);
@@ -146,6 +173,9 @@ public class FragmentHealthProfile extends Fragment {
         buttonShare = getView().findViewById(R.id.btn_share_measurement);
         buttonBack =  getView().findViewById(R.id.btn_back_measurement);
         buttonAddEditText = getView().findViewById(R.id.btn_add_edit_text);
+        buttonEditEditText = getView().findViewById(R.id.btn_edit_edit_text);
+        buttonBackEditText = getView().findViewById(R.id.btn_back_edit_text);
+        buttonSaveEditText = getView().findViewById(R.id.btn_save_edit_text);
 
         buttonBackMeasureHeart = getView().findViewById(R.id.btn_back_measurement_heart);
         buttonMeasure = getView().findViewById(R.id.btn_measure);
@@ -239,6 +269,10 @@ public class FragmentHealthProfile extends Fragment {
 
             }
         });
+
+//PROBLEMI DA RISOLVERE, QUANDO CLICCO BACK SI DOPPIANO GLI EDITTEXT SOTTO, SE RICARICO IL LAYOUT
+        //SCOMPAIONO, SE NON VIENE INSERITO NESSUN CODICE E L'UTENTE CLICCA OK L'APP CRASHA
+        //INSERIRE UN CONTROLLO
 
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -348,10 +382,78 @@ public class FragmentHealthProfile extends Fragment {
             }
         });
 
+        buttonEditEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Crea l'EditText per la password
+                EditText passwordEditText = new EditText(getContext());
+                passwordEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+                passwordEditText.setFilters(new InputFilter[] {new InputFilter.LengthFilter(4)});
+
+                // Crea l'AlertDialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Insert Medical Code");
+                builder.setView(passwordEditText);
+
+                builder.setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String doctorCode = passwordEditText.getText().toString();
+                        queryMedicalCode(doctorCode, new QueryCallback() {
+                            @Override
+                            public void onQueryCompleted(boolean isMatch) {
+                                if (isMatch) {
+                                    // Codice corrispondente
+                                    buttonEditEditText.setVisibility(View.GONE);
+                                    buttonAddEditText.setVisibility(View.VISIBLE);
+                                    buttonBackEditText.setVisibility(View.VISIBLE);
+                                    buttonSaveEditText.setVisibility(View.VISIBLE);
+
+                                    enableAllViews(container);
+                                } else {
+                                    // Nessun codice trovato
+                                    Toast.makeText(getActivity(), "No code found!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+                });
+
+                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                // Mostra l'AlertDialog
+                builder.show();
+            }
+        });
+
         buttonAddEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addEditText();
+                addEditText(userId);
+            }
+        });
+
+        buttonBackEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                disableAllViews(container);
+
+                buttonEditEditText.setVisibility(View.VISIBLE);
+                buttonAddEditText.setVisibility(View.GONE);
+                buttonBackEditText.setVisibility(View.GONE);
+                buttonSaveEditText.setVisibility(View.GONE);
+            }
+        });
+
+        buttonSaveEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveData(userId);
             }
         });
     }
@@ -749,6 +851,7 @@ public class FragmentHealthProfile extends Fragment {
                         tDateOxygenation.setText(oxygenationDate);
                         tTemperatureData.setText(temperature);
                         tDateTemperature.setText(temperatureDate);
+
                     } else {
                         Log.d("Firestore", "Nessun documento trovato");
                     }
@@ -757,9 +860,104 @@ public class FragmentHealthProfile extends Fragment {
                 }
             }
         });
+
+        docRef = db.collection("Pathologies").document(userId);
+
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot documentSnapshot = task.getResult();
+
+                    if(documentSnapshot.exists()){
+                        Integer numberOfEditTexts = documentSnapshot.getLong(KEY_NUMBER_EDIT_TEXT).intValue();
+
+                        for (int i = 1; i <= numberOfEditTexts; i++) {
+                            EditText editText = new EditText(getContext());
+                            editText.setLayoutParams(new LinearLayout.LayoutParams(
+                                    LinearLayout.LayoutParams.MATCH_PARENT,
+                                    LinearLayout.LayoutParams.WRAP_CONTENT));
+                            editText.setText(documentSnapshot.getString(String.valueOf(i)));
+                            editText.setId(i);
+
+                            // Aggiungi un TextWatcher per tracciare i cambiamenti
+                            editText.addTextChangedListener(new TextWatcher() {
+                                @Override
+                                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                                    // Implementazione non necessaria
+                                }
+
+                                @Override
+                                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                    editTextData.put(editText.getId(), s.toString());
+                                }
+
+                                @Override
+                                public void afterTextChanged(Editable s) {
+                                    // Implementazione non necessaria
+                                }
+                            });
+
+                            // Imposta il colore del testo a nero
+                            editText.setTextColor(Color.BLACK);
+
+                            container.addView(editText);
+                        }
+                        disableAllViews(container);
+                    }
+                }
+            }
+        });
     }
 
-    public void addEditText(){
+    public void queryMedicalCode(String doctorCode, QueryCallback callback) {
+        Log.d("queryMedicalCode", "Inizio della query. Codice medico: " + doctorCode);
+
+        db.collection("Medical Code").document(KEY_ID_DOCUMENT).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        boolean isMatch = false;
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                List<Long> storedPassword = (List<Long>) document.get("Doctor Code");
+                                Log.d("queryMedicalCode", "Password trovata: " + storedPassword);
+
+                                // Converte l'input dell'utente in un intero
+                                int userInput = Integer.parseInt(doctorCode);
+
+                                // Controlla se l'input corrisponde a uno degli elementi dell'array 'password'
+                                for (Long password : storedPassword) {
+                                    if (userInput == password.intValue()) {
+                                        isMatch = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!isMatch) {
+                                    Log.d("queryMedicalCode", "Non corrispondenza trovata");
+                                }
+                            } else {
+                                Log.d("queryMedicalCode", "Il documento non esiste");
+                            }
+                        } else {
+                            Log.e("queryMedicalCode", "Errore durante la query", task.getException());
+                        }
+                        // Chiamata al callback
+                        callback.onQueryCompleted(isMatch);
+                    }
+                });
+    }
+
+    public interface QueryCallback {
+        void onQueryCompleted(boolean isMatch);
+    }
+
+    // Mappa per memorizzare il testo di ciascun EditText
+    Map<Integer, String> editTextData = new HashMap<>();
+
+    public void addEditText(String userId) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Add Text");
 
@@ -767,20 +965,65 @@ public class FragmentHealthProfile extends Fragment {
         inputField.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(inputField);
 
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
                 EditText editText = new EditText(getContext());
                 editText.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT));
+                editText.setTextColor(Color.BLACK); // Imposta il colore del testo a nero
+
                 editText.setText(inputField.getText().toString());
 
+                // Assegna l'ID prima di aggiungere il TextWatcher
+                countEditText++;
+                editText.setId(countEditText);
+
+                // Aggiungi il testo iniziale alla mappa
+                editTextData.put(countEditText, inputField.getText().toString());
+
+                // Aggiungi un TextWatcher per tracciare i cambiamenti
+                editText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                        // Implementazione non necessaria
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        editTextData.put(editText.getId(), s.toString());
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        // Implementazione non necessaria
+                    }
+                });
+
                 container.addView(editText);
+
+                Map<String, Object> note = new HashMap<>();
+                note.put(String.valueOf(countEditText), inputField.getText().toString());
+                note.put(KEY_NUMBER_EDIT_TEXT, countEditText);
+
+                db.collection("Pathologies").document(userId)
+                        .update(note).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(getActivity(), "User data saved!", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getActivity(), "Error!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -788,6 +1031,44 @@ public class FragmentHealthProfile extends Fragment {
         });
 
         builder.show();
+    }
+    public void saveData(String userId) {
+        Map<String, Object> note = new HashMap<>();
+        for (Map.Entry<Integer, String> entry : editTextData.entrySet()) {
+            note.put(String.valueOf(entry.getKey()), entry.getValue());
+        }
 
+        db.collection("Pathologies").document(userId)
+                .update(note)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(getActivity(), "Modifications saved!", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity(), "Error saving modifications!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+    private void disableAllViews(ViewGroup layout) {
+        for (int i = 0; i < layout.getChildCount(); i++) {
+            View child = layout.getChildAt(i);
+            child.setEnabled(false); // Disabilita la View
+            if (child instanceof ViewGroup) {
+                disableAllViews((ViewGroup) child); // Ricorsione per sottolayout
+            }
+        }
+    }
+    private void enableAllViews(ViewGroup layout) {
+        for (int i = 0; i < layout.getChildCount(); i++) {
+            View child = layout.getChildAt(i);
+            child.setEnabled(true); // Abilita la View
+            if (child instanceof ViewGroup) {
+                enableAllViews((ViewGroup) child); // Ricorsione per sottolayout
+            }
+        }
     }
 }

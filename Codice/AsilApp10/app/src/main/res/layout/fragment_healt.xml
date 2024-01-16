@@ -453,10 +453,45 @@
                 android:gravity="center">
 
                 <Button
+                    android:id="@+id/btn_share_pathologies"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Share"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#4CAF50"/>
+
+                <Button
                     android:id="@+id/btn_add_edit_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Add"
+                    android:visibility="gone"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#4CAF50"/>
+
+                <Button
+                    android:id="@+id/btn_edit_edit_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#4CAF50"/>
+
+                <Button
+                    android:id="@+id/btn_back_edit_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Back"
+                    android:visibility="gone"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#4CAF50"/>
+
+                <Button
+                    android:id="@+id/btn_save_edit_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Save"
+                    android:visibility="gone"
                     android:textColor="#FFFFFF"
                     android:backgroundTint="#4CAF50"/>
 
