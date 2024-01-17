@@ -76,6 +76,7 @@ public class Register extends AppCompatActivity {
     public static final String KEY_OXYGENATION_DATE = "Oxygenation data";
     public static final String KEY_TEMPERATURE_DATE = "Body temperature data";
     public static final String KEY_NUMBER_EDIT_TEXT = "Number Edit Text";
+    public static final String KEY_IDS_DELETED = "IDs deleted";
     private RadioGroup radioGroup1;
     private RadioGroup radioGroup2;
     private RadioGroup radioGroup3;
@@ -360,6 +361,10 @@ public class Register extends AppCompatActivity {
                 });
 
         Map<String, Object> notePathologies = new HashMap<>();
+
+        List<Integer> idsDelete = Arrays.asList();
+
+        notePathologies.put(KEY_IDS_DELETED, idsDelete);
 
         for (int i = 1; i <= 30; i++){
             notePathologies.put(String.valueOf(i), "No Data");

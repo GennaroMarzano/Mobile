@@ -41,10 +41,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,6 +77,7 @@ public class FragmentHealthProfile extends Fragment {
     public static final String KEY_TEMPERATURE_DATE = "Temperature data";
     public static final String KEY_NUMBER_EDIT_TEXT = "Number Edit Text";
     public static final String KEY_ID_DOCUMENT = "LsYRSc0yPM8h7PoN9Pmy";
+    public static final String KEY_IDS_DELETED = "IDs deleted";
 
     FirebaseUser user;
     FirebaseAuth mAuth;
@@ -434,7 +437,7 @@ public class FragmentHealthProfile extends Fragment {
         buttonAddEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addEditText(userId);
+                addEditTextAndDeleteButton(userId);
             }
         });
 
@@ -870,15 +873,43 @@ public class FragmentHealthProfile extends Fragment {
                     DocumentSnapshot documentSnapshot = task.getResult();
 
                     if(documentSnapshot.exists()){
+
+                        // Recupera l'elenco degli ID eliminati
+                        List<Long> firestoreDeletedIds = (List<Long>) documentSnapshot.get(KEY_IDS_DELETED);
+                        if (firestoreDeletedIds != null) {
+                            deletedEditTextIds.clear();
+                            deletedEditTextIds.addAll(firestoreDeletedIds.stream()
+                                    .map(Long::intValue)
+                                    .collect(Collectors.toList()));
+                        }
+
                         Integer numberOfEditTexts = documentSnapshot.getLong(KEY_NUMBER_EDIT_TEXT).intValue();
 
                         for (int i = 1; i <= numberOfEditTexts; i++) {
+
+                            if (deletedEditTextIds.contains(i)) {
+                                continue;
+                            }
+                            
                             EditText editText = new EditText(getContext());
                             editText.setLayoutParams(new LinearLayout.LayoutParams(
                                     LinearLayout.LayoutParams.MATCH_PARENT,
                                     LinearLayout.LayoutParams.WRAP_CONTENT));
                             editText.setText(documentSnapshot.getString(String.valueOf(i)));
                             editText.setId(i);
+
+                            // Crea il bottone di eliminazione
+                            Button deleteButton = new Button(getContext());
+                            deleteButton.setText("Delete");
+                            deleteButton.setId(i + 1000); // Assicurati che l'ID del bottone sia univoco
+
+                            // Aggiungi il listener al bottone di eliminazione
+                            deleteButton.setOnClickListener(v -> {
+                                container.removeView(editText);
+                                container.removeView(deleteButton);
+                                deletedEditTextIds.add(editText.getId());
+                                updateFireStoreWithIdDeleted(userId);
+                            });
 
                             // Aggiungi un TextWatcher per tracciare i cambiamenti
                             editText.addTextChangedListener(new TextWatcher() {
@@ -901,6 +932,7 @@ public class FragmentHealthProfile extends Fragment {
                             // Imposta il colore del testo a nero
                             editText.setTextColor(Color.BLACK);
 
+                            container.addView(deleteButton);
                             container.addView(editText);
                         }
                         disableAllViews(container);
@@ -956,8 +988,10 @@ public class FragmentHealthProfile extends Fragment {
 
     // Mappa per memorizzare il testo di ciascun EditText
     Map<Integer, String> editTextData = new HashMap<>();
+    // Supponiamo di avere un ArrayList per tenere traccia degli ID eliminati
+    ArrayList<Integer> deletedEditTextIds = new ArrayList<>();
 
-    public void addEditText(String userId) {
+    public void addEditTextAndDeleteButton(String userId) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Add Text");
 
@@ -1001,6 +1035,22 @@ public class FragmentHealthProfile extends Fragment {
                     }
                 });
 
+                Button deleteButton = new Button(getContext());
+                deleteButton.setText("Delete");
+                deleteButton.setId(countEditText + 1000); // Assicurati che l'ID del bottone sia univoco
+
+                // Aggiungi listener al bottone di eliminazione
+                deleteButton.setOnClickListener(v -> {
+
+                    int deletedId = editText.getId(); // Ottieni l'ID dell'EditText eliminato
+                    container.removeView(editText);
+                    container.removeView(deleteButton);
+                    deletedEditTextIds.add(deletedId);
+
+                    updateFireStoreWithIdDeleted(userId);
+                });
+
+                container.addView(deleteButton);
                 container.addView(editText);
 
                 Map<String, Object> note = new HashMap<>();
@@ -1031,6 +1081,20 @@ public class FragmentHealthProfile extends Fragment {
         });
 
         builder.show();
+    }
+    public void updateFireStoreWithIdDeleted(String userId){
+        // Aggiorna Firestore con l'ID eliminato
+        Map<String, Object> updates = new HashMap<>();
+        updates.put(KEY_IDS_DELETED, deletedEditTextIds); // Aggiunge l'ID all'array 'deleted_ids'
+
+        db.collection("Pathologies").document(userId)
+                .update(updates)
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("Firestore", "ID eliminato aggiornato con successo");
+                })
+                .addOnFailureListener(e -> {
+                    Log.w("Firestore", "Errore nell'aggiornamento dell'ID eliminato", e);
+                });
     }
     public void saveData(String userId) {
         Map<String, Object> note = new HashMap<>();
