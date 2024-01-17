@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,42 +33,34 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
-        buttonFragmentUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        buttonFragmentUser.setOnClickListener(v -> {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                FragmentUserData userFragment = new FragmentUserData();
-                fragmentTransaction.replace(R.id.fragment_container, userFragment);
-                fragmentTransaction.commit();
-            }
+            FragmentUserData userFragment = new FragmentUserData();
+            fragmentTransaction.replace(R.id.fragment_container, userFragment);
+            fragmentTransaction.commit();
         });
 
-        buttonFragmentQR.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                FragmentQRCode codeQRFragment = new FragmentQRCode();
-                fragmentTransaction.replace(R.id.fragment_container, codeQRFragment);
-                fragmentTransaction.commit();
+        buttonFragmentQR.setOnClickListener(v -> {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-            }
+            FragmentQRCode codeQRFragment = new FragmentQRCode();
+            fragmentTransaction.replace(R.id.fragment_container, codeQRFragment);
+            fragmentTransaction.commit();
         });
 
-        buttonFragmentHealth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                FragmentHealthProfile healthProfileFragment = new FragmentHealthProfile();
-                fragmentTransaction.replace(R.id.fragment_container, healthProfileFragment);
-                fragmentTransaction.commit();
-            }
+        buttonFragmentHealth.setOnClickListener(v -> {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            FragmentHealthProfile healthProfileFragment = new FragmentHealthProfile();
+            fragmentTransaction.replace(R.id.fragment_container, healthProfileFragment);
+            fragmentTransaction.commit();
         });
+
     }
 }

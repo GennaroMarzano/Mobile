@@ -908,7 +908,7 @@ public class FragmentHealthProfile extends Fragment {
                                 container.removeView(editText);
                                 container.removeView(deleteButton);
                                 deletedEditTextIds.add(editText.getId());
-                                updateFireStoreWithIdDeleted(userId);
+                                updateFireStoreWithIdsDeleted(userId);
                             });
 
                             // Aggiungi un TextWatcher per tracciare i cambiamenti
@@ -932,8 +932,8 @@ public class FragmentHealthProfile extends Fragment {
                             // Imposta il colore del testo a nero
                             editText.setTextColor(Color.BLACK);
 
-                            container.addView(deleteButton);
                             container.addView(editText);
+                            container.addView(deleteButton);
                         }
                         disableAllViews(container);
                     }
@@ -1010,12 +1010,22 @@ public class FragmentHealthProfile extends Fragment {
 
                 editText.setText(inputField.getText().toString());
 
-                // Assegna l'ID prima di aggiungere il TextWatcher
-                countEditText++;
-                editText.setId(countEditText);
+                int newEditTextId;
 
-                // Aggiungi il testo iniziale alla mappa
-                editTextData.put(countEditText, inputField.getText().toString());
+                if (!deletedEditTextIds.isEmpty()) {
+                    // Se ci sono ID liberi, usa il primo ID disponibile
+                    newEditTextId = deletedEditTextIds.remove(0); // Rimuove e restituisce il primo elemento
+
+                    // Aggiorna Firestore con la lista aggiornata di ID eliminati
+                    updateFireStoreWithIdsDeleted(userId);
+                } else {
+                    // Se non ci sono ID liberi, incrementa il contatore e usa il nuovo ID
+                    countEditText++;
+                    newEditTextId = countEditText;
+                }
+
+                editText.setId(newEditTextId);
+                editTextData.put(newEditTextId, inputField.getText().toString());
 
                 // Aggiungi un TextWatcher per tracciare i cambiamenti
                 editText.addTextChangedListener(new TextWatcher() {
@@ -1047,14 +1057,14 @@ public class FragmentHealthProfile extends Fragment {
                     container.removeView(deleteButton);
                     deletedEditTextIds.add(deletedId);
 
-                    updateFireStoreWithIdDeleted(userId);
+                    updateFireStoreWithIdsDeleted(userId);
                 });
 
-                container.addView(deleteButton);
                 container.addView(editText);
+                container.addView(deleteButton);
 
                 Map<String, Object> note = new HashMap<>();
-                note.put(String.valueOf(countEditText), inputField.getText().toString());
+                note.put(String.valueOf(newEditTextId), inputField.getText().toString());
                 note.put(KEY_NUMBER_EDIT_TEXT, countEditText);
 
                 db.collection("Pathologies").document(userId)
@@ -1082,7 +1092,7 @@ public class FragmentHealthProfile extends Fragment {
 
         builder.show();
     }
-    public void updateFireStoreWithIdDeleted(String userId){
+    public void updateFireStoreWithIdsDeleted(String userId){
         // Aggiorna Firestore con l'ID eliminato
         Map<String, Object> updates = new HashMap<>();
         updates.put(KEY_IDS_DELETED, deletedEditTextIds); // Aggiunge l'ID all'array 'deleted_ids'

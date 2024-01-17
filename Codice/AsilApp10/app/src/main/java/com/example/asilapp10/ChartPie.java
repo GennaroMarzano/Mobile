@@ -1,13 +1,10 @@
 package com.example.asilapp10;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 
@@ -16,9 +13,6 @@ import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Pie;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -41,7 +35,7 @@ public class ChartPie extends AppCompatActivity {
     DatePicker datePickerEnd;
     String startDate = "";
     String endDate = "";
-    Button buttonCalendar, edit, apply;
+    Button edit, apply;
     String[] categories = {"Food", "Medicines", "Other"};
     private Pie pie;
     FirebaseUser user;
@@ -54,7 +48,6 @@ public class ChartPie extends AppCompatActivity {
 
         Date currentDate = new Date();
 
-        // Formattare la data corrente
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String formattedDate = dateFormat.format(currentDate);
 
@@ -71,65 +64,66 @@ public class ChartPie extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 
-        String userId = user.getUid();
+        String userId = (user != null) ? user.getUid() : "";
+
         DocumentReference docRef = db.collection("Chart Pie Data")
                 .document(userId + " FMO");
 
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-                    List<Double> values = (List<Double>) documentSnapshot.get(formattedDate);
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                List<Double> values = new ArrayList<>();
 
-                    // Verifica se l'array esiste e ha almeno 3 valori
-                    if (values != null && values.size() >= 3) {
-                        double[] valuesArray = new double[]{
-                                values.get(0),
-                                values.get(1),
-                                values.get(2)
-                        };
-                        boolean flag = false;
-                        setupPieChart(valuesArray, flag);
+                Object rawData = documentSnapshot.get(formattedDate);
+                if (rawData instanceof List<?>) {
+                    List<?> rawList = (List<?>) rawData;
+
+                    for (Object item : rawList) {
+                        if (item instanceof Double) {
+                            values.add((Double) item);
+                        } else if (item instanceof Integer) {
+                            values.add(((Integer) item).doubleValue());
+                        }
                     }
+                }
+                if (values.size() >= 3) {
+                    double[] valuesArray = new double[]{
+                            values.get(0),
+                            values.get(1),
+                            values.get(2)
+                    };
+                    setupPieChart(valuesArray);
                 }
             }
         });
 
-        edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), EditChartPie.class);
-                startActivity(intent);
-                finish();
-            }
+
+        edit.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), EditChartPie.class);
+            startActivity(intent);
+            finish();
         });
 
-        apply.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Imposta le date iniziali
-                startDate = getCurrentFormattedDate(datePickerStart.getYear(), datePickerStart.getMonth(), datePickerStart.getDayOfMonth());
-                endDate = getCurrentFormattedDate(datePickerEnd.getYear(), datePickerEnd.getMonth(), datePickerEnd.getDayOfMonth());
 
-                // Setta i listener
-                datePickerStart.init(datePickerStart.getYear(), datePickerStart.getMonth(), datePickerStart.getDayOfMonth(),
-                        (view, year, monthOfYear, dayOfMonth) ->
-                                startDate = getCurrentFormattedDate(year, monthOfYear, dayOfMonth));
+        apply.setOnClickListener(v -> {
+            startDate = getCurrentFormattedDate(datePickerStart.getYear(), datePickerStart.getMonth(), datePickerStart.getDayOfMonth());
+            endDate = getCurrentFormattedDate(datePickerEnd.getYear(), datePickerEnd.getMonth(), datePickerEnd.getDayOfMonth());
 
-                datePickerEnd.init(datePickerEnd.getYear(), datePickerEnd.getMonth(), datePickerEnd.getDayOfMonth(),
-                        (view, year, monthOfYear, dayOfMonth) ->
-                                endDate = getCurrentFormattedDate(year, monthOfYear, dayOfMonth));
+            datePickerStart.init(datePickerStart.getYear(), datePickerStart.getMonth(), datePickerStart.getDayOfMonth(),
+                    (view, year, monthOfYear, dayOfMonth) ->
+                            startDate = getCurrentFormattedDate(year, monthOfYear, dayOfMonth));
 
-                // Esegui la query a Firestore
-                performFirestoreQuery(userId);
-            }
+            datePickerEnd.init(datePickerEnd.getYear(), datePickerEnd.getMonth(), datePickerEnd.getDayOfMonth(),
+                    (view, year, monthOfYear, dayOfMonth) ->
+                            endDate = getCurrentFormattedDate(year, monthOfYear, dayOfMonth));
+
+            performFirestoreQuery(userId);
         });
 
     }
 
-    public void setupPieChart(double[] valuesArray, boolean flag) {
+    public void setupPieChart(double[] valuesArray) {
         if (pie == null) {
-            // Creazione del grafico per la prima volta
+
             pie = AnyChart.pie();
             anyChartView.setChart(pie);
         }
@@ -139,13 +133,12 @@ public class ChartPie extends AppCompatActivity {
             dataEntries.add(new ValueDataEntry(categories[i], valuesArray[i]));
         }
 
-        pie.autoRedraw(false); // Disabilita il ridisegno automatico
+        pie.autoRedraw(false);
         pie.data(dataEntries);
-        pie.palette(new String[]{"#ED2B2B", "#53C943", "#2D70D3"}); // Rosso, verde, blu
-        pie.autoRedraw(true);  // Riabilita il ridisegno automatico
+        pie.palette(new String[]{"#ED2B2B", "#53C943", "#2D70D3"});
+        pie.autoRedraw(true);
     }
 
-    // Metodo per eseguire la query Firestore
     private void performFirestoreQuery(String userId) {
         double[] sumFood = {0.0};
         double[] sumMedicines = {0.0};
@@ -161,14 +154,19 @@ public class ChartPie extends AppCompatActivity {
             try {
                 Date start = format.parse(startDate);
                 Date end = format.parse(endDate);
-                // Aggiunta di un log per visualizzare le date di inizio e fine
+
                 Log.d("QueryDates", "Start date: " + startDate + ", End date: " + endDate);
 
                 Calendar calendarStart = Calendar.getInstance();
-                calendarStart.setTime(start);
+                if (start != null) {
+                    calendarStart.setTime(start);
+                }
 
                 Calendar calendarEnd = Calendar.getInstance();
-                calendarEnd.setTime(end);
+                if (end != null) {
+                    calendarEnd.setTime(end);
+                }
+
 
                 while (!calendarStart.after(calendarEnd)) {
                     Date currentDate = calendarStart.getTime();
@@ -187,57 +185,52 @@ public class ChartPie extends AppCompatActivity {
             DocumentReference docRef = db.collection("Chart Pie Data")
                     .document(userId + " FMO");
 
-            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot documentSnapshot = task.getResult();
-                        if (documentSnapshot.exists()) {
-                            Log.d("FirestoreDocument", "Document Snapshot: " + documentSnapshot.getData());
-                            for (String date : datesInRange) {
-                                Object rawData = documentSnapshot.get(date);
+            docRef.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    if (documentSnapshot != null && documentSnapshot.exists()) {
+                        Log.d("Fire store Document", "Document Snapshot: " + documentSnapshot.getData());
+                        for (String date : datesInRange) {
+                            Object rawData = documentSnapshot.get(date);
 
-                                if (rawData instanceof List<?>) {
-                                    List<?> rawList = (List<?>) rawData;
-                                    if (rawList.size() >= 3 && allElementsAreNumbers(rawList)) {
-                                        sumFood[0] += ((Number) rawList.get(0)).doubleValue();
-                                        sumMedicines[0] += ((Number) rawList.get(1)).doubleValue();
-                                        sumOther[0] += ((Number) rawList.get(2)).doubleValue();
-                                    }
+                            if (rawData instanceof List<?>) {
+                                List<?> rawList = (List<?>) rawData;
+                                if (rawList.size() >= 3 && allElementsAreNumbers(rawList)) {
+                                    sumFood[0] += ((Number) rawList.get(0)).doubleValue();
+                                    sumMedicines[0] += ((Number) rawList.get(1)).doubleValue();
+                                    sumOther[0] += ((Number) rawList.get(2)).doubleValue();
                                 }
                             }
-                            double[] valuesArray = new double[]{
-                                    sumFood[0],
-                                    sumMedicines[0],
-                                    sumOther[0]
-                            };
-                            // Aggiunta di un log per visualizzare i valori sommati
-                            Log.d("SummedValues", "Food: " + sumFood[0] + ", Medicines: "
-                                    + sumMedicines[0] + ", Other: " + sumOther[0]);
+                        }
+                        double[] valuesArray = new double[]{
+                                sumFood[0],
+                                sumMedicines[0],
+                                sumOther[0]
+                        };
 
-                            boolean flag = true;
-                            setupPieChart(valuesArray, flag);
-                        } else {
-                            // Il documento non esiste
-                            Log.d("FirestoreError", "Document does not exist");
-                        }
+                        Log.d("SummedValues", "Food: " + sumFood[0] + ", Medicines: "
+                                + sumMedicines[0] + ", Other: " + sumOther[0]);
+
+                        setupPieChart(valuesArray);
                     } else {
-                        // Gestione dell'errore
-                        Exception e = task.getException();
-                        if (e != null) {
-                            e.printStackTrace();
-                            Log.d("FirestoreError", "Error fetching document: " + e.getMessage());
-                        }
+                        Log.d("Fire store Error", "Document does not exist");
+                    }
+                } else {
+                    Exception e = task.getException();
+                    if (e != null) {
+                        e.printStackTrace();
+                        Log.d("Fire store Error", "Error fetching document: " + e.getMessage());
                     }
                 }
             });
+
         }
     }
-    // Metodo per ottenere la data formattata
+
     private String getCurrentFormattedDate(int year, int month, int day) {
         return String.format(Locale.ENGLISH, "%04d-%02d-%02d", year, month + 1, day);
     }
-    // Metodo ausiliario per verificare che tutti gli elementi della lista siano numeri
+
     private boolean allElementsAreNumbers(List<?> list) {
         for (Object element : list) {
             if (!(element instanceof Number)) {

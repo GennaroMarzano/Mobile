@@ -17,7 +17,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Name:" />
+            android:text="Name:"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/tf_name"
@@ -48,7 +49,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Last name:" />
+            android:text="Last name:"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/tl_name"
@@ -79,7 +81,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Tax ID Code:" />
+            android:text="Tax ID Code:"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/tCF"
@@ -110,7 +113,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Birth place:" />
+            android:text="Birth place:"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/tb_place"
@@ -141,7 +145,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Date of birth"/>
+            android:text="Date of birth"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/td_birth"
@@ -172,7 +177,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Nationality:" />
+            android:text="Nationality:"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/t_nationality"
@@ -203,7 +209,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Place of residence:" />
+            android:text="Place of residence:"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/tp_residence"
@@ -234,7 +241,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Address:" />
+            android:text="Address:"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/t_address"
@@ -265,7 +273,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Phone number:" />
+            android:text="Phone number:"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/tp_number"
@@ -297,7 +306,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Email:" />
+            android:text="Email:"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/t_email"
@@ -363,7 +373,8 @@
                 android:backgroundTint="#4CAF50"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit" />
+                android:text="Edit"
+                android:textColor="#FFFFFF"/>
 
             <Button
                 android:id="@+id/btn_back_edit"
@@ -371,7 +382,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Back"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:textColor="#FFFFFF"/>
         </FrameLayout>
 
         <!-- Secondo FrameLayout per gli altri due bottoni -->
@@ -385,7 +397,8 @@
                 android:backgroundTint="#4CAF50"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Logout" />
+                android:text="Logout"
+                android:textColor="#FFFFFF"/>
 
             <Button
                 android:id="@+id/btn_apply_edit_data"
@@ -393,7 +406,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Apply"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:textColor="#FFFFFF"/>
         </FrameLayout>
 
         <FrameLayout
@@ -406,7 +420,8 @@
                 android:backgroundTint="#4CAF50"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/share" />
+                android:text="@string/share"
+                android:textColor="#FFFFFF"/>
 
         </FrameLayout>
 

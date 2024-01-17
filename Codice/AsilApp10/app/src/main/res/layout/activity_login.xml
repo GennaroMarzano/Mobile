@@ -27,8 +27,11 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email"
             android:hint="@string/email"
+            android:textColorHint="#000000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:padding="12dp"
             android:background="@drawable/login_input_edit_text"
             android:textColor="#000000"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -44,6 +47,8 @@
             android:textColorHint="#000000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="48dp"
+        android:padding="12dp"
             android:background="@drawable/login_input_edit_text"
             android:textColor="#000000"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -60,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#FFFFFF"
-        android:backgroundTint="#4CAF50"/>
+        android:backgroundTint="#3A833C"/>
 
     <TextView
         android:textStyle="bold"
