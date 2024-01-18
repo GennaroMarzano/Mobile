@@ -116,7 +116,6 @@ public class FragmentUserData extends Fragment {
         tAddress = getView().findViewById(R.id.t_address);
         tpNumber = getView().findViewById(R.id.tp_number);
         tEmail = getView().findViewById(R.id.t_email);
-        tPassword = getView().findViewById(R.id.t_password);
 
 
         buttonEdit = getView().findViewById(R.id.btn_edit_data);

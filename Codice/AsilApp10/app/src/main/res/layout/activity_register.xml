@@ -647,7 +647,7 @@
         android:text="@string/register"
         android:id="@+id/btn_register"
         android:layout_width="wrap_content"
-        android:backgroundTint="#00AA00"
+        android:backgroundTint="#3A833C"
         android:textColor="#FFFFFF"
         android:layout_height="wrap_content"/>
 
