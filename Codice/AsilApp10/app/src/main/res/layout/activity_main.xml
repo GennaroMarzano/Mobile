@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- Layout principale che utilizza ConstraintLayout -->
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="#FFFFFF"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <!-- FrameLayout per contenere frammenti o altri componenti -->
 
     <FrameLayout
         android:id="@+id/fragment_container"
@@ -17,25 +22,35 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- HorizontalScrollView per permettere lo scorrimento orizzontale dei pulsanti -->
+
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView"
         android:layout_width="413dp"
         android:layout_height="107dp"
         android:layout_marginBottom="-15dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints,VisualLintBounds">
+
+        <!-- ConstraintLayout interno al HorizontalScrollView -->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:ignore="MissingConstraints">
+            tools:ignore="MissingConstraints,VisualLintBounds">
+
+            <!-- LinearLayout per disporre i pulsanti in orizzontale -->
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="128dp"
                 android:background="#008000"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:ignore="MissingConstraints">
+                tools:ignore="MissingConstraints,VisualLintBounds">
+
+                <!-- Serie di pulsanti con icone e testo -->
+
+                <!-- Pulsante Home -->
 
                 <Button
                     android:id="@+id/btn_home"
@@ -48,8 +63,11 @@
                     android:paddingVertical="20dp"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
-                    android:text="Home"
-                    android:textColor="#FFFFFF" />
+                    android:text="@string/home"
+                    android:textColor="#FFFFFF"
+                    style="?android:attr/buttonBarButtonStyle"/>
+
+                <!-- Pulsante QR Code -->
 
                 <Button
                     android:id="@+id/btn_qr"
@@ -61,8 +79,11 @@
                     android:paddingVertical="20dp"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
-                    android:text="QR code"
-                    android:textColor="#FFFFFF" />
+                    android:text="@string/qr_code"
+                    android:textColor="#FFFFFF"
+                    style="?android:attr/buttonBarButtonStyle"/>
+
+                <!-- Pulsante Profilo -->
 
                 <Button
                     android:id="@+id/btn_profile"
@@ -74,8 +95,11 @@
                     android:paddingVertical="20dp"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
-                    android:text="Profile"
-                    android:textColor="#FFFFFF" />
+                    android:text="@string/profile"
+                    android:textColor="#FFFFFF"
+                    style="?android:attr/buttonBarButtonStyle"/>
+
+                <!-- Pulsante Mappa -->
 
                 <Button
                     android:id="@+id/btn_map"
@@ -87,8 +111,11 @@
                     android:paddingVertical="20dp"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
-                    android:text="Map"
-                    android:textColor="#FFFFFF" />
+                    android:text="@string/map"
+                    android:textColor="#FFFFFF"
+                    style="?android:attr/buttonBarButtonStyle"/>
+
+                <!-- Pulsante Grafico a Torta -->
 
                 <Button
                     android:id="@+id/btn_pie"
@@ -100,8 +127,11 @@
                     android:paddingVertical="20dp"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
-                    android:text="Pie Chart"
-                    android:textColor="#FFFFFF" />
+                    android:text="@string/pie_chart"
+                    android:textColor="#FFFFFF"
+                    style="?android:attr/buttonBarButtonStyle"/>
+
+                <!-- Pulsante Profilo Salute -->
 
                 <Button
                     android:id="@+id/btn_health"
@@ -110,20 +140,9 @@
                     android:layout_weight="1"
                     android:backgroundTint="#008000"
                     android:paddingTop="70dp"
-                    android:text="Button"
-                    android:textColor="#FFFFFF" />
-
-                <Button
-                    android:id="@+id/button8"
-                    android:layout_width="105dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:backgroundTint="#008000"
-                    android:drawablePadding="5dp"
-                    android:paddingVertical="20dp"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp" />
-
+                    android:text="@string/health_profile"
+                    android:textColor="#FFFFFF"
+                    style="?android:attr/buttonBarButtonStyle"/>
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -131,5 +150,6 @@
     </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 

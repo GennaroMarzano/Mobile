@@ -80,5 +80,37 @@
     <string name="no_13">No</string>
     <string name="yes_14">Yes</string>
     <string name="no_14">No</string>
+    <string name="btn_login">Login</string>
+    <string name="food">Food</string>
+    <string name="food_eu">€</string>
+    <string name="medicines">Medicines</string>
+    <string name="medicines_eu">€</string>
+    <string name="other">Other</string>
+    <string name="other_eu">€</string>
+    <string name="click_to_add_medicines">Click to add</string>
+    <string name="click_to_add_other">Click to add</string>
+    <string name="add_eu">Add</string>
+    <string name="click_to_add_food">Click to add</string>
+    <string name="add_edit_chart">Add</string>
+    <string name="home">Home</string>
+    <string name="map">Map</string>
+    <string name="pie_chart">Pie Chart</string>
+    <string name="profile">Profile</string>
+    <string name="health_profile">Health Profile</string>
+    <string name="qr_code">QR code</string>
+    <string name="apply_user_data">Apply</string>
+    <string name="back_user_data">Back</string>
+    <string name="edit_user_data">Edit</string>
+    <string name="logout_user_data">Logout</string>
+    <string name="address_user_data">Address:</string>
+    <string name="birth_place_user_data">Birth place:</string>
+    <string name="date_of_birth_user_data">Date of birth:</string>
+    <string name="tax_id_code_user_data">Tax ID Code:</string>
+    <string name="email_usser_data">Email:</string>
+    <string name="name_user_data">Name:</string>
+    <string name="nationality_user_data">Nationality:</string>
+    <string name="phone_number_user_data">Phone number:</string>
+    <string name="place_of_residence_user_data">Place of residence:</string>
+    <string name="last_name_user_data">Last name:</string>
 
 </resources>

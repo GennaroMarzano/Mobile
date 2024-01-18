@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout android:layout_width="match_parent"
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
@@ -17,19 +18,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Name:"
+            android:text="@string/name_user_data"
             android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/tf_name"
-            android:textColor="@color/black"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="2"
             android:enabled="false"
+            android:minHeight="30dp"
             android:padding="8dp"
+            android:textColor="@color/black"
             android:textSize="14sp"
-            android:minHeight="30dp"/>
+            tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
 
     </LinearLayout>
 
@@ -49,19 +51,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Last name:"
+            android:text="@string/last_name_user_data"
             android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/tl_name"
-            android:textColor="@color/black"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="2"
             android:enabled="false"
+            android:minHeight="30dp"
             android:padding="8dp"
+            android:textColor="@color/black"
             android:textSize="14sp"
-            android:minHeight="30dp"/>
+            tools:ignore="Autofill,LabelFor,TextFields,SpeakableTextPresentCheck" />
 
     </LinearLayout>
 
@@ -81,19 +84,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Tax ID Code:"
+            android:text="@string/tax_id_code_user_data"
             android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/tCF"
-            android:textColor="@color/black"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="2"
             android:enabled="false"
+            android:minHeight="48dp"
             android:padding="8dp"
+            android:textColor="@color/black"
             android:textSize="14sp"
-            android:minHeight="30dp"/>
+            tools:ignore="Autofill,LabelFor,TextFields,SpeakableTextPresentCheck,VisualLintTextFieldSize" />
 
     </LinearLayout>
 
@@ -113,19 +117,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Birth place:"
+            android:text="@string/birth_place_user_data"
             android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/tb_place"
-            android:textColor="@color/black"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="2"
             android:enabled="false"
+            android:minHeight="30dp"
             android:padding="8dp"
+            android:textColor="@color/black"
             android:textSize="14sp"
-            android:minHeight="30dp"/>
+            tools:ignore="Autofill,LabelFor,TextFields,SpeakableTextPresentCheck" />
 
     </LinearLayout>
 
@@ -145,19 +150,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Date of birth"
+            android:text="@string/date_of_birth_user_data"
             android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/td_birth"
-            android:textColor="@color/black"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="2"
             android:enabled="false"
+            android:minHeight="30dp"
             android:padding="8dp"
+            android:textColor="@color/black"
             android:textSize="14sp"
-            android:minHeight="30dp"/>
+            tools:ignore="Autofill,LabelFor,TextFields,SpeakableTextPresentCheck" />
 
     </LinearLayout>
 
@@ -177,19 +183,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Nationality:"
+            android:text="@string/nationality_user_data"
             android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/t_nationality"
-            android:textColor="@color/black"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="2"
             android:enabled="false"
+            android:minHeight="30dp"
             android:padding="8dp"
+            android:textColor="@color/black"
             android:textSize="14sp"
-            android:minHeight="30dp"/>
+            tools:ignore="Autofill,LabelFor,TextFields,SpeakableTextPresentCheck" />
 
     </LinearLayout>
 
@@ -209,19 +216,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Place of residence:"
+            android:text="@string/place_of_residence_user_data"
             android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/tp_residence"
-            android:textColor="@color/black"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="2"
             android:enabled="false"
+            android:minHeight="30dp"
             android:padding="8dp"
+            android:textColor="@color/black"
             android:textSize="14sp"
-            android:minHeight="30dp"/>
+            tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
 
     </LinearLayout>
 
@@ -241,19 +249,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Address:"
+            android:text="@string/address_user_data"
             android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/t_address"
-            android:textColor="@color/black"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="2"
             android:enabled="false"
+            android:minHeight="30dp"
             android:padding="8dp"
+            android:textColor="@color/black"
             android:textSize="14sp"
-            android:minHeight="30dp"/>
+            tools:ignore="Autofill,LabelFor,TextFields,SpeakableTextPresentCheck"/>
 
     </LinearLayout>
 
@@ -273,20 +282,21 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Phone number:"
+            android:text="@string/phone_number_user_data"
             android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/tp_number"
-            android:textColor="@color/black"
-            android:inputType="numberDecimal"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="2"
             android:enabled="false"
+            android:inputType="numberDecimal"
+            android:minHeight="30dp"
             android:padding="8dp"
+            android:textColor="@color/black"
             android:textSize="14sp"
-            android:minHeight="30dp"/>
+            tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck" />
 
     </LinearLayout>
 
@@ -306,19 +316,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Email:"
+            android:text="@string/email_usser_data"
             android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/t_email"
-            android:textColor="@color/black"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="2"
             android:enabled="false"
+            android:minHeight="30dp"
             android:padding="8dp"
+            android:textColor="@color/black"
             android:textSize="14sp"
-            android:minHeight="30dp"/>
+            tools:ignore="Autofill,LabelFor,TextFields,SpeakableTextPresentCheck" />
 
     </LinearLayout>
 
@@ -335,7 +346,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="108dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <!-- Primo FrameLayout per i primi due bottoni -->
         <FrameLayout
@@ -345,20 +357,20 @@
 
             <Button
                 android:id="@+id/btn_edit_data"
-                android:backgroundTint="#4CAF50"
+                android:backgroundTint="#3A833C"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:layout_gravity="start"
                 android:layout_marginStart="20dp"
-                android:text="Edit"
+                android:text="@string/edit_user_data"
                 android:textColor="#FFFFFF"/>
 
             <Button
                 android:id="@+id/btn_back_edit"
-                android:backgroundTint="#4CAF50"
+                android:backgroundTint="#3A833C"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Back"
+                android:text="@string/back_user_data"
                 android:visibility="gone"
                 android:textColor="#FFFFFF"/>
         </FrameLayout>
@@ -371,19 +383,19 @@
 
             <Button
                 android:id="@+id/btn_logout"
-                android:backgroundTint="#4CAF50"
+                android:backgroundTint="#3A833C"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Logout"
+                android:text="@string/logout_user_data"
                 android:textColor="#FFFFFF"/>
 
             <Button
                 android:id="@+id/btn_apply_edit_data"
-                android:backgroundTint="#4CAF50"
+                android:backgroundTint="#3A833C"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Apply"
+                android:text="@string/apply_user_data"
                 android:visibility="gone"
                 android:textColor="#FFFFFF"/>
         </FrameLayout>
@@ -395,10 +407,10 @@
 
             <Button
                 android:id="@+id/btn_share"
-                android:backgroundTint="#4CAF50"
+                android:backgroundTint="#3A833C"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:layout_marginEnd="20dp"
                 android:text="@string/share"
                 android:textColor="#FFFFFF"/>

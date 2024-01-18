@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- Layout principale della schermata del grafico a torta -->
+
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,6 +10,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChartPie">
+
+    <!-- Titolo della schermata del grafico a torta -->
 
     <TextView
         android:id="@+id/textView"
@@ -27,6 +32,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.024" />
 
+    <!-- Visualizzazione del grafico a torta -->
+
     <com.anychart.AnyChartView
         android:id="@+id/any_chart_view"
         android:layout_width="0dp"
@@ -40,13 +47,17 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="1.0">
 
+        <!-- Pulsante per modificare il grafico a torta -->
+
         <Button
             android:id="@+id/b_edit_chart_pie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_chart_pie" />
-
+            android:text="@string/add_chart_pie"
+            android:backgroundTint="#3A833C"/>
     </com.anychart.AnyChartView>
+
+    <!-- DatePicker per selezionare la data di inizio -->
 
     <DatePicker
         android:id="@+id/d_pie_start"
@@ -63,13 +74,18 @@
         app:layout_constraintVertical_bias="0.518"
         tools:ignore="MissingConstraints" />
 
+    <!-- Pulsante per applicare la selezione del test -->
+
     <Button
         android:id="@+id/btn_apply_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/apply"
         tools:layout_editor_absoluteY="16dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:backgroundTint="#3A833C"/>
+
+    <!-- DatePicker per selezionare la data di fine -->
 
     <DatePicker
         android:id="@+id/d_pie_end"
@@ -84,6 +100,5 @@
         app:layout_constraintTop_toBottomOf="@+id/d_pie_start"
         app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
