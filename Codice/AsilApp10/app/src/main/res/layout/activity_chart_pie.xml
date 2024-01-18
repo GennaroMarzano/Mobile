@@ -16,7 +16,7 @@
         android:shadowDx="0"
         android:shadowDy="10"
         android:shadowRadius="5"
-        android:text="Total Charges"
+        android:text="@string/total_charges_1"
         android:textColor="#000000"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -44,22 +44,9 @@
             android:id="@+id/b_edit_chart_pie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add" />
+            android:text="@string/add_chart_pie" />
 
     </com.anychart.AnyChartView>
-
-
-    <ImageButton
-        android:id="@+id/infoButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="25dp"
-        android:background="@android:drawable/ic_menu_help"
-        android:contentDescription="Help"
-        android:src="@drawable/ic_info"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <DatePicker
         android:id="@+id/d_pie_start"

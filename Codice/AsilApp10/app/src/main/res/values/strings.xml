@@ -57,4 +57,28 @@
     <string name="no">No</string>
     <string name="yes2">Yes</string>
     <string name="no2">No</string>
+    <string name="delete_button_text">Delete</string>
+    <string name="add_chart_pie">Add</string>
+    <string name="total_charges_1">Total Charges</string>
+    <string name="yes_5">Yes</string>
+    <string name="no_5">No</string>
+    <string name="yes_6">Yes</string>
+    <string name="no_6">No</string>
+    <string name="yes_7">Yes</string>
+    <string name="no_7">No</string>
+    <string name="yes_9">Yes</string>
+    <string name="no_9">No</string>
+    <string name="yes_8">Yes</string>
+    <string name="no_8">No</string>
+    <string name="yes_10">Yes</string>
+    <string name="no_10">No</string>
+    <string name="yes_11">Yes</string>
+    <string name="no_11">No</string>
+    <string name="yes_12">Yes</string>
+    <string name="no_12">No</string>
+    <string name="yes_13">Yes</string>
+    <string name="no_13">No</string>
+    <string name="yes_14">Yes</string>
+    <string name="no_14">No</string>
+
 </resources>

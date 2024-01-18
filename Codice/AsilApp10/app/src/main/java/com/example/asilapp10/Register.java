@@ -32,6 +32,7 @@ import java.util.Map;
 
 public class Register extends AppCompatActivity {
 
+    // Dichiarazione delle variabili per gli elementi dell'interfaccia utente
     TextInputEditText editTextEmail, editTextPassword, editTextFirstName, editTextLastName,
             editTextTaxIdCode,editTextBirthPlace, editTextNationality,
             editTextPlaceOfResidence, editTextAddress, editTextPhoneNumber;
@@ -42,6 +43,7 @@ public class Register extends AppCompatActivity {
     TextView textView;
     DatePicker dateOfBirth;
 
+    // Dichiarazione di costanti utilizzate come chiavi per i dati
     private static final String TAG = "Register";
     private static final String KEY_SMOKE = "Do you smoke?";
     private static final String KEY_DRUGS = "Do you do drugs?";
@@ -71,6 +73,8 @@ public class Register extends AppCompatActivity {
     public static final String KEY_TEMPERATURE_DATE = "Body temperature data";
     public static final String KEY_NUMBER_EDIT_TEXT = "Number Edit Text";
     public static final String KEY_IDS_DELETED = "IDs deleted";
+
+    // Dichiarazione di oggetti RadioGroup per le scelte multiple
     private RadioGroup radioGroup1;
     private RadioGroup radioGroup2;
     private RadioGroup radioGroup3;
@@ -86,6 +90,7 @@ public class Register extends AppCompatActivity {
     private RadioGroup radioGroup13;
     private RadioGroup radioGroup14;
 
+    // Dichiarazione di costanti chiave per i dati utente
     public static final String KEY_FIRST_NAME = "First name";
     public static final String KEY_LAST_NAME = "Last name";
     public static final String KEY_TAX_ID_CODE = "Tax ID Code";
@@ -101,8 +106,14 @@ public class Register extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+
+        // Verifica se un utente è già autenticato all'avvio dell'app
+
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
+
+            // Se c'è già un utente autenticato, reindirizza a MainActivity
+
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
@@ -120,12 +131,19 @@ public class Register extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String formattedDate = dateFormat.format(currentDate);
 
+        // Inizializza l'istanza di FirebaseAuth
+
         mAuth = FirebaseAuth.getInstance();
+
+        // Inizializza le view e i pulsanti
+
         editTextEmail = findViewById(R.id.email);
         editTextPassword = findViewById(R.id.password);
         buttonReg = findViewById(R.id.btn_register);
         progressBar = findViewById(R.id.progressBar);
         textView = findViewById(R.id.loginNow);
+
+        // Inizializza gli oggetti RadioGroup
 
         radioGroup1 = findViewById(R.id.radioGroup1);
         radioGroup2 = findViewById(R.id.radioGroup2);
@@ -142,6 +160,8 @@ public class Register extends AppCompatActivity {
         radioGroup13 = findViewById(R.id.radioGroup13);
         radioGroup14 = findViewById(R.id.radioGroup14);
 
+        // Inizializza le altre view e variabili
+
         editTextFirstName = findViewById(R.id.f_name);
         editTextLastName = findViewById(R.id.l_name);
         editTextTaxIdCode = findViewById(R.id.cf);
@@ -152,6 +172,7 @@ public class Register extends AppCompatActivity {
         editTextAddress = findViewById(R.id.address);
         editTextPhoneNumber = findViewById(R.id.phone_number);
 
+        // Gestisce il click sul link "Login Now"
 
         textView.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), Login.class);
@@ -159,12 +180,14 @@ public class Register extends AppCompatActivity {
             finish();
         });
 
+        // Gestisce il click sul pulsante di registrazione
 
         buttonReg.setOnClickListener(v -> {
             progressBar.setVisibility(View.VISIBLE);
             String email = editTextEmail.getText() != null ? editTextEmail.getText().toString() : "";
             String password = editTextPassword.getText() != null ? editTextPassword.getText().toString() : "";
 
+            // Verifica se l'email e la password sono state inserite
 
             if (TextUtils.isEmpty(email)) {
                 Toast.makeText(Register.this, "Enter email", Toast.LENGTH_SHORT).show();
@@ -176,12 +199,19 @@ public class Register extends AppCompatActivity {
                 return;
             }
 
+            // Effettua la registrazione tramite Firebase Authentication
+
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
+
+                            // Se la registrazione è riuscita, reindirizza a MainActivity
+
                             user = mAuth.getCurrentUser();
                             String userId = (user != null) ? user.getUid() : "";
+
+                            // Salva i dati dell'utente, dello stile di vita e della salute in Firestore
 
                             UsersLifestyleData(userId);
                             UserData(userId);
@@ -210,7 +240,16 @@ public class Register extends AppCompatActivity {
 
     }
 
+    /**
+     * Questo metodo è utilizzato per raccogliere i dati relativi allo stile di vita dell'utente
+     * e salvarli nel database Firebase Firestore.
+     *
+     * @param userId ID univoco dell'utente a cui associare i dati dello stile di vita.
+     */
+
     public void UsersLifestyleData(String userId){
+
+        // Ottenere i valori selezionati dalle opzioni radio relative allo stile di vita dell'utente
 
         String smoke = getSelectedRadioValue(radioGroup1);
         String drink = getSelectedRadioValue(radioGroup2);
@@ -226,6 +265,8 @@ public class Register extends AppCompatActivity {
         String meals_eat_day = getSelectedRadioValue(radioGroup12);
         String vegetables_fruits = getSelectedRadioValue(radioGroup13);
         String diet_on = getSelectedRadioValue(radioGroup14);
+
+        // Crea un dizionario (Map) contenente i dati dello stile di vita dell'utente
 
         Map<String, Object> note =  new HashMap<>();
 
@@ -244,16 +285,36 @@ public class Register extends AppCompatActivity {
         note.put(KEY_VEGETABLES_FRUIT, vegetables_fruits);
         note.put(KEY_DIET_ON, diet_on);
 
+        // Salvataggio dei dati dello stile di vita dell'utente nel database Firebase Firestore
+
         db.collection("Lifestyle Users").document(userId + " Lifestyle").set(note)
-                .addOnSuccessListener(unused -> Toast.makeText(Register.this, "Lifestyle data saves!", Toast.LENGTH_SHORT).show())
+                .addOnSuccessListener(unused -> {
+
+                    // Notificare l'utente che i dati sono stati salvati con successo
+
+                    Toast.makeText(Register.this, "Lifestyle data saved!", Toast.LENGTH_SHORT).show();
+                })
                 .addOnFailureListener(e -> {
+
+                    // Gestire eventuali errori durante il salvataggio dei dati
+
                     Toast.makeText(Register.this, "Error!", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, e.toString());
                 });
 
     }
 
+    /**
+     * Ottiene il valore selezionato da un RadioGroup.
+     *
+     * @param radioGroup Il RadioGroup da cui ottenere il valore selezionato.
+     * @return Il testo del RadioButton selezionato o una stringa vuota se nessuno è selezionato.
+     */
+
     private String getSelectedRadioValue(RadioGroup radioGroup) {
+
+        // Ottiene il valore selezionato da un RadioGroup
+
         int selectedRadioButtonId = radioGroup.getCheckedRadioButtonId();
         RadioButton selectedRadioButton = findViewById(selectedRadioButtonId);
 
@@ -264,21 +325,35 @@ public class Register extends AppCompatActivity {
         }
     }
 
+    /**
+     * Questo metodo è utilizzato per raccogliere i dati personali dell'utente
+     * e salvarli nel database Firebase Firestore.
+     *
+     * @param userId ID univoco dell'utente a cui associare i dati personali.
+     */
     public void UserData(String userId){
+
+        // Ottenere il giorno, il mese e l'anno dalla data di nascita selezionata
+
         int day = dateOfBirth.getDayOfMonth();
-        int month = dateOfBirth.getMonth() + 1;
+        int month = dateOfBirth.getMonth() + 1; // L'indice del mese inizia da 0
         int year = dateOfBirth.getYear();
+
+        // Ottenere i valori inseriti dall'utente per i dati personali
 
         String firstName = editTextFirstName.getText() != null ? editTextFirstName.getText().toString() : "";
         String lastName = editTextLastName.getText() != null ? editTextLastName.getText().toString() : "";
         String taxIdCode = editTextTaxIdCode.getText() != null ? editTextTaxIdCode.getText().toString() : "";
         String birthPlace = editTextBirthPlace.getText() != null ? editTextBirthPlace.getText().toString() : "";
-        String dateOfBirth = day + "/" + month + "/" + year;
+
+        String dateOfBirth = day + "/" + month + "/" + year;  // Comporre la data di nascita nel formato "gg/mm/aaaa"
+
         String nationality = editTextNationality.getText() != null ? editTextNationality.getText().toString() : "";
         String placeOfResidence = editTextPlaceOfResidence.getText() != null ? editTextPlaceOfResidence.getText().toString() : "";
         String address = editTextAddress.getText() != null ? editTextAddress.getText().toString() : "";
         String phoneNumber = editTextPhoneNumber.getText() != null ? editTextPhoneNumber.getText().toString() : "";
 
+        // Creare un dizionario (Map) contenente i dati personali dell'utente
 
         Map<String, Object> note =  new HashMap<>();
 
@@ -292,17 +367,38 @@ public class Register extends AppCompatActivity {
         note.put(KEY_ADDRESS, address);
         note.put(KEY_PHONE_NUMBER, phoneNumber);
 
+        // Salvare i dati personali dell'utente nel database Firebase Firestore
+
         db.collection("Users Data").document(userId + " Personal Data").set(note)
-                .addOnSuccessListener(unused -> Toast.makeText(Register.this, "User data saves!", Toast.LENGTH_SHORT).show())
+                .addOnSuccessListener(unused -> {
+
+                    // Notificare l'utente che i dati sono stati salvati con successo
+
+                    Toast.makeText(Register.this, "User data saved!", Toast.LENGTH_SHORT).show();
+                })
                 .addOnFailureListener(e -> {
+
+                    // Gestire eventuali errori durante il salvataggio dei dati
+
                     Toast.makeText(Register.this, "Error!", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, e.toString());
                 });
 
     }
 
+    /**
+     * Salva i dati di salute iniziali dell'utente nel database.
+     *
+     * @param userId ID dell'utente per identificare i dati di salute.
+     */
+
     public void HealthData(String userId){
+
+        // Creazione di un nuovo oggetto "note" per i dati di salute
+
         Map<String, Object> note =  new HashMap<>();
+
+        // Impostazione dei dati di salute iniziali a "No Data"
 
         note.put(KEY_HEART, "No Data");
         note.put(KEY_PRESSURE, "No Data");
@@ -317,16 +413,23 @@ public class Register extends AppCompatActivity {
         note.put(KEY_OXYGENATION_DATE, "No Data");
         note.put(KEY_TEMPERATURE_DATE, "No Data");
 
+        // Salvataggio dei dati di salute nel documento "User Measurement Data" nel database
+
         db.collection("User Measurement Data").document(userId + " Health Data")
                 .set(note)
                 .addOnSuccessListener(unused -> {
+                    // Successo: i dati di salute sono stati salvati con successo nel database
                 });
 
+        // Creazione di un nuovo oggetto "notePathologies" per i dati sulle patologie
 
         Map<String, Object> notePathologies = new HashMap<>();
 
+        // Creazione di una lista vuota per gli ID delle patologie eliminate
+
         List<Integer> idsDelete = new ArrayList<>();
 
+        // Impostazione dell'ID delle patologie eliminate e dei dati a "No Data"
 
         notePathologies.put(KEY_IDS_DELETED, idsDelete);
 
@@ -334,12 +437,16 @@ public class Register extends AppCompatActivity {
             notePathologies.put(String.valueOf(i), "No Data");
         }
 
+        // Impostazione del numero di campi di modifica dei dati a 0
+
         notePathologies.put(KEY_NUMBER_EDIT_TEXT, 0);
+
+        // Salvataggio dei dati sulle patologie nel documento "Pathologies" nel database
 
         db.collection("Pathologies").document(userId)
                 .set(notePathologies)
                 .addOnSuccessListener(unused -> {
-
+                    // Successo: i dati sulle patologie sono stati salvati con successo nel database
                 });
     }
 }

@@ -20,7 +20,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-
+/**
+ * Activity per l'aggiunta di dati al grafico a torta.
+ */
 public class EditChartPie extends AppCompatActivity {
 
     EditText editTextFood, editTextMedicines, editTextOther;
@@ -39,6 +41,8 @@ public class EditChartPie extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String formattedDate = dateFormat.format(currentDate);
 
+        // Inizializzazione dei componenti UI e degli oggetti Firebase
+
         buttonBack = findViewById(R.id.btn_add_back);
         buttonAdd = findViewById(R.id.btn_add_add);
 
@@ -49,12 +53,15 @@ public class EditChartPie extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 
+        // Gestisce il click sul pulsante "Indietro"
+
         buttonBack.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), ChartPie.class);
             startActivities(new Intent[]{intent});
             finish();
         });
 
+        // Ottiene i valori inseriti dall'utente per cibo, medicine e altro
 
         buttonAdd.setOnClickListener(v -> {
             double[] food = { editTextFood.getText().toString().isEmpty() ? 0.0
@@ -68,6 +75,8 @@ public class EditChartPie extends AppCompatActivity {
             DocumentReference docRef = db.collection("Chart Pie Data")
                     .document(userId + " FMO");
 
+            // Ottiene i dati esistenti dal documento su Firestore
+
                 docRef.get().addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
                         List<Double> values = new ArrayList<>();
@@ -75,6 +84,9 @@ public class EditChartPie extends AppCompatActivity {
                         Object rawData = documentSnapshot.get(formattedDate);
                         if (rawData instanceof List<?>) {
                             List<?> rawList = (List<?>) rawData;
+
+                            // Estrae i valori esistenti dal documento
+                            //Controllo se sono delle istanze di Double e Integer
 
                             for (Object item : rawList) {
                                 if (item instanceof Double) {
@@ -89,6 +101,8 @@ public class EditChartPie extends AppCompatActivity {
                         Double medicinesValue = 0.0;
                         Double otherValue = 0.0;
 
+                        // Se ci sono almeno 3 valori, assegna i valori alle categorie
+
                         if (values.size() >= 3) {
                             foodValue = values.get(0);
                             medicinesValue = values.get(1);
@@ -96,15 +110,24 @@ public class EditChartPie extends AppCompatActivity {
                         }
 
                         if (foodValue != null && medicinesValue != null && otherValue != null) {
+
+                            // Aggiorna i valori con quelli inseriti dall'utente
+
                             food[0] += foodValue;
                             medicines[0] += medicinesValue;
                             other[0] += otherValue;
 
+                            // Crea una lista con i valori aggiornati
+
                             List<Double> updatedValues = Arrays.asList(food[0], medicines[0], other[0]);
+
+                            // Aggiorna il documento su Firestore con i nuovi valori
 
                             docRef.update(formattedDate, updatedValues)
                                     .addOnSuccessListener(aVoid -> Toast.makeText(EditChartPie.this, "Data saved!", Toast.LENGTH_SHORT).show())
                                     .addOnFailureListener(e -> Toast.makeText(EditChartPie.this, "Error!", Toast.LENGTH_SHORT).show());
+
+                            // Torna alla schermata del grafico a torta
 
                             Intent intent = new Intent(getApplicationContext(), ChartPie.class);
                             startActivity(intent);
@@ -112,6 +135,7 @@ public class EditChartPie extends AppCompatActivity {
                         }
                     }
                 }).addOnFailureListener(e -> {
+                    // Gestisce eventuali errori
                 });
         });
     }
