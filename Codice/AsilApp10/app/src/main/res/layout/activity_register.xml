@@ -8,7 +8,8 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    android:paddingRight="16dp">
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
 
     <!-- Il RelativeLayout permette di centrare il CardView -->
     <RelativeLayout
@@ -270,7 +271,7 @@
             android:id="@+id/radioButtonOption5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yes"
+            android:text="@string/yes_5"
             android:textColor="@color/black"
             android:textSize="16sp"/>
 
@@ -278,7 +279,7 @@
             android:id="@+id/radioButtonOption6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No"
+            android:text="@string/no_5"
             android:textColor="@color/black"
             android:textSize="16sp"/>
     </RadioGroup>
@@ -300,7 +301,7 @@
             android:id="@+id/radioButtonOption7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yes"
+            android:text="@string/yes_6"
             android:textColor="@color/black"
             android:textSize="16sp"/>
 
@@ -308,7 +309,7 @@
             android:id="@+id/radioButtonOption8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No"
+            android:text="@string/no_6"
             android:textColor="@color/black"
             android:textSize="16sp"/>
     </RadioGroup>
@@ -330,7 +331,7 @@
             android:id="@+id/radioButtonOption9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yes"
+            android:text="@string/yes_7"
             android:textColor="@color/black"
             android:textSize="16sp"/>
 
@@ -338,7 +339,7 @@
             android:id="@+id/radioButtonOption10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No"
+            android:text="@string/no_7"
             android:textColor="@color/black"
             android:textSize="16sp"/>
     </RadioGroup>
@@ -360,7 +361,7 @@
             android:id="@+id/radioButtonOption11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yes"
+            android:text="@string/yes_9"
             android:textColor="@color/black"
             android:textSize="16sp"/>
 
@@ -368,7 +369,7 @@
             android:id="@+id/radioButtonOption12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No"
+            android:text="@string/no_9"
             android:textColor="@color/black"
             android:textSize="16sp"/>
     </RadioGroup>
@@ -390,7 +391,7 @@
             android:id="@+id/radioButtonOption13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yes"
+            android:text="@string/yes_8"
             android:textColor="@color/black"
             android:textSize="16sp"/>
 
@@ -398,7 +399,7 @@
             android:id="@+id/radioButtonOption14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No"
+            android:text="@string/no_8"
             android:textColor="@color/black"
             android:textSize="16sp"/>
     </RadioGroup>
@@ -420,7 +421,7 @@
             android:id="@+id/radioButtonOption15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yes"
+            android:text="@string/yes_10"
             android:textColor="@color/black"
             android:textSize="16sp"/>
 
@@ -428,7 +429,7 @@
             android:id="@+id/radioButtonOption16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No"
+            android:text="@string/no_10"
             android:textColor="@color/black"
             android:textSize="16sp"/>
     </RadioGroup>
@@ -450,7 +451,7 @@
             android:id="@+id/radioButtonOption17"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yes"
+            android:text="@string/yes_11"
             android:textColor="@color/black"
             android:textSize="16sp"/>
 
@@ -458,7 +459,7 @@
             android:id="@+id/radioButtonOption18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No"
+            android:text="@string/no_11"
             android:textColor="@color/black"
             android:textSize="16sp"/>
     </RadioGroup>
@@ -480,7 +481,7 @@
             android:id="@+id/radioButtonOption19"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yes"
+            android:text="@string/yes_12"
             android:textColor="@color/black"
             android:textSize="16sp"/>
 
@@ -488,7 +489,7 @@
             android:id="@+id/radioButtonOption20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No"
+            android:text="@string/no_12"
             android:textColor="@color/black"
             android:textSize="16sp"/>
     </RadioGroup>
@@ -510,7 +511,7 @@
             android:id="@+id/radioButtonOption21"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yes"
+            android:text="@string/yes_13"
             android:textColor="@color/black"
             android:textSize="16sp"/>
 
@@ -518,7 +519,7 @@
             android:id="@+id/radioButtonOption22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No"
+            android:text="@string/no_13"
             android:textColor="@color/black"
             android:textSize="16sp"/>
     </RadioGroup>
@@ -580,13 +581,14 @@
         android:id="@+id/radioGroup13"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:ignore="TooManyViews">
 
         <RadioButton
             android:id="@+id/radioButtonOption27"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yes"
+            android:text="@string/yes_14"
             android:textColor="@color/black"
             android:textSize="16sp"/>
 
@@ -594,7 +596,7 @@
             android:id="@+id/radioButtonOption28"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No"
+            android:text="@string/no_14"
             android:textColor="@color/black"
             android:textSize="16sp"/>
     </RadioGroup>
