@@ -42,13 +42,11 @@ public class FragmentUserData extends Fragment {
     public static final String KEY_LAST_NAME = "Last name";
     public static final String KEY_TAX_ID_CODE = "Tax ID Code";
     public static final String KEY_BIRTH_PLACE = "Birth place";
-    public static final String KEY_DATE_OF_BIRTH = "Date of birth";
     public static final String KEY_NATIONALITY = "Nationality";
     public static final String KEY_PLACE_OF_RESIDENCE = "Place of residence";
     public static final String KEY_ADDRESS = "Address";
     public static final String KEY_PHONE_NUMBER = "Phone number";
 
-    //MANCA VISUALIZZARE LA DATA
     public FragmentUserData() {
         // Required empty public constructor
     }
@@ -102,7 +100,6 @@ public class FragmentUserData extends Fragment {
             tlName.setEnabled(true);
             tCF.setEnabled(true);
             tbPlace.setEnabled(true);
-            tdBirth.setEnabled(true);
             tNationality.setEnabled(true);
             tpResidence.setEnabled(true);
             tAddress.setEnabled(true);
@@ -143,7 +140,6 @@ public class FragmentUserData extends Fragment {
             tlName.setEnabled(false);
             tCF.setEnabled(false);
             tbPlace.setEnabled(false);
-            tdBirth.setEnabled(false);
             tNationality.setEnabled(false);
             tpResidence.setEnabled(false);
             tAddress.setEnabled(false);
@@ -170,7 +166,6 @@ public class FragmentUserData extends Fragment {
             tlName.setEnabled(false);
             tCF.setEnabled(false);
             tbPlace.setEnabled(false);
-            tdBirth.setEnabled(false);
             tNationality.setEnabled(false);
             tpResidence.setEnabled(false);
             tAddress.setEnabled(false);
@@ -257,7 +252,6 @@ public class FragmentUserData extends Fragment {
         String lastName = tlName.getText().toString();
         String taxIdCode = tCF.getText().toString();
         String birthPlace = tbPlace.getText().toString();
-        //String dateOfBirth = day + "/" + month + "/" + year; // Assicurati di gestire questa parte in base alla tua logica
         String nationality = tNationality.getText().toString();
         String placeOfResidence = tpResidence.getText().toString();
         String address = tAddress.getText().toString();
@@ -277,7 +271,6 @@ public class FragmentUserData extends Fragment {
         if (!birthPlace.isEmpty()) {
             note.put(KEY_BIRTH_PLACE, birthPlace);
         }
-        // Gestisci dateOfBirth qui se necessario
         if (!nationality.isEmpty()) {
             note.put(KEY_NATIONALITY, nationality);
         }

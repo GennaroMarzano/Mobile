@@ -112,5 +112,23 @@
     <string name="phone_number_user_data">Phone number:</string>
     <string name="place_of_residence_user_data">Place of residence:</string>
     <string name="last_name_user_data">Last name:</string>
+    <string name="_3_user_lifestyle">3 - User Lifestyle</string>
+    <string name="_3_user_lifestyle_2">3 - User Lifestyle</string>
+    <string name="are_you_on_medicines_health">Are you on medicines?</string>
+    <string name="do_you_do_drugs_health">Do you do drugs?</string>
+    <string name="do_you_drink_health">Do you drink?</string>
+    <string name="do_you_drink_enough_water_health">Do you drink enough water?</string>
+    <string name="do_you_eat_enough_vegetables_and_fruit_health">Do you eat enough vegetables and fruit?</string>
+    <string name="do_you_exercise_health">Do you exercise?</string>
+    <string name="do_you_have_a_good_diet_health">Do you have a good diet?</string>
+    <string name="do_you_have_any_allergies_health">Do you have any allergies?</string>
+    <string name="do_you_sleep_enough_health">Do you sleep enough?</string>
+    <string name="do_you_smoke_health">Do you smoke?</string>
+    <string name="has_anyone_in_your_family_had_any_diseases_health">Has anyone in your family had any diseases?</string>
+    <string name="have_you_ever_been_operated_in_the_past_health">Have you ever been operated in the past?</string>
+    <string name="how_many_meals_do_you_eat_in_a_day_health">How many meals do you eat in a day?</string>
+    <string name="which_diet_are_you_on_health">Which diet are you on?</string>
+    <string name="share_health">Share</string>
+    <string name="back_health">Back</string>
 
 </resources>

@@ -31,7 +31,7 @@
             android:padding="8dp"
             android:textColor="@color/black"
             android:textSize="14sp"
-            tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+            tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields,VisualLintTextFieldSize" />
 
     </LinearLayout>
 
@@ -40,12 +40,12 @@
         android:layout_width="match_parent"
         android:layout_height="8dp"/>
 
+    <!-- Riga per Cognome -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Riga per Cognome -->
         <TextView
             android:id="@+id/label_surname"
             android:layout_width="0dp"
@@ -64,7 +64,7 @@
             android:padding="8dp"
             android:textColor="@color/black"
             android:textSize="14sp"
-            tools:ignore="Autofill,LabelFor,TextFields,SpeakableTextPresentCheck" />
+            tools:ignore="Autofill,LabelFor,TextFields,SpeakableTextPresentCheck,VisualLintTextFieldSize" />
 
     </LinearLayout>
 
@@ -73,12 +73,12 @@
         android:layout_width="match_parent"
         android:layout_height="8dp"/>
 
+    <!-- Riga per Codice Fiscale -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Riga per Codice Fiscale -->
         <TextView
             android:id="@+id/label_cf"
             android:layout_width="0dp"
@@ -106,12 +106,12 @@
         android:layout_width="match_parent"
         android:layout_height="8dp"/>
 
+    <!-- Riga per Luogo di Nascita -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Riga per Luogo di Nascita -->
         <TextView
             android:id="@+id/label_birth_place"
             android:layout_width="0dp"
@@ -130,7 +130,7 @@
             android:padding="8dp"
             android:textColor="@color/black"
             android:textSize="14sp"
-            tools:ignore="Autofill,LabelFor,TextFields,SpeakableTextPresentCheck" />
+            tools:ignore="Autofill,LabelFor,TextFields,SpeakableTextPresentCheck,VisualLintTextFieldSize" />
 
     </LinearLayout>
 
@@ -139,12 +139,12 @@
         android:layout_width="match_parent"
         android:layout_height="8dp"/>
 
+    <!-- Riga per Data di Nascita -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Riga per Data di Nascita -->
         <TextView
             android:id="@+id/label_birth_date"
             android:layout_width="0dp"
@@ -163,7 +163,8 @@
             android:padding="8dp"
             android:textColor="@color/black"
             android:textSize="14sp"
-            tools:ignore="Autofill,LabelFor,TextFields,SpeakableTextPresentCheck" />
+            android:focusable="false"
+            tools:ignore="Autofill,LabelFor,TextFields,SpeakableTextPresentCheck,VisualLintTextFieldSize" />
 
     </LinearLayout>
 
@@ -172,12 +173,13 @@
         android:layout_width="match_parent"
         android:layout_height="8dp"/>
 
+    <!-- Riga per Nazionalità -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Riga per Nazionalità -->
+
         <TextView
             android:id="@+id/label_nationality"
             android:layout_width="0dp"
@@ -196,7 +198,7 @@
             android:padding="8dp"
             android:textColor="@color/black"
             android:textSize="14sp"
-            tools:ignore="Autofill,LabelFor,TextFields,SpeakableTextPresentCheck" />
+            tools:ignore="Autofill,LabelFor,TextFields,SpeakableTextPresentCheck,VisualLintTextFieldSize" />
 
     </LinearLayout>
 
@@ -205,12 +207,12 @@
         android:layout_width="match_parent"
         android:layout_height="8dp"/>
 
+    <!-- Riga per Residenza -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Riga per Residenza -->
         <TextView
             android:id="@+id/label_residence"
             android:layout_width="0dp"
@@ -229,7 +231,7 @@
             android:padding="8dp"
             android:textColor="@color/black"
             android:textSize="14sp"
-            tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+            tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields,VisualLintTextFieldSize" />
 
     </LinearLayout>
 
@@ -238,12 +240,12 @@
         android:layout_width="match_parent"
         android:layout_height="8dp"/>
 
+    <!-- Riga per Indirizzo -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Riga per Indirizzo -->
         <TextView
             android:id="@+id/label_address"
             android:layout_width="0dp"
@@ -262,7 +264,7 @@
             android:padding="8dp"
             android:textColor="@color/black"
             android:textSize="14sp"
-            tools:ignore="Autofill,LabelFor,TextFields,SpeakableTextPresentCheck"/>
+            tools:ignore="Autofill,LabelFor,TextFields,SpeakableTextPresentCheck,VisualLintTextFieldSize"/>
 
     </LinearLayout>
 
@@ -271,12 +273,12 @@
         android:layout_width="match_parent"
         android:layout_height="8dp"/>
 
+    <!-- Riga per Numero di Telefono -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Riga per Numero di Telefono -->
         <TextView
             android:id="@+id/label_phone_number"
             android:layout_width="0dp"
@@ -296,7 +298,7 @@
             android:padding="8dp"
             android:textColor="@color/black"
             android:textSize="14sp"
-            tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck" />
+            tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,VisualLintTextFieldSize" />
 
     </LinearLayout>
 
@@ -305,12 +307,12 @@
         android:layout_width="match_parent"
         android:layout_height="8dp"/>
 
+    <!-- Riga per Email -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Riga per Email -->
         <TextView
             android:id="@+id/label_email"
             android:layout_width="0dp"
@@ -329,19 +331,14 @@
             android:padding="8dp"
             android:textColor="@color/black"
             android:textSize="14sp"
-            tools:ignore="Autofill,LabelFor,TextFields,SpeakableTextPresentCheck" />
+            tools:ignore="Autofill,LabelFor,TextFields,SpeakableTextPresentCheck,VisualLintTextFieldSize" />
 
     </LinearLayout>
 
     <!-- Spaziatura -->
     <View
         android:layout_width="match_parent"
-        android:layout_height="8dp"/>
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="20dp"/>
+        android:layout_height="28dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -355,6 +352,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
+            <!-- Bottone per l'edit -->
             <Button
                 android:id="@+id/btn_edit_data"
                 android:backgroundTint="#3A833C"
@@ -365,6 +363,7 @@
                 android:text="@string/edit_user_data"
                 android:textColor="#FFFFFF"/>
 
+            <!-- Bottone ritornare indietro dall'edit -->
             <Button
                 android:id="@+id/btn_back_edit"
                 android:backgroundTint="#3A833C"
@@ -381,6 +380,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
+            <!-- Bottone per il logout -->
             <Button
                 android:id="@+id/btn_logout"
                 android:backgroundTint="#3A833C"
@@ -390,6 +390,7 @@
                 android:text="@string/logout_user_data"
                 android:textColor="#FFFFFF"/>
 
+            <!-- Bottone per applicare le modifiche -->
             <Button
                 android:id="@+id/btn_apply_edit_data"
                 android:backgroundTint="#3A833C"
@@ -400,11 +401,13 @@
                 android:textColor="#FFFFFF"/>
         </FrameLayout>
 
+        <!-- Terzo FrameLayout per l'ultimo bottone -->
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
+            <!-- Bottone per condividere i dati personali -->
             <Button
                 android:id="@+id/btn_share"
                 android:backgroundTint="#3A833C"

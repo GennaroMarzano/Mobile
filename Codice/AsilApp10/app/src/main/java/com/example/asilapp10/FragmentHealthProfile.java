@@ -89,12 +89,17 @@ public class FragmentHealthProfile extends Fragment {
             pressure, tInfoSensor, tOxygenationData, tMeasureDataOxygenation, tDateOxygenation,
             tDataMeasureOxygenationGone, oxygenation, tTemperatureData, tMeasureDataTemperature,
             tDateTemperature, tDataMeasureTemperature, temperature, tDataMeasureTemperatureGone;
+
+    EditText eMedicines, eDrugs, eDrinkWater, eDrink, eEatVegetablesAndFruit, eExercise,
+             eGoodDiet, eAllergies, eSleep, eSmoke, eFamilyDiseases, eOperated, eMealsADay,
+             eDietOn;
     ImageView imageViewSensorLocation;
 
     Button buttonShare, buttonBack, buttonMeasure, buttonMeasureHeart, buttonMeasurePressure,
            buttonMeasureDiabetes, buttonMeasureRespiratory, buttonBackMeasureHeart,
            buttonMeasureOxygenation, buttonMeasureTemperature, buttonAddEditText, buttonEditEditText,
-           buttonBackEditText, buttonSaveEditText;
+           buttonBackEditText, buttonSaveEditText, buttonBackHealth, buttonShareHealth, buttonEditHealth,
+           buttonApplyHealth;
 
     LinearLayout container;
     SensorEventListener proximitySensorListener;
@@ -189,6 +194,11 @@ public class FragmentHealthProfile extends Fragment {
         buttonMeasureOxygenation = getView().findViewById(R.id.btn_measure_oxygenation);
         buttonMeasureTemperature = getView().findViewById(R.id.btn_measure_temperature);
 
+        buttonBackHealth = getView().findViewById(R.id.btn_back_health);
+        buttonShareHealth = getView().findViewById(R.id.btn_share_health);
+        buttonEditHealth = getView().findViewById(R.id.btn_edit_health);
+        buttonApplyHealth = getView().findViewById(R.id.btn_apply_health);
+
         tDataMeasureHeartGone = getView().findViewById(R.id.data_measure_heart);
         tHeartData = getView().findViewById(R.id.t_heart);
         tMeasureDataHeart = getView().findViewById(R.id.heart_date);
@@ -224,6 +234,21 @@ public class FragmentHealthProfile extends Fragment {
         tMeasureDataTemperature = getView().findViewById(R.id.temperature_date);
         tDateTemperature = getView().findViewById(R.id.t_temperature_date);
         temperature = getView().findViewById(R.id.temperature);
+
+        eMedicines = getView().findViewById(R.id.health_medicines);
+        eDrugs = getView().findViewById(R.id.health_drugs);
+        eDrinkWater = getView().findViewById(R.id.health_water);
+        eDrink = getView().findViewById(R.id.health_drink);
+        eEatVegetablesAndFruit = getView().findViewById(R.id.health_vegetables_and_fruit);
+        eExercise = getView().findViewById(R.id.health_exercise);
+        eGoodDiet = getView().findViewById(R.id.health_diet);
+        eAllergies = getView().findViewById(R.id.health_allergies);
+        eSleep = getView().findViewById(R.id.health_sleep);
+        eSmoke = getView().findViewById(R.id.health_smoke);
+        eFamilyDiseases = getView().findViewById(R.id.health_family_diseases);
+        eOperated = getView().findViewById(R.id.health_operated);
+        eMealsADay = getView().findViewById(R.id.health_eat);
+        eDietOn = getView().findViewById(R.id.health_diet_on);
 
         buttonMeasure.setOnClickListener(new View.OnClickListener() {
             @Override

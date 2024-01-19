@@ -421,8 +421,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Sezione 2 (replica la struttura di Sezione 1) -->
-
+        <!-- Sezione 2 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -499,7 +498,507 @@
 
         </LinearLayout>
 
-        <!-- Sezione 3 (replica la struttura di Sezione 1) -->
+        <!-- Sezione 3 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_3_user_lifestyle_2"
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:textColor="@color/black"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/are_you_on_medicines_health"
+                    android:textColor="@color/black"/>
+
+                <EditText
+                    android:id="@+id/health_medicines"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="2"
+                    android:enabled="false"
+                    android:minHeight="30dp"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+
+            </LinearLayout>
+
+            <!-- Spaziatura -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/do_you_do_drugs_health"
+                    android:textColor="@color/black"/>
+
+                <EditText
+                    android:id="@+id/health_drugs"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="2"
+                    android:enabled="false"
+                    android:minHeight="30dp"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+
+            </LinearLayout>
+
+            <!-- Spaziatura -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/do_you_drink_enough_water_health"
+                    android:textColor="@color/black"/>
+
+                <EditText
+                    android:id="@+id/health_water"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="2"
+                    android:enabled="false"
+                    android:minHeight="30dp"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+
+            </LinearLayout>
+
+            <!-- Spaziatura -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/do_you_drink_health"
+                    android:textColor="@color/black"/>
+
+                <EditText
+                    android:id="@+id/health_drink"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="2"
+                    android:enabled="false"
+                    android:minHeight="30dp"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+
+            </LinearLayout>
+
+            <!-- Spaziatura -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/do_you_eat_enough_vegetables_and_fruit_health"
+                    android:textColor="@color/black"/>
+
+                <EditText
+                    android:id="@+id/health_vegetables_and_fruit"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="2"
+                    android:enabled="false"
+                    android:minHeight="30dp"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+
+            </LinearLayout>
+
+            <!-- Spaziatura -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/do_you_exercise_health"
+                    android:textColor="@color/black"/>
+
+                <EditText
+                    android:id="@+id/health_exercise"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="2"
+                    android:enabled="false"
+                    android:minHeight="30dp"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+
+            </LinearLayout>
+
+            <!-- Spaziatura -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/do_you_have_a_good_diet_health"
+                    android:textColor="@color/black"/>
+
+                <EditText
+                    android:id="@+id/health_diet"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="2"
+                    android:enabled="false"
+                    android:minHeight="30dp"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+
+            </LinearLayout>
+
+            <!-- Spaziatura -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/do_you_have_any_allergies_health"
+                    android:textColor="@color/black"/>
+
+                <EditText
+                    android:id="@+id/health_allergies"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="2"
+                    android:enabled="false"
+                    android:minHeight="30dp"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+
+            </LinearLayout>
+
+            <!-- Spaziatura -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/do_you_sleep_enough_health"
+                    android:textColor="@color/black"/>
+
+                <EditText
+                    android:id="@+id/health_sleep"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="2"
+                    android:enabled="false"
+                    android:minHeight="30dp"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+
+            </LinearLayout>
+
+            <!-- Spaziatura -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/do_you_smoke_health"
+                    android:textColor="@color/black"/>
+
+                <EditText
+                    android:id="@+id/health_smoke"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="2"
+                    android:enabled="false"
+                    android:minHeight="30dp"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+
+            </LinearLayout>
+
+            <!-- Spaziatura -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/has_anyone_in_your_family_had_any_diseases_health"
+                    android:textColor="@color/black"/>
+
+                <EditText
+                    android:id="@+id/health_family_diseases"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="2"
+                    android:enabled="false"
+                    android:minHeight="30dp"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+
+            </LinearLayout>
+
+            <!-- Spaziatura -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/have_you_ever_been_operated_in_the_past_health"
+                    android:textColor="@color/black"/>
+
+                <EditText
+                    android:id="@+id/health_operated"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="2"
+                    android:enabled="false"
+                    android:minHeight="30dp"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+
+            </LinearLayout>
+
+            <!-- Spaziatura -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/how_many_meals_do_you_eat_in_a_day_health"
+                    android:textColor="@color/black"/>
+
+                <EditText
+                    android:id="@+id/health_eat"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="2"
+                    android:enabled="false"
+                    android:minHeight="30dp"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+
+            </LinearLayout>
+
+            <!-- Spaziatura -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/which_diet_are_you_on_health"
+                    android:textColor="@color/black"/>
+
+                <EditText
+                    android:id="@+id/health_diet_on"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="2"
+                    android:enabled="false"
+                    android:minHeight="30dp"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+
+            </LinearLayout>
+
+            <!-- Spaziatura -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_edit_health"
+                    android:backgroundTint="#3A833C"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/edit_user_data"
+                    android:textColor="#FFFFFF"/>
+
+                <Button
+                    android:id="@+id/btn_share_health"
+                    android:backgroundTint="#3A833C"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/share_health"
+                    android:textColor="#FFFFFF"/>
+
+                <Button
+                    android:id="@+id/btn_back_health"
+                    android:backgroundTint="#3A833C"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/back_health"
+                    android:textColor="#FFFFFF"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/btn_apply_health"
+                    android:backgroundTint="#3A833C"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/edit_user_data"
+                    android:textColor="#FFFFFF"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
+
 </ScrollView>
 
