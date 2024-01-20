@@ -36,7 +36,7 @@ public class Register extends AppCompatActivity {
     TextInputEditText editTextEmail, editTextPassword, editTextFirstName, editTextLastName,
             editTextTaxIdCode,editTextBirthPlace, editTextNationality,
             editTextPlaceOfResidence, editTextAddress, editTextPhoneNumber;
-    Button buttonReg;
+    Button buttonReg, buttonGuest;
     FirebaseAuth mAuth;
     FirebaseUser user;
     ProgressBar progressBar;
@@ -140,6 +140,7 @@ public class Register extends AppCompatActivity {
         editTextEmail = findViewById(R.id.email);
         editTextPassword = findViewById(R.id.password);
         buttonReg = findViewById(R.id.btn_register);
+        buttonGuest = findViewById(R.id.btn_guest);
         progressBar = findViewById(R.id.progressBar);
         textView = findViewById(R.id.loginNow);
 
@@ -238,6 +239,54 @@ public class Register extends AppCompatActivity {
                     });
         });
 
+        buttonGuest.setOnClickListener(v ->{
+            progressBar.setVisibility(View.VISIBLE);
+            String email = "Buono@gmail.com";
+            String password = "000000";
+
+            // Effettua la registrazione tramite Firebase Authentication
+
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(task -> {
+                        progressBar.setVisibility(View.GONE);
+                        if (task.isSuccessful()) {
+
+                            // Se la registrazione è riuscita, reindirizza a MainActivity
+
+                            user = mAuth.getCurrentUser();
+                            String userId = (user != null) ? user.getUid() : "";
+
+                            // Salva i dati dell'utente, dello stile di vita e della salute in Firestore
+
+                            UsersLifestyleData(userId);
+                            UserData(userId);
+                            HealthData(userId);
+
+                            List<Double> dbInitialValue = Arrays.asList(0.0, 0.0, 0.0);
+                            Map<String, Object> note = new HashMap<>();
+                            note.put(formattedDate, dbInitialValue);
+
+                            db.collection("Chart Pie Data")
+                                    .document(userId + " FMO")
+                                    .set(note)
+                                    .addOnSuccessListener(unused -> {
+
+                                    })
+                                    .addOnFailureListener(e -> {
+
+                                    });
+
+                            Toast.makeText(Register.this, "Account created.", Toast.LENGTH_SHORT).show();
+
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                            
+                        } else {
+                            Toast.makeText(Register.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        });
     }
 
     /**
@@ -251,20 +300,21 @@ public class Register extends AppCompatActivity {
 
         // Ottenere i valori selezionati dalle opzioni radio relative allo stile di vita dell'utente
 
-        String smoke = getSelectedRadioValue(radioGroup1);
-        String drink = getSelectedRadioValue(radioGroup2);
-        String drugs = getSelectedRadioValue(radioGroup3);
-        String medicines = getSelectedRadioValue(radioGroup4);
-        String operated = getSelectedRadioValue(radioGroup5);
-        String family_diseases = getSelectedRadioValue(radioGroup6);
-        String exercise = getSelectedRadioValue(radioGroup7);
-        String good_diet = getSelectedRadioValue(radioGroup8);
-        String sleep = getSelectedRadioValue(radioGroup9);
-        String allergies = getSelectedRadioValue(radioGroup10);
-        String water = getSelectedRadioValue(radioGroup11);
-        String meals_eat_day = getSelectedRadioValue(radioGroup12);
-        String vegetables_fruits = getSelectedRadioValue(radioGroup13);
-        String diet_on = getSelectedRadioValue(radioGroup14);
+        String smoke = !getSelectedRadioValue(radioGroup1).isEmpty() ? getSelectedRadioValue(radioGroup1) : "Yes";
+        String drink = !getSelectedRadioValue(radioGroup2).isEmpty() ? getSelectedRadioValue(radioGroup2) : "Yes";
+        String drugs = !getSelectedRadioValue(radioGroup3).isEmpty() ? getSelectedRadioValue(radioGroup3) : "Yes";
+        String medicines = !getSelectedRadioValue(radioGroup4).isEmpty() ? getSelectedRadioValue(radioGroup4) : "Yes";
+        String operated = !getSelectedRadioValue(radioGroup5).isEmpty() ? getSelectedRadioValue(radioGroup5) : "Yes";
+        String family_diseases = !getSelectedRadioValue(radioGroup6).isEmpty() ? getSelectedRadioValue(radioGroup6) : "Yes";
+        String exercise = !getSelectedRadioValue(radioGroup7).isEmpty() ? getSelectedRadioValue(radioGroup7) : "Yes";
+        String good_diet = !getSelectedRadioValue(radioGroup8).isEmpty() ? getSelectedRadioValue(radioGroup8) : "Yes";
+        String sleep = !getSelectedRadioValue(radioGroup9).isEmpty() ? getSelectedRadioValue(radioGroup9) : "Yes";
+        String allergies = !getSelectedRadioValue(radioGroup10).isEmpty() ? getSelectedRadioValue(radioGroup10) : "Yes";
+        String water = !getSelectedRadioValue(radioGroup11).isEmpty() ? getSelectedRadioValue(radioGroup11) : "Yes";
+        String meals_eat_day = !getSelectedRadioValue(radioGroup12).isEmpty() ? getSelectedRadioValue(radioGroup12) : "Yes";
+        String vegetables_fruits = !getSelectedRadioValue(radioGroup13).isEmpty() ? getSelectedRadioValue(radioGroup13) : "Yes";
+        String diet_on = !getSelectedRadioValue(radioGroup14).isEmpty() ? getSelectedRadioValue(radioGroup14) : "Yes";
+
 
         // Crea un dizionario (Map) contenente i dati dello stile di vita dell'utente
 
@@ -341,17 +391,17 @@ public class Register extends AppCompatActivity {
 
         // Ottenere i valori inseriti dall'utente per i dati personali
 
-        String firstName = editTextFirstName.getText() != null ? editTextFirstName.getText().toString() : "";
-        String lastName = editTextLastName.getText() != null ? editTextLastName.getText().toString() : "";
-        String taxIdCode = editTextTaxIdCode.getText() != null ? editTextTaxIdCode.getText().toString() : "";
-        String birthPlace = editTextBirthPlace.getText() != null ? editTextBirthPlace.getText().toString() : "";
+        String firstName = editTextFirstName.getText() != null ? editTextFirstName.getText().toString() : "Paolo";
+        String lastName = editTextLastName.getText() != null ? editTextLastName.getText().toString() : "Buono";
+        String taxIdCode = editTextTaxIdCode.getText() != null ? editTextTaxIdCode.getText().toString() : "AAAAAA";
+        String birthPlace = editTextBirthPlace.getText() != null ? editTextBirthPlace.getText().toString() : "Bari";
 
         String dateOfBirth = day + "/" + month + "/" + year;  // Comporre la data di nascita nel formato "gg/mm/aaaa"
 
-        String nationality = editTextNationality.getText() != null ? editTextNationality.getText().toString() : "";
-        String placeOfResidence = editTextPlaceOfResidence.getText() != null ? editTextPlaceOfResidence.getText().toString() : "";
+        String nationality = editTextNationality.getText() != null ? editTextNationality.getText().toString() : "Italiana";
+        String placeOfResidence = editTextPlaceOfResidence.getText() != null ? editTextPlaceOfResidence.getText().toString() : "Bari";
         String address = editTextAddress.getText() != null ? editTextAddress.getText().toString() : "";
-        String phoneNumber = editTextPhoneNumber.getText() != null ? editTextPhoneNumber.getText().toString() : "";
+        String phoneNumber = editTextPhoneNumber.getText() != null ? editTextPhoneNumber.getText().toString() : "333333333";
 
         // Creare un dizionario (Map) contenente i dati personali dell'utente
 
@@ -383,7 +433,6 @@ public class Register extends AppCompatActivity {
                     Toast.makeText(Register.this, "Error!", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, e.toString());
                 });
-
     }
 
     /**

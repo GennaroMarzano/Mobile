@@ -161,5 +161,6 @@
     <string name="measure_heart">Measure</string>
     <string name="measure_diabetes">Measure</string>
     <string name="back_home">Back</string>
+    <string name="click_here_to_enter_as_a_guest">Click here to enter as a guest</string>
 
 </resources>

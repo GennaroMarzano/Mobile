@@ -1120,12 +1120,6 @@ public class FragmentHealthProfile extends Fragment {
             deleteButton.setText(R.string.delete);
             deleteButton.setId(countEditText + 1000); // Assicurati che l'ID del bottone sia univoco
 
-            // Imposta il colore del testo a bianco
-            deleteButton.setTextColor(Color.WHITE);
-
-            // Imposta il colore di sfondo del bottone a #3A833C
-            deleteButton.setBackgroundColor(Color.parseColor("#3A833C"));
-
             // Aggiungi listener al bottone di eliminazione
             deleteButton.setOnClickListener(v -> {
 
