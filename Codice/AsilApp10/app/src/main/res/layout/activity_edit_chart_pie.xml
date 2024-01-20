@@ -31,10 +31,12 @@
     <RelativeLayout
         android:layout_width="370dp"
         android:layout_height="714dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="64dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/roundlayoutrl"
         android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="VisualLintBounds">
@@ -119,10 +121,10 @@
                 android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="-214dp"
-                android:textColorHint="@color/black"
                 android:hint="@string/click_to_add_medicines"
                 android:inputType="numberDecimal"
                 android:textColor="#000000"
+                android:textColorHint="@color/black"
                 tools:ignore="Autofill" />
 
             <!-- Etichetta unità di misura per le medicine -->
@@ -170,10 +172,10 @@
                 android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="-214dp"
-                android:textColorHint="@color/black"
                 android:hint="@string/click_to_add_other"
                 android:inputType="numberDecimal"
                 android:textColor="#000000"
+                android:textColorHint="@color/black"
                 tools:ignore="Autofill" />
 
             <!-- Etichetta unità di misura per altre spese -->
