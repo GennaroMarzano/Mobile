@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
-    Button buttonFragmentUser, buttonFragmentQR, buttonFragmentHealth;
+    Button buttonFragmentUser, buttonFragmentQR, buttonFragmentHealth, buttonChartPie;
     FirebaseUser user;
 
     @Override
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         buttonFragmentUser = findViewById(R.id.btn_profile);
         buttonFragmentQR = findViewById(R.id.btn_qr);
         buttonFragmentHealth = findViewById(R.id.btn_health);
+        buttonChartPie = findViewById(R.id.btn_pie);
 
         // Ottieni l'utente corrente
 
@@ -45,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Configura il click listener per il pulsante del profilo utente
-
         buttonFragmentUser.setOnClickListener(v -> {
 
             // Ottieni il gestore dei frammenti
@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Configura il click listener per il pulsante del codice QR
-
         buttonFragmentQR.setOnClickListener(v -> {
 
             // Ottieni il gestore dei frammenti
@@ -77,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
          // Configura il click listener per il pulsante del profilo salute
-
         buttonFragmentHealth.setOnClickListener(v -> {
 
             // Ottieni il gestore dei frammenti
@@ -90,6 +88,13 @@ public class MainActivity extends AppCompatActivity {
             FragmentHealthProfile healthProfileFragment = new FragmentHealthProfile();
             fragmentTransaction.replace(R.id.fragment_container, healthProfileFragment);
             fragmentTransaction.commit();
+        });
+
+        //Configura il click listener per il pulsante del grafico a torta
+        buttonChartPie.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), ChartPie.class);
+            startActivity(intent);
+            finish();
         });
     }
 }

@@ -38,7 +38,7 @@ public class ChartPie extends AppCompatActivity {
     DatePicker datePickerEnd; // DatePicker per la data di fine
     String startDate = ""; // Data di inizio selezionata
     String endDate = ""; // Data di fine selezionata
-    Button edit, apply; // Pulsanti "Edit" e "Apply"
+    Button edit, apply, buttonBackHome; // Pulsanti "Edit" e "Apply" e "buttonBackHome"
     String[] categories = {"Food", "Medicines", "Other"}; // Categorie per il grafico a torta
     private Pie pie; // Oggetto Pie del grafico
     FirebaseUser user; // Utente autenticato
@@ -60,6 +60,7 @@ public class ChartPie extends AppCompatActivity {
 
         anyChartView = findViewById(R.id.any_chart_view); // Inizializza la vista del grafico
         edit = findViewById(R.id.b_edit_chart_pie); // Inizializza il pulsante "Edit"
+        buttonBackHome = findViewById(R.id.btn_back_home);
 
         apply = findViewById(R.id.btn_apply_test); // Inizializza il pulsante "Apply"
 
@@ -109,10 +110,7 @@ public class ChartPie extends AppCompatActivity {
         // Listener per il pulsante "Edit"
 
         edit.setOnClickListener(v -> {
-
-            // Avvia l'activity per modificare il grafico a torta
-
-            Intent intent = new Intent(getApplicationContext(), EditChartPie.class);
+            Intent intent = new Intent(ChartPie.this, EditChartPie.class);
             startActivity(intent);
             finish();
         });
@@ -139,6 +137,13 @@ public class ChartPie extends AppCompatActivity {
             // Esegue una query su Firestore per ottenere i dati
 
             performFirestoreQuery(userId);
+        });
+
+        // Listener per il pulsante "buttonBackHome"
+        buttonBackHome.setOnClickListener(v ->{
+            Intent intent = new Intent(ChartPie.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         });
 
     }
@@ -319,5 +324,4 @@ public class ChartPie extends AppCompatActivity {
         }
         return true;
     }
-
 }

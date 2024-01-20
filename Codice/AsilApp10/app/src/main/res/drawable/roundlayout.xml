@@ -5,8 +5,5 @@
         android:centerColor="#60FF3434"
         android:endColor="#00FF6969"
         android:angle="270"/>
-
-    <solid android:color="@drawable/sfumatura"/>
     <corners android:radius="120dp"/>
-
 </shape>

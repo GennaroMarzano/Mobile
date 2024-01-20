@@ -130,5 +130,36 @@
     <string name="which_diet_are_you_on_health">Which diet are you on?</string>
     <string name="share_health">Share</string>
     <string name="back_health">Back</string>
+    <string name="delete">Delete</string>
+    <string name="apply_health">Apply</string>
+    <string name="add_section_2">Add</string>
+    <string name="back_section_2">Back</string>
+    <string name="back_measurement">Back</string>
+    <string name="back_measurement_heart">Back</string>
+    <string name="edit_edit_text">Edit</string>
+    <string name="measure_health">Measure</string>
+    <string name="date_oxygenation">Date</string>
+    <string name="oxygenation">Oxygenation:</string>
+    <string name="pressure">Pressure:</string>
+    <string name="date_temperature">Date</string>
+    <string name="body_temperature">Body temperature:</string>
+    <string name="date_respiratory">Date</string>
+    <string name="respiratory_rate">Respiratory rate:</string>
+    <string name="date_pressure">Date</string>
+    <string name="descrizione_immagine">descrizione_immagine</string>
+    <string name="heartbeat_rate">Heartbeat rate:</string>
+    <string name="date_heart">Date</string>
+    <string name="date_diabetes">Date</string>
+    <string name="diabetes">Diabetes:</string>
+    <string name="share_pathologies">Share</string>
+    <string name="share_measurement">Share</string>
+    <string name="save_edit_text">Save</string>
+    <string name="measure_respiratory_rate">Measure</string>
+    <string name="measure_temperature">Measure</string>
+    <string name="measure_pressure">Measure</string>
+    <string name="measure_oxygenation">Measure</string>
+    <string name="measure_heart">Measure</string>
+    <string name="measure_diabetes">Measure</string>
+    <string name="back_home">Back</string>
 
 </resources>

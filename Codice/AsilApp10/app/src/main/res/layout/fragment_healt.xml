@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/_1_medical_measurement"
                 android:textStyle="bold"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:textColor="@color/black"/>
 
             <!-- EditText disposti verticalmente -->
@@ -43,7 +43,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Heartbeat rate:"
+                        android:text="@string/heartbeat_rate"
                         android:textColor="@color/black"/>
 
                     <TextView
@@ -58,7 +58,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Date"
+                        android:text="@string/date_heart"
                         android:textColor="@color/black"/>
 
                     <TextView
@@ -81,16 +81,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:visibility="gone"
-                        android:text="Measure"
+                        android:text="@string/measure_heart"
                         android:textColor="#FFFFFF"
-                        android:backgroundTint="#4CAF50"/>
+                        android:backgroundTint="#3A833C"/>
 
                     <ImageView
                         android:id="@+id/imageViewSensorLocation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/indicazione_sensore_png"
-                        android:contentDescription="descrizione_immagine"
+                        android:contentDescription="@string/descrizione_immagine"
                         android:visibility="gone"/>
 
                 </LinearLayout>
@@ -106,7 +106,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Pressure:"
+                        android:text="@string/pressure"
                         android:textColor="@color/black"/>
 
                     <TextView
@@ -121,7 +121,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Date"
+                        android:text="@string/date_pressure"
                         android:textColor="@color/black"/>
 
                     <TextView
@@ -144,9 +144,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:visibility="gone"
-                        android:text="Measure"
+                        android:text="@string/measure_pressure"
                         android:textColor="#FFFFFF"
-                        android:backgroundTint="#4CAF50"/>
+                        android:backgroundTint="#3A833C"/>
                 </LinearLayout>
 
                 <!-- Esempio di EditText affiancati -->
@@ -160,7 +160,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Diabetes:"
+                        android:text="@string/diabetes"
                         android:textColor="@color/black"/>
 
                     <TextView
@@ -175,7 +175,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Date"
+                        android:text="@string/date_diabetes"
                         android:textColor="@color/black"/>
 
                     <TextView
@@ -198,9 +198,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:visibility="gone"
-                        android:text="Measure"
+                        android:text="@string/measure_diabetes"
                         android:textColor="#FFFFFF"
-                        android:backgroundTint="#4CAF50"/>
+                        android:backgroundTint="#3A833C"/>
                 </LinearLayout>
 
                 <!-- Esempio di EditText affiancati -->
@@ -214,7 +214,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Respiratory rate:"
+                        android:text="@string/respiratory_rate"
                         android:textColor="@color/black"/>
 
                     <TextView
@@ -229,7 +229,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Date"
+                        android:text="@string/date_respiratory"
                         android:textColor="@color/black"/>
 
                     <TextView
@@ -261,9 +261,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:visibility="gone"
-                        android:text="Measure"
+                        android:text="@string/measure_respiratory_rate"
                         android:textColor="#FFFFFF"
-                        android:backgroundTint="#4CAF50"/>
+                        android:backgroundTint="#3A833C"/>
                 </LinearLayout>
 
                 <!-- Esempio di EditText affiancati -->
@@ -277,7 +277,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Oxygenation:"
+                        android:text="@string/oxygenation"
                         android:textColor="@color/black"/>
 
                     <TextView
@@ -292,7 +292,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Date"
+                        android:text="@string/date_oxygenation"
                         android:textColor="@color/black"/>
 
                     <TextView
@@ -315,9 +315,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:visibility="gone"
-                        android:text="Measure"
+                        android:text="@string/measure_oxygenation"
                         android:textColor="#FFFFFF"
-                        android:backgroundTint="#4CAF50"/>
+                        android:backgroundTint="#3A833C"/>
                 </LinearLayout>
 
                 <!-- Esempio di EditText affiancati -->
@@ -331,7 +331,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Body temperature:"
+                        android:text="@string/body_temperature"
                         android:textColor="@color/black"/>
 
                     <TextView
@@ -346,7 +346,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Date"
+                        android:text="@string/date_temperature"
                         android:textColor="@color/black"/>
 
                     <TextView
@@ -369,9 +369,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:visibility="gone"
-                        android:text="Measure"
+                        android:text="@string/measure_temperature"
                         android:textColor="#FFFFFF"
-                        android:backgroundTint="#4CAF50"/>
+                        android:backgroundTint="#3A833C"/>
                 </LinearLayout>
 
 
@@ -386,39 +386,45 @@
 
                 <Button
                     android:id="@+id/btn_share_measurement"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Share"
+                    android:backgroundTint="#3A833C"
+                    android:text="@string/share_measurement"
                     android:textColor="#FFFFFF"
-                    android:backgroundTint="#4CAF50"/>
+                    tools:ignore="DuplicateSpeakableTextCheck" />
 
                 <Button
                     android:id="@+id/btn_measure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Measure"
+                    android:text="@string/measure_health"
                     android:textColor="#FFFFFF"
-                    android:backgroundTint="#4CAF50"/>
+                    android:backgroundTint="#3A833C"
+                    style="?android:attr/buttonBarButtonStyle" />
 
                 <Button
                     android:id="@+id/btn_back_measurement"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    android:text="Back"
+                    android:text="@string/back_measurement"
                     android:textColor="#FFFFFF"
-                    android:backgroundTint="#4CAF50"/>
+                    android:backgroundTint="#3A833C"
+                    style="?android:attr/buttonBarButtonStyle" />
 
                 <Button
                     android:id="@+id/btn_back_measurement_heart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    android:text="Back"
+                    android:text="@string/back_measurement_heart"
                     android:textColor="#FFFFFF"
-                    android:backgroundTint="#4CAF50"/>
+                    android:backgroundTint="#3A833C"
+                    style="?android:attr/buttonBarButtonStyle" />
 
             </LinearLayout>
+
         </LinearLayout>
 
         <!-- Sezione 2 -->
@@ -433,7 +439,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/_2_pathologies"
                 android:textStyle="bold"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:textColor="@color/black"/>
 
             <!-- EditText disposti verticalmente -->
@@ -455,44 +461,49 @@
                     android:id="@+id/btn_share_pathologies"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Share"
+                    android:text="@string/share_pathologies"
                     android:textColor="#FFFFFF"
-                    android:backgroundTint="#4CAF50"/>
+                    android:backgroundTint="#3A833C"
+                    style="?android:attr/buttonBarButtonStyle" />
 
                 <Button
                     android:id="@+id/btn_add_edit_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Add"
+                    android:text="@string/add_section_2"
                     android:visibility="gone"
                     android:textColor="#FFFFFF"
-                    android:backgroundTint="#4CAF50"/>
+                    android:backgroundTint="#3A833C"
+                    style="?android:attr/buttonBarButtonStyle" />
 
                 <Button
                     android:id="@+id/btn_edit_edit_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Edit"
+                    android:text="@string/edit_edit_text"
                     android:textColor="#FFFFFF"
-                    android:backgroundTint="#4CAF50"/>
+                    android:backgroundTint="#3A833C"
+                    style="?android:attr/buttonBarButtonStyle" />
 
                 <Button
                     android:id="@+id/btn_back_edit_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Back"
+                    android:text="@string/back_section_2"
                     android:visibility="gone"
                     android:textColor="#FFFFFF"
-                    android:backgroundTint="#4CAF50"/>
+                    android:backgroundTint="#3A833C"
+                    style="?android:attr/buttonBarButtonStyle" />
 
                 <Button
                     android:id="@+id/btn_save_edit_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Save"
+                    android:text="@string/save_edit_text"
                     android:visibility="gone"
                     android:textColor="#FFFFFF"
-                    android:backgroundTint="#4CAF50"/>
+                    android:backgroundTint="#3A833C"
+                    style="?android:attr/buttonBarButtonStyle" />
 
             </LinearLayout>
 
@@ -500,6 +511,7 @@
 
         <!-- Sezione 3 -->
         <LinearLayout
+            android:id="@+id/container_section_three"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -510,7 +522,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/_3_user_lifestyle_2"
                 android:textStyle="bold"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:textColor="@color/black"/>
 
             <LinearLayout
@@ -535,7 +547,7 @@
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields,VisualLintTextFieldSize" />
 
             </LinearLayout>
 
@@ -566,7 +578,7 @@
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields,VisualLintTextFieldSize" />
 
             </LinearLayout>
 
@@ -597,7 +609,7 @@
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields,VisualLintTextFieldSize" />
 
             </LinearLayout>
 
@@ -628,7 +640,7 @@
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields,TooManyViews,VisualLintTextFieldSize" />
 
             </LinearLayout>
 
@@ -659,7 +671,7 @@
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields,VisualLintTextFieldSize" />
 
             </LinearLayout>
 
@@ -690,7 +702,7 @@
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields,VisualLintTextFieldSize" />
 
             </LinearLayout>
 
@@ -721,7 +733,7 @@
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields,VisualLintTextFieldSize" />
 
             </LinearLayout>
 
@@ -752,7 +764,7 @@
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields,VisualLintTextFieldSize" />
 
             </LinearLayout>
 
@@ -783,7 +795,7 @@
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields,VisualLintTextFieldSize" />
 
             </LinearLayout>
 
@@ -814,7 +826,7 @@
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields,VisualLintTextFieldSize" />
 
             </LinearLayout>
 
@@ -845,7 +857,7 @@
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields,VisualLintTextFieldSize" />
 
             </LinearLayout>
 
@@ -876,7 +888,7 @@
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields,VisualLintTextFieldSize" />
 
             </LinearLayout>
 
@@ -907,7 +919,7 @@
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields,VisualLintTextFieldSize" />
 
             </LinearLayout>
 
@@ -938,7 +950,7 @@
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+                    tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields,VisualLintTextFieldSize" />
 
             </LinearLayout>
 
@@ -947,54 +959,58 @@
                 android:layout_width="match_parent"
                 android:layout_height="8dp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_edit_health"
+                android:backgroundTint="#3A833C"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_gravity="start"
+                android:layout_marginStart="20dp"
+                android:text="@string/edit_user_data"
+                android:textColor="#FFFFFF"
+                style="?android:attr/buttonBarButtonStyle" />
 
-                <Button
-                    android:id="@+id/btn_edit_health"
-                    android:backgroundTint="#3A833C"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_marginStart="20dp"
-                    android:text="@string/edit_user_data"
-                    android:textColor="#FFFFFF"/>
+            <Button
+                android:id="@+id/btn_share_health"
+                android:backgroundTint="#3A833C"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="20dp"
+                android:text="@string/share_health"
+                android:textColor="#FFFFFF"
+                style="?android:attr/buttonBarButtonStyle" />
 
-                <Button
-                    android:id="@+id/btn_share_health"
-                    android:backgroundTint="#3A833C"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_marginStart="20dp"
-                    android:text="@string/share_health"
-                    android:textColor="#FFFFFF"/>
+            <Button
+                android:id="@+id/btn_back_health"
+                android:backgroundTint="#3A833C"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="20dp"
+                android:text="@string/back_health"
+                android:textColor="#FFFFFF"
+                android:visibility="gone"
+                style="?android:attr/buttonBarButtonStyle" />
 
-                <Button
-                    android:id="@+id/btn_back_health"
-                    android:backgroundTint="#3A833C"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_marginStart="20dp"
-                    android:text="@string/back_health"
-                    android:textColor="#FFFFFF"
-                    android:visibility="gone"/>
-
-                <Button
-                    android:id="@+id/btn_apply_health"
-                    android:backgroundTint="#3A833C"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_marginStart="20dp"
-                    android:text="@string/edit_user_data"
-                    android:textColor="#FFFFFF"
-                    android:visibility="gone"/>
-
-            </LinearLayout>
+            <Button
+                android:id="@+id/btn_apply_health"
+                android:backgroundTint="#3A833C"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="20dp"
+                android:text="@string/apply_health"
+                android:textColor="#FFFFFF"
+                android:visibility="gone"
+                style="?android:attr/buttonBarButtonStyle" />
 
         </LinearLayout>
 
