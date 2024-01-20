@@ -241,7 +241,7 @@ public class Register extends AppCompatActivity {
 
         buttonGuest.setOnClickListener(v ->{
             progressBar.setVisibility(View.VISIBLE);
-            String email = "Buono@gmail.com";
+            String email = "buono@gmail.com";
             String password = "000000";
 
             // Effettua la registrazione tramite Firebase Authentication

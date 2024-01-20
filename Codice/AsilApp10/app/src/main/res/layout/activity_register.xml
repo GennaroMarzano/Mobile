@@ -328,18 +328,18 @@
 
                 </RadioGroup>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/have_you_ever_been_operated_in_the_past"
-        android:textColor="@color/black"
-        android:textSize="16sp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/have_you_ever_been_operated_in_the_past"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
 
-    <RadioGroup
-        android:id="@+id/radioGroup5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+                <RadioGroup
+                    android:id="@+id/radioGroup5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/radioButtonOption9"

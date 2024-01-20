@@ -119,18 +119,35 @@ public class FragmentUserData extends Fragment {
 
         // Imposta il listener per il pulsante 'Logout'
         buttonLogout.setOnClickListener(v -> {
+            // Ottiene l'utente attualmente autenticato
+            if (user != null && user.getEmail() != null && user.getEmail().equals("buono@gmail.com")) {
+                // Cancella l'account se l'email corrisponde
+                user.delete().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Account cancellato con successo, reindirizza alla schermata di login
+                        Intent intent = new Intent(getActivity(), Login.class);
+                        startActivity(intent);
 
-            // Esegue il logout dall'autenticazione Firebase
-            FirebaseAuth.getInstance().signOut();
+                        // Chiude l'activity corrente
+                        Activity activity = getActivity();
+                        if (activity != null) {
+                            activity.finish();
+                        }
+                    }
+                });
+            } else {
+                // Esegue il logout se l'email non corrisponde o l'utente non è autenticato
+                FirebaseAuth.getInstance().signOut();
 
-            // Reindirizza l'utente alla schermata di login
-            Intent intent = new Intent(getActivity(), Login.class);
-            startActivity(intent);
+                // Reindirizza l'utente alla schermata di login
+                Intent intent = new Intent(getActivity(), Login.class);
+                startActivity(intent);
 
-            // Chiude l'activity corrente
-            Activity activity = getActivity();
-            if (activity != null) {
-                activity.finish();
+                // Chiude l'activity corrente
+                Activity activity = getActivity();
+                if (activity != null) {
+                    activity.finish();
+                }
             }
         });
 
@@ -201,7 +218,6 @@ public class FragmentUserData extends Fragment {
             AlertDialog dialog = builder.create();
             dialog.show();
         });
-
     }
 
     /**

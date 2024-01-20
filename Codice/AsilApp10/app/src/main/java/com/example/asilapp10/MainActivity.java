@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
-    Button buttonFragmentUser, buttonFragmentQR, buttonFragmentHealth, buttonChartPie;
+    Button buttonFragmentUser, buttonFragmentQR, buttonFragmentHealth, buttonChartPie, buttonHome;
     FirebaseUser user;
 
     @Override
@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         buttonFragmentQR = findViewById(R.id.btn_qr);
         buttonFragmentHealth = findViewById(R.id.btn_health);
         buttonChartPie = findViewById(R.id.btn_pie);
+        buttonHome = findViewById(R.id.btn_home);
 
         // Ottieni l'utente corrente
 
@@ -95,6 +96,21 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), ChartPie.class);
             startActivity(intent);
             finish();
+        });
+
+        //Configura il click listener per il pulsante home
+        buttonHome.setOnClickListener(v ->{
+
+            // Ottieni il gestore dei frammenti
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            // Crea e sostituisci il frammento dell'utente
+
+            FragmentRules rules = new FragmentRules();
+            fragmentTransaction.replace(R.id.fragment_container, rules);
+            fragmentTransaction.commit();
         });
     }
 }
