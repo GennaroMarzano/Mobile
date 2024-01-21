@@ -9,11 +9,63 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ciao"/>
-    </ScrollView>
+            android:orientation="vertical"
+            android:background="#FFFFFF">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:text="@string/current_regulations_and_guidelines_for_good_coexistence"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="@string/in_this_building_which_houses_asylum_seekers_it_is_essential_to_follow_rules_of_coexistence_that_promote_respect_and_harmony_among_all_residents_mutual_respect_tolerance_and_understanding_are_the_pillars_of_our_community_please_observe_the_following_norms" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="@string/_1_respect_for_common_spaces_keep_common_areas_clean_and_tidy_each_resident_is_responsible_for_cleaning_up_after_using_shared_areas_such_as_the_kitchen_living_room_and_recreational_areas"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="@string/_2_silence_during_night_hours_respect_silence_from_10_00_pm_to_7_00_am_to_ensure_everyone_s_rest"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="@string/_3_tolerance_and_cultural_respect_celebrate_cultural_diversity_and_show_respect_for_each_individual_s_traditions_and_practices_avoid_behaviors_or_comments_that_may_be_perceived_as_offensive_or_discriminatory"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="@string/_4_cooperation_and_assistance_collaborate_in_communal_activities_and_offer_help_to_neighbors_when_needed_thereby_strengthening_the_community_spirit"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="@string/_5_open_communication_in_case_of_disagreements_or_problems_open_and_constructive_communication_is_encouraged_contact_the_facility_managers_for_any_need_or_concern"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </FrameLayout>

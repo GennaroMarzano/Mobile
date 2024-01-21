@@ -36,11 +36,15 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -52,13 +56,13 @@ public class FragmentHealthProfile extends Fragment {
     public static final String KEY_DIABETES = "Diabetes";
     public static final String KEY_RESPIRATORY_RATE = "Respiratory rate";
     public static final String KEY_OXYGENATION = "Oxygenation";
-    public static final String KEY_TEMPERATURE = "Temperature";
+    public static final String KEY_TEMPERATURE = "Body temperature";
     public static final String KEY_PRESSURE_DATE = "Pressure measurement data";
     public static final String KEY_DIABETES_DATE = "Diabetes measurement data";
     public static final String KEY_RESPIRATORY_RATE_DATE = "Respiratory rate measurement data";
     public static final String KEY_HEARTBEAT_DATE = "Heartbeat measurement data";
     public static final String KEY_OXYGENATION_DATE = "Oxygenation data";
-    public static final String KEY_TEMPERATURE_DATE = "Temperature data";
+    public static final String KEY_TEMPERATURE_DATE = "Body temperature data";
     public static final String KEY_NUMBER_EDIT_TEXT = "Number Edit Text";
     public static final String KEY_ID_DOCUMENT = "LsYRSc0yPM8h7PoN9Pmy";
     public static final String KEY_IDS_DELETED = "IDs deleted";
@@ -96,7 +100,7 @@ public class FragmentHealthProfile extends Fragment {
     TextView tOxygenationData, tMeasureDataOxygenation, tDateOxygenation, tDataMeasureOxygenationGone, oxygenation;
 
     // Variabili relative alla temperatura (Temperature)
-    TextView tTemperatureData, tMeasureDataTemperature, tDateTemperature, tDataMeasureTemperature, tDataMeasureTemperatureGone, temperature;
+    TextView tTemperatureData, tMeasureDataTemperature, tDateTemperature, tDataMeasureTemperatureGone, temperature;
 
     // Altre variabili
     TextView tInfoSensor;
@@ -116,6 +120,8 @@ public class FragmentHealthProfile extends Fragment {
     SensorEventListener proximitySensorListener;
     int countEditText;
     boolean flag = true;
+
+    private final Map<Integer, EditText> editTextMap = new HashMap<>();
 
     public FragmentHealthProfile() {
         // Required empty public constructor
@@ -806,9 +812,12 @@ public class FragmentHealthProfile extends Fragment {
         Random rand = new Random();
 
         // Genera un valore casuale per la frequenza respiratoria
-        float temperature = (4.5f * rand.nextFloat()) + 35.5f;   //Intervallo: 90% - 100%
+        float temperature = (4.5f * rand.nextFloat()) + 35.5f; // Intervallo: 35.5 - 40.5
+        DecimalFormat decimalFormat = new DecimalFormat("#.#");
+        decimalFormat.setRoundingMode(RoundingMode.HALF_UP);
+        decimalFormat.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+        String temperatureText = decimalFormat.format(temperature) + " °C";
 
-        String temperatureText = temperature + " °C";
 
         LocalDate currentDate = LocalDate.now();
 
@@ -921,6 +930,8 @@ public class FragmentHealthProfile extends Fragment {
                                 editText.setText(documentSnapshot.getString(String.valueOf(i)));
                                 editText.setId(i);
 
+                                editTextMap.put(editText.getId(), editText);
+
                                 // Crea il bottone di eliminazione
                                 Button deleteButton = new Button(getContext());
                                 deleteButton.setText(R.string.delete);
@@ -931,6 +942,7 @@ public class FragmentHealthProfile extends Fragment {
                                     container.removeView(editText);
                                     container.removeView(deleteButton);
                                     deletedEditTextIds.add(editText.getId());
+                                    editTextMap.remove(editText.getId());
                                     updateFireStoreWithIdsDeleted(userId);
                                 });
 
@@ -1029,20 +1041,21 @@ public class FragmentHealthProfile extends Fragment {
                     Log.d("FirestoreDocument", "Document Snapshot: " + documentSnapshot.getData());
 
                     // Imposta i dati sulle TextView
-                    eMedicines.setText(documentSnapshot.getString("Are you on Medicines?"));
-                    eDrugs.setText(documentSnapshot.getString("Do you do drugs?"));
-                    eDrinkWater.setText(documentSnapshot.getString("Do you drink enough water?"));
-                    eDrink.setText(documentSnapshot.getString("Do you drink?"));
-                    eEatVegetablesAndFruit.setText(documentSnapshot.getString("Do you eat enough vegetables and fruit?"));
-                    eExercise.setText(documentSnapshot.getString("Do you exercise?"));
-                    eGoodDiet.setText(documentSnapshot.getString("Do you have a good diet?"));
-                    eAllergies.setText(documentSnapshot.getString("Do you have any allergies?"));
-                    eSleep.setText(documentSnapshot.getString("Do you sleep enough?"));
-                    eSmoke.setText(documentSnapshot.getString("Do you smoke?"));
-                    eFamilyDiseases.setText(documentSnapshot.getString("Has anyone in your family had any disease?"));
-                    eOperated.setText(documentSnapshot.getString("Have you ever been operated in the past?"));
-                    eMealsADay.setText(documentSnapshot.getString("How many meals do you eat in a day?"));
-                    eDietOn.setText(documentSnapshot.getString("Which diet are you on?"));
+                    eMedicines.setText(documentSnapshot.getString(KEY_MEDICINES));
+                    eDrugs.setText(documentSnapshot.getString(KEY_DRUGS));
+                    eDrinkWater.setText(documentSnapshot.getString(KEY_WATER));
+                    eDrink.setText(documentSnapshot.getString(KEY_DRINK));
+                    eEatVegetablesAndFruit.setText(documentSnapshot.getString(KEY_VEGETABLES_FRUIT));
+                    eExercise.setText(documentSnapshot.getString(KEY_EXERCISE));
+                    eGoodDiet.setText(documentSnapshot.getString(KEY_GOOD_DIET));
+                    eAllergies.setText(documentSnapshot.getString(KEY_ALLERGIES));
+                    eSleep.setText(documentSnapshot.getString(KEY_SLEEP));
+                    eSmoke.setText(documentSnapshot.getString(KEY_SMOKE));
+                    eFamilyDiseases.setText(documentSnapshot.getString(KEY_FAMILY_DISEASES));
+                    eOperated.setText(documentSnapshot.getString(KEY_OPERATED));
+                    eMealsADay.setText(documentSnapshot.getString(KEY_MEALS_EAT_DAY));
+                    eDietOn.setText(documentSnapshot.getString(KEY_DIET_ON));
+
 
                 } else {
                     // Il documento non esiste
@@ -1098,6 +1111,8 @@ public class FragmentHealthProfile extends Fragment {
             editText.setId(newEditTextId);
             editTextData.put(newEditTextId, inputField.getText().toString());
 
+            editTextMap.put(editText.getId(), editText);
+
             // Aggiungi un TextWatcher per tracciare i cambiamenti
             editText.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -1127,6 +1142,7 @@ public class FragmentHealthProfile extends Fragment {
                 container.removeView(editText);
                 container.removeView(deleteButton);
                 deletedEditTextIds.add(deletedId);
+                editTextMap.remove(editText.getId());
 
                 updateFireStoreWithIdsDeleted(userId);
             });
@@ -1266,20 +1282,21 @@ public class FragmentHealthProfile extends Fragment {
         }
     }
     public void shareLifeStyleUser(){
-        String data = "Are you on medicines? " + eMedicines.getText().toString() + "\n" +
-                "Do you do drugs? " + eDrugs.getText().toString() + "\n" +
-                "Do you drink enough water? " + eDrinkWater.getText().toString() + "\n" +
-                "Do you drink? " + eDrink.getText().toString() + "\n" +
-                "Do you eat enough vegetables and fruit? " + eEatVegetablesAndFruit.getText().toString() + "\n" +
-                "Do you exercise? " + eExercise.getText().toString() + "\n" +
-                "Do you have a good diet? " + eGoodDiet.getText().toString() + "\n" +
-                "Do you have any allergies? " + eAllergies.getText().toString() + "\n" +
-                "Do you sleep enough? " + eSleep.getText().toString() + "\n" +
-                "Do you smoke? " + eSmoke.getText().toString() + "\n" +
-                "Has anyone in your family had any diseases? " + eFamilyDiseases.getText().toString() + "\n" +
-                "Have you ever benn operated in the past? " + eOperated.getText().toString() + "\n" +
-                "How many meals do you eat in a dat? " + eMealsADay.getText().toString() + "\n" +
-                "Which diet are you on? " + eSmoke.getText().toString() + "\n";
+        String data = KEY_MEDICINES + " " + eMedicines.getText().toString() + "\n" +
+                KEY_DRUGS + " " + eDrugs.getText().toString() + "\n" +
+                KEY_WATER + " " + eDrinkWater.getText().toString() + "\n" +
+                KEY_DRINK + " " + eDrink.getText().toString() + "\n" +
+                KEY_VEGETABLES_FRUIT + " " + eEatVegetablesAndFruit.getText().toString() + "\n" +
+                KEY_EXERCISE + " " + eExercise.getText().toString() + "\n" +
+                KEY_GOOD_DIET + " " + eGoodDiet.getText().toString() + "\n" +
+                KEY_ALLERGIES + " " + eAllergies.getText().toString() + "\n" +
+                KEY_SLEEP + " " + eSleep.getText().toString() + "\n" +
+                KEY_SMOKE + " " + eSmoke.getText().toString() + "\n" +
+                KEY_FAMILY_DISEASES + " " + eFamilyDiseases.getText().toString() + "\n" +
+                KEY_OPERATED + " " + eOperated.getText().toString() + "\n" +
+                KEY_MEALS_EAT_DAY + " " + eMealsADay.getText().toString() + "\n" +
+                KEY_DIET_ON + " " + eDietOn.getText().toString() + "\n";
+
 
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
@@ -1293,7 +1310,6 @@ public class FragmentHealthProfile extends Fragment {
             Toast.makeText(getContext(), "WhatsApp is not installed.", Toast.LENGTH_SHORT).show();
         }
     }
-
     public void shareMeasurement(){
         String measurement = "Heartbeat rate: " + tHeartData.getText().toString() + " Date: " + tDateHeart.getText().toString() + "\n" +
                 "Pressure: " + tPressureData.getText().toString() + " Date: " + tDatePressure.getText().toString() + "\n" +
@@ -1314,10 +1330,20 @@ public class FragmentHealthProfile extends Fragment {
             Toast.makeText(getContext(), "WhatsApp is not installed.", Toast.LENGTH_SHORT).show();
         }
     }
-
     public void sharePathologies(){
-        String pathologies = "Ciao";
+        StringBuilder pathologiesBuilder = new StringBuilder();
 
+        // Concatena il testo di tutti gli EditText
+        for (EditText editText : editTextMap.values()) {
+            String text = editText.getText().toString();
+            if (!text.isEmpty()) {
+                pathologiesBuilder.append(text).append("\n"); // Aggiungi una nuova linea tra ogni testo
+            }
+        }
+
+        String pathologies = pathologiesBuilder.toString();
+
+        // Crea e configura l'Intent per la condivisione
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, pathologies);

@@ -18,7 +18,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".FragmentHealthProfile">
+        tools:context=".FragmentHealthProfile"
+        tools:ignore="VisualLintBounds">
 
         <ScrollView
             android:layout_width="375dp"
@@ -28,7 +29,8 @@
             android:layout_marginEnd="9dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UselessParent">
 
 
             <LinearLayout
@@ -279,7 +281,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="@string/place_your_finger_on_the_top_part_of_the_phone_as_shown_in_the_picture_keep_sliding_your_finger_until_the_flashlight_turns_off_once_done_keep_your_finger_still_for_3_seconds"
+                                android:text="@string/Place_your_finger_on_the_top_part_of_the_phone_as_shown_in_the_picture_keep_sliding_your_finger_until_the_measurement_is_taken"
+                                android:textSize="16sp"
                                 android:textColor="@color/black"
                                 android:visibility="gone" />
 
@@ -650,7 +653,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        tools:ignore="TooManyViews">
 
                         <TextView
                             android:layout_width="0dp"
