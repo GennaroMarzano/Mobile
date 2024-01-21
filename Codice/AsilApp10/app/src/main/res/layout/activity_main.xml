@@ -9,6 +9,28 @@
     android:layout_height="match_parent"
     android:background="@drawable/sfondo_login">
 
+    <LinearLayout
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|top"
+            android:text="@string/welcome"
+            android:textColor="#156017"
+            android:textSize="48dp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="80dp" />
+
+    </LinearLayout>
+
     <!-- FrameLayout per contenere frammenti o altri componenti -->
 
     <FrameLayout
@@ -128,7 +150,7 @@
                     android:paddingVertical="25dp"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
-                    android:text="@string/pie_chart"
+                    android:text="@string/charges"
                     android:textColor="#FFFFFF" />
 
                 <!-- Pulsante Profilo Salute -->

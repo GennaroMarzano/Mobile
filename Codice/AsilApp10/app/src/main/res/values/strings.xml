@@ -175,4 +175,8 @@
     <string name="_3_tolerance_and_cultural_respect_celebrate_cultural_diversity_and_show_respect_for_each_individual_s_traditions_and_practices_avoid_behaviors_or_comments_that_may_be_perceived_as_offensive_or_discriminatory">3 - Tolerance and Cultural Respect: Celebrate cultural diversity and show respect for each individual\'s traditions and practices. Avoid behaviors or comments that may be perceived as offensive or discriminatory.</string>
     <string name="_4_cooperation_and_assistance_collaborate_in_communal_activities_and_offer_help_to_neighbors_when_needed_thereby_strengthening_the_community_spirit">4 - Cooperation and Assistance: Collaborate in communal activities and offer help to neighbors when needed, thereby strengthening the community spirit.</string>
     <string name="_5_open_communication_in_case_of_disagreements_or_problems_open_and_constructive_communication_is_encouraged_contact_the_facility_managers_for_any_need_or_concern">5 - Open Communication: In case of disagreements or problems, open and constructive communication is encouraged. Contact the facility managers for any need or concern.</string>
+    <string name="charges">Charges</string>
+    <string name="welcome">Welcome!</string>
+    <string name="from">From:</string>
+    <string name="to">To:</string>
 </resources>
