@@ -179,4 +179,16 @@
     <string name="welcome">Welcome!</string>
     <string name="from">From:</string>
     <string name="to">To:</string>
+    <string name="illustration_of_lifestyle_for_staying_healthy">Illustration of Lifestyle for Staying Healthy</string>
+    <string name="to_promote_and_maintain_a_healthy_lifestyle_within_our_community_we_recommend_following_these_simple_but_effective_daily_habits">To promote and maintain a healthy lifestyle within our community, we recommend following these simple but effective daily habits:</string>
+    <string name="_1_balanced_diet_consume_a_variety_of_nutritious_foods_preferring_fruits_vegetables_whole_grains_lean_proteins_and_limiting_the_intake_of_sugars_saturated_fats_and_salt">1 - Balanced Diet: Consume a variety of nutritious foods, preferring fruits, vegetables, whole grains, lean proteins, and limiting the intake of sugars, saturated fats, and salt.</string>
+    <string name="regular_physical_activity_incorporate_physical_activity_into_your_daily_routine_such_as_walking_light_exercises_or_group_sports_for_at_least_30_minutes_a_day">Regular Physical Activity: Incorporate physical activity into your daily routine, such as walking, light exercises, or group sports, for at least 30 minutes a day.</string>
+    <string name="_3_personal_and_sleep_hygiene_maintain_good_personal_hygiene_and_ensure_adequate_rest_each_night">3 - Personal and Sleep Hygiene: Maintain good personal hygiene and ensure adequate rest each night.</string>
+    <string name="_5_mental_health_dedicate_time_to_relaxing_activities_and_socializing_and_do_not_hesitate_to_seek_support_when_needed">5 - Mental Health: Dedicate time to relaxing activities and socializing, and do not hesitate to seek support when needed.</string>
+    <string name="_6_access_to_medical_care_if_needed_consult_the_available_medical_staff_for_health_advice_medications_and_nutrition">6 - Access to Medical Care: If needed, consult the available medical staff for health advice, medications, and nutrition.</string>
+    <string name="following_these_tips_will_contribute_to_creating_a_healthy_and_positive_environment_for_all_community_members">Following these tips will contribute to creating a healthy and positive environment for all community members.</string>
+    <string name="_4_avoiding_harmful_habits_reduce_or_eliminate_the_consumption_of_tobacco_alcohol_and_other_harmful_substances">4 - Avoiding Harmful Habits: Reduce or eliminate the consumption of tobacco, alcohol, and other harmful substances.</string>
+    <string name="click_here_to_leave_a_review">Click here to leave a review</string>
+    <string name="send">Send</string>
+    <string name="thank_you">Thank You!</string>
 </resources>

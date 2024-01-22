@@ -6,7 +6,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -15,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
     Button buttonFragmentUser, buttonFragmentQR, buttonFragmentHealth, buttonChartPie, buttonHome;
+    TextView textRating, textSend, textThankYou;
+    RatingBar ratingBar;
     FirebaseUser user;
 
     @Override
@@ -33,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
         buttonFragmentHealth = findViewById(R.id.btn_health);
         buttonChartPie = findViewById(R.id.btn_pie);
         buttonHome = findViewById(R.id.btn_home);
+
+        textRating = findViewById(R.id.btn_review);
+        textSend = findViewById(R.id.t_send);
+        textThankYou = findViewById(R.id.thank_you);
+
+        ratingBar = findViewById(R.id.ratingBar);
 
         // Ottieni l'utente corrente
 
@@ -111,6 +123,24 @@ public class MainActivity extends AppCompatActivity {
             FragmentRules rules = new FragmentRules();
             fragmentTransaction.replace(R.id.fragment_container, rules);
             fragmentTransaction.commit();
+        });
+
+        //Configura il click listener per far apparire la valutazione
+        textRating.setOnClickListener(v -> textSend.setVisibility(View.VISIBLE));
+
+        ratingBar.setOnRatingBarChangeListener((ratingBar1, rating, fromUser) -> {
+            if (fromUser) {
+                Log.d("RatingBar", "Nuova valutazione: " + rating);
+                // Questo codice viene eseguito ogni volta che l'utente cambia la valutazione
+                // Aggiungi qui la tua logica, ad esempio per salvare la valutazione
+            }
+        });
+
+        textSend.setOnClickListener(v -> {
+            ratingBar.setVisibility(View.GONE);
+            textRating.setVisibility(View.GONE);
+            textSend.setVisibility(View.GONE);
+            textThankYou.setVisibility(View.VISIBLE);
         });
     }
 }
