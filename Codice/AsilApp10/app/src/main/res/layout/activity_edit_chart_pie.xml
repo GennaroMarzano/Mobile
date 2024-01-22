@@ -84,7 +84,7 @@
                 android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="-115dp"
-                android:layout_marginBottom="-5dp"
+                android:layout_marginBottom="-14dp"
                 android:text="@string/food_eu"
                 android:textColor="#000000"
                 android:textSize="20sp" />
@@ -134,7 +134,7 @@
                 android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="-115dp"
-                android:layout_marginBottom="-5dp"
+                android:layout_marginBottom="-14dp"
                 android:text="@string/medicines_eu"
                 android:textColor="#000000"
                 android:textSize="20sp" />
@@ -185,7 +185,7 @@
                 android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="-115dp"
-                android:layout_marginBottom="-5dp"
+                android:layout_marginBottom="-14dp"
                 android:text="@string/other_eu"
                 android:textColor="#000000"
                 android:textSize="20sp" />

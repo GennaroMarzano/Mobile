@@ -126,7 +126,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Configura il click listener per far apparire la valutazione
-        textRating.setOnClickListener(v -> textSend.setVisibility(View.VISIBLE));
+        textRating.setOnClickListener(v ->{
+            textSend.setVisibility(View.VISIBLE);
+            ratingBar.setVisibility(View.VISIBLE);
+        } );
 
         ratingBar.setOnRatingBarChangeListener((ratingBar1, rating, fromUser) -> {
             if (fromUser) {

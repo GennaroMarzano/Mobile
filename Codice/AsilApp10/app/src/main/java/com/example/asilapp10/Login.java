@@ -66,12 +66,10 @@ public class Login extends AppCompatActivity {
         // Gestisce il click sul pulsante di login
 
         buttonLogin.setOnClickListener(v -> {
-            progressBar.setVisibility(View.VISIBLE);
             String email = "";
             String password = "";
 
             // Ottiene l'email e la password inserite dall'utente
-
             if (editTextEmail.getText() != null) {
                 email = editTextEmail.getText().toString();
             }
@@ -80,23 +78,26 @@ public class Login extends AppCompatActivity {
                 password = editTextPassword.getText().toString();
             }
 
-            // Effettua il login tramite Firebase Authentication
+            // Controlla se l'email e la password sono vuote
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(Login.this, "Please enter email and password", Toast.LENGTH_SHORT).show();
+                return; // Interrompe l'esecuzione ulteriore se manca email o password
+            }
 
+            progressBar.setVisibility(View.VISIBLE);
+
+            // Effettua il login tramite Firebase Authentication
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
-
-                            // Se il login è riuscito, reindirizza a MainActivity
-
+                            // Successo del login
                             Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                             finish();
                         } else {
-
-                            // Se il login è fallito, mostra un messaggio di errore
-
+                            // Fallimento del login
                             Toast.makeText(Login.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
                     });
