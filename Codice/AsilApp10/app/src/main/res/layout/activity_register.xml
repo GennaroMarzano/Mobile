@@ -80,6 +80,7 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/password"
+                            android:inputType="textPassword"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/password"
@@ -596,7 +597,8 @@
                         android:layout_height="match_parent"
                         android:text="@string/do_you_eat_enough_vegetables_and_fruit"
                         android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        tools:ignore="TooManyViews" />
 
                     <RadioGroup
                         android:id="@+id/radioGroup13"

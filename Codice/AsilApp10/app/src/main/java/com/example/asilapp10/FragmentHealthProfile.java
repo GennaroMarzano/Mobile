@@ -530,6 +530,16 @@ public class FragmentHealthProfile extends Fragment {
         });
     }
 
+    /**
+     * Simula e visualizza la frequenza cardiaca utilizzando il sensore di prossimità del dispositivo.
+     * Questa funzione registra un listener per il sensore di prossimità. Quando il sensore rileva
+     * un oggetto vicino (come un dito), genera un valore casuale per la frequenza cardiaca tra 60 e 130 bpm.
+     * Questo valore viene poi visualizzato in una TextView e salvato nel database sotto
+     * "User Measurement Data" con la data corrente. In caso di successo, viene mostrato un messaggio di completamento;
+     * in caso di errore, viene mostrato un messaggio di errore. Il listener viene disattivato dopo la prima rilevazione.
+     *
+     * @param userId L'ID dell'utente per cui viene simulata la frequenza cardiaca, usato per salvare i dati nel database.
+     */
     public void simulateAndDisplayHeartbeatRate(String userId){
         final int[] heartRate = {0};
         SensorManager sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
@@ -580,6 +590,14 @@ public class FragmentHealthProfile extends Fragment {
 
     }
 
+    /**
+     * Visualizza l'immagine del sensore e le informazioni relative, mentre nasconde le altre View.
+     * Questa funzione rende visibili l'imageView del sensore e il testo informativo, e mostra
+     * il pulsante per tornare alla misurazione della frequenza cardiaca. Nasconde tutte le TextView
+     * relative alle misurazioni di salute (come frequenza cardiaca, pressione, ecc.) e i pulsanti
+     * per le misurazioni specifiche. È utilizzata per focalizzare l'attenzione dell'utente
+     * sul posizionamento del sensore.
+     */
     public void showImage(){
         imageViewSensorLocation.setVisibility(View.VISIBLE);
         tInfoSensor.setVisibility(View.VISIBLE);
@@ -631,6 +649,13 @@ public class FragmentHealthProfile extends Fragment {
         buttonMeasureTemperature.setVisibility(View.GONE);
     }
 
+    /**
+     * Visualizza le opzioni per altre misurazioni, nascondendo l'immagine del sensore e le informazioni.
+     * Questa funzione nasconde l'imageView del sensore e il testo informativo. Rende visibili
+     * i pulsanti per le misurazioni di salute (come pressione, diabete, ecc.) e visualizza le TextView
+     * per le misurazioni completate. È utilizzata per permettere all'utente di passare a diverse
+     * misurazioni di salute dopo aver completato una misurazione specifica.
+     */
     public void showOtherMeasurement(){
 
         imageViewSensorLocation.setVisibility(View.GONE);
@@ -685,6 +710,15 @@ public class FragmentHealthProfile extends Fragment {
         buttonMeasureTemperature.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * Simula e visualizza la pressione sanguigna dell'utente.
+     * Genera valori casuali per la pressione sistolica e diastolica e li visualizza in una TextView.
+     * Salva questi valori nel database sotto "User Measurement Data" con la data corrente.
+     * Mostra un messaggio di successo o errore a seconda dell'esito del salvataggio.
+     *
+     * @param userId L'ID dell'utente per cui viene simulata la pressione sanguigna.
+     */
+
     public void simulateAndDisplayBloodPressure(String userId){
         Random rand = new Random();
 
@@ -717,6 +751,15 @@ public class FragmentHealthProfile extends Fragment {
                 .addOnFailureListener(e -> Toast.makeText(getActivity(), "Error!", Toast.LENGTH_SHORT).show());
     }
 
+    /**
+     * Simula e visualizza il livello di glucosio nel sangue dell'utente.
+     * Genera un valore casuale per il glucosio e lo visualizza in una TextView.
+     * Salva questo valore nel database sotto "User Measurement Data" con la data corrente.
+     * Mostra un messaggio di successo o errore a seconda dell'esito del salvataggio.
+     *
+     * @param userId L'ID dell'utente per cui viene simulato il livello di glucosio.
+     */
+
     public void simulateAndDisplayDiabetes(String userId){
         Random rand = new Random();
 
@@ -748,6 +791,15 @@ public class FragmentHealthProfile extends Fragment {
 
     }
 
+    /**
+     * Simula e visualizza la frequenza respiratoria dell'utente.
+     * Genera un valore casuale per la frequenza respiratoria e lo visualizza in una TextView.
+     * Salva questo valore nel database sotto "User Measurement Data" con la data corrente.
+     * Mostra un messaggio di successo o errore a seconda dell'esito del salvataggio.
+     *
+     * @param userId L'ID dell'utente per cui viene simulata la frequenza respiratoria.
+     */
+
     public void simulateAndDisplayRespiratoryRate(String userId){
         Random rand = new Random();
 
@@ -778,6 +830,15 @@ public class FragmentHealthProfile extends Fragment {
 
     }
 
+    /**
+     * Simula e visualizza il livello di ossigenazione del sangue dell'utente.
+     * Genera un valore casuale per l'ossigenazione e lo visualizza in una TextView.
+     * Salva questo valore nel database sotto "User Measurement Data" con la data corrente.
+     * Mostra un messaggio di successo o errore a seconda dell'esito del salvataggio.
+     *
+     * @param userId L'ID dell'utente per cui viene simulato il livello di ossigenazione.
+     */
+
     public void simulateAndDisplayOxygenation(String userId){
         Random rand = new Random();
 
@@ -807,6 +868,15 @@ public class FragmentHealthProfile extends Fragment {
                 .addOnFailureListener(e -> Toast.makeText(getActivity(), "Error!", Toast.LENGTH_SHORT).show());
 
     }
+
+    /**
+     * Simula e visualizza la temperatura corporea dell'utente.
+     * Genera un valore casuale per la temperatura e lo visualizza in una TextView.
+     * Salva questo valore nel database sotto "User Measurement Data" con la data corrente.
+     * Mostra un messaggio di successo o errore a seconda dell'esito del salvataggio.
+     *
+     * @param userId L'ID dell'utente per cui viene simulata la temperatura corporea.
+     */
 
     public void simulateAndDisplayTemperature(String userId){
         Random rand = new Random();
@@ -1186,6 +1256,15 @@ public class FragmentHealthProfile extends Fragment {
                 .addOnSuccessListener(unused -> Toast.makeText(getActivity(), "Modifications saved!", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> Toast.makeText(getActivity(), "Error saving modifications!", Toast.LENGTH_SHORT).show());
     }
+
+    /**
+     * Disabilita ricorsivamente tutte le View all'interno di un ViewGroup.
+     * Questa funzione attraversa tutte le View contenute in un ViewGroup specificato e le disabilita,
+     * rendendo l'interfaccia utente non interattiva. Se una View è anch'essa un ViewGroup,
+     * la funzione viene applicata ricorsivamente a quel ViewGroup.
+     *
+     * @param layout Il ViewGroup il cui contenuto deve essere disabilitato.
+     */
     private void disableAllViews(ViewGroup layout) {
         for (int i = 0; i < layout.getChildCount(); i++) {
             View child = layout.getChildAt(i);
@@ -1195,6 +1274,15 @@ public class FragmentHealthProfile extends Fragment {
             }
         }
     }
+
+    /**
+     * Abilita ricorsivamente tutte le View all'interno di un ViewGroup.
+     * Questa funzione attraversa tutte le View contenute in un ViewGroup specificato e le abilita,
+     * rendendo l'interfaccia utente interattiva di nuovo. Se una View è anch'essa un ViewGroup,
+     * la funzione viene applicata ricorsivamente a quel ViewGroup.
+     *
+     * @param layout Il ViewGroup il cui contenuto deve essere abilitato.
+     */
     private void enableAllViews(ViewGroup layout) {
         for (int i = 0; i < layout.getChildCount(); i++) {
             View child = layout.getChildAt(i);
@@ -1210,6 +1298,7 @@ public class FragmentHealthProfile extends Fragment {
      * @param userId L'ID dell'utente per il quale salvare i dati.
      */
     public void saveNewLifeStyleUser(String userId){
+        //Prendo e salvo il testo degli EditText
         String medicines = eMedicines.getText().toString();
         String drugs = eDrugs.getText().toString();
         String water = eDrinkWater.getText().toString();
@@ -1227,6 +1316,7 @@ public class FragmentHealthProfile extends Fragment {
 
         Map<String, Object> note = new HashMap<>();
 
+        //Controllo quali campi sono vuoti e quali no
         if (!medicines.isEmpty()) {
             note.put(KEY_MEDICINES, medicines);
         }
@@ -1281,7 +1371,18 @@ public class FragmentHealthProfile extends Fragment {
                     });
         }
     }
+
+    /**
+     * Condivide le informazioni sullo stile di vita dell'utente tramite WhatsApp.
+     * Raccoglie dettagli riguardanti vari aspetti dello stile di vita, come uso di medicinali, droghe,
+     * consumo di acqua, alcol, frutta e verdura, attività fisica, qualità della dieta, allergie,
+     * abitudini di sonno, fumo, malattie familiari, interventi chirurgici subiti, numero di pasti al giorno,
+     * e aderenza alla dieta. Questi dati sono raccolti da una serie di EditText e poi concatenati
+     * in una singola stringa. La stringa viene poi inviata ad WhatsApp tramite un Intent.
+     * Se WhatsApp non è installato, viene mostrato all'utente un messaggio di errore.
+     */
     public void shareLifeStyleUser(){
+        // Concatena il testo
         String data = KEY_MEDICINES + " " + eMedicines.getText().toString() + "\n" +
                 KEY_DRUGS + " " + eDrugs.getText().toString() + "\n" +
                 KEY_WATER + " " + eDrinkWater.getText().toString() + "\n" +
@@ -1297,7 +1398,7 @@ public class FragmentHealthProfile extends Fragment {
                 KEY_MEALS_EAT_DAY + " " + eMealsADay.getText().toString() + "\n" +
                 KEY_DIET_ON + " " + eDietOn.getText().toString() + "\n";
 
-
+        // Crea e configura l'Intent per la condivisione
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, data);
@@ -1310,7 +1411,16 @@ public class FragmentHealthProfile extends Fragment {
             Toast.makeText(getContext(), "WhatsApp is not installed.", Toast.LENGTH_SHORT).show();
         }
     }
+
+    /**
+     * Condivide le misurazioni di salute dell'utente tramite WhatsApp.
+     * Raccoglie dati come frequenza cardiaca, pressione, diabete, frequenza respiratoria,
+     * ossigenazione e temperatura corporea dagli EditText corrispondenti e li concatena in un singolo String.
+     * Invia questa stringa tramite un Intent ad WhatsApp. Se WhatsApp non è installato,
+     * mostra un messaggio di errore all'utente.
+     */
     public void shareMeasurement(){
+        // Concatena il testo
         String measurement = "Heartbeat rate: " + tHeartData.getText().toString() + " Date: " + tDateHeart.getText().toString() + "\n" +
                 "Pressure: " + tPressureData.getText().toString() + " Date: " + tDatePressure.getText().toString() + "\n" +
                 "Diabetes: " + tDiabetesData.getText().toString() + " Date: " + tDateDiabetes.getText().toString() + "\n" +
@@ -1318,6 +1428,7 @@ public class FragmentHealthProfile extends Fragment {
                 "Oxygenation: " + tOxygenationData.getText().toString() + " Date: " + tDateOxygenation.getText().toString() + "\n" +
                 "Body temperature: " + tTemperatureData.getText().toString() + " Date: " + tDateTemperature.getText().toString() + "\n";
 
+        // Crea e configura l'Intent per la condivisione
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, measurement);
@@ -1330,6 +1441,13 @@ public class FragmentHealthProfile extends Fragment {
             Toast.makeText(getContext(), "WhatsApp is not installed.", Toast.LENGTH_SHORT).show();
         }
     }
+
+    /**
+     * Condivide le patologie dell'utente tramite WhatsApp.
+     * Raccoglie i testi da un insieme di EditText, rappresentanti diverse patologie,
+     * e li concatena in un unico String. Invia questa stringa tramite un Intent ad WhatsApp.
+     * Se WhatsApp non è installato, mostra un messaggio di errore all'utente.
+     */
     public void sharePathologies(){
         StringBuilder pathologiesBuilder = new StringBuilder();
 

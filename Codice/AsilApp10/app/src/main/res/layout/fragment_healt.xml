@@ -281,7 +281,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="@string/Place_your_finger_on_the_top_part_of_the_phone_as_shown_in_the_picture_keep_sliding_your_finger_until_the_measurement_is_taken"
+                                android:text="@string/image_text"
                                 android:textSize="16sp"
                                 android:textColor="@color/black"
                                 android:visibility="gone" />
