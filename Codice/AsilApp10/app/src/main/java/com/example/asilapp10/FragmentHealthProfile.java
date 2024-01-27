@@ -102,7 +102,7 @@ public class FragmentHealthProfile extends Fragment {
     // Variabili relative alla temperatura (Temperature)
     TextView tTemperatureData, tMeasureDataTemperature, tDateTemperature, tDataMeasureTemperatureGone, temperature;
 
-    // Altre variabili
+    // Variabili per EditText, ImageView, TextView, Button, LinearLayout e SensorEventListener
     TextView tInfoSensor;
 
     EditText eMedicines, eDrugs, eDrinkWater, eDrink, eEatVegetablesAndFruit, eExercise,
@@ -118,10 +118,10 @@ public class FragmentHealthProfile extends Fragment {
 
     LinearLayout container, containerThree;
     SensorEventListener proximitySensorListener;
-    int countEditText;
-    boolean flag = true;
+    int countEditText; // Contiene il numero di EditText
+    boolean flag = true; //Evita che gli EditText si sdoppiano
 
-    private final Map<Integer, EditText> editTextMap = new HashMap<>();
+    private final Map<Integer, EditText> editTextMap = new HashMap<>(); // Contiene gli EditText
 
     public FragmentHealthProfile() {
         // Required empty public constructor

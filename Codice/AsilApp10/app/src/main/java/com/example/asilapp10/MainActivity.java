@@ -18,7 +18,8 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
-    Button buttonFragmentUser, buttonFragmentQR, buttonFragmentHealth, buttonChartPie, buttonHome;
+    Button buttonFragmentUser, buttonFragmentQR, buttonFragmentHealth, buttonChartPie, buttonHome,
+           buttonVideo;
     TextView textRating, textSend, textThankYou;
     RatingBar ratingBar;
     FirebaseUser user;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         buttonFragmentHealth = findViewById(R.id.btn_health);
         buttonChartPie = findViewById(R.id.btn_pie);
         buttonHome = findViewById(R.id.btn_home);
+        buttonVideo = findViewById(R.id.btn_video);
 
         textRating = findViewById(R.id.btn_review);
         textSend = findViewById(R.id.t_send);
@@ -122,6 +124,21 @@ public class MainActivity extends AppCompatActivity {
 
             FragmentRules rules = new FragmentRules();
             fragmentTransaction.replace(R.id.fragment_container, rules);
+            fragmentTransaction.commit();
+        });
+
+        //Configura il click listener per far visualizzare il video all'utente
+
+        buttonVideo.setOnClickListener(v ->{
+            // Ottieni il gestore dei frammenti
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            // Crea e sostituisci il frammento dell'utente
+
+            FragmentVideo video = new FragmentVideo();
+            fragmentTransaction.replace(R.id.fragment_container, video);
             fragmentTransaction.commit();
         });
 

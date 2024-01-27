@@ -218,6 +218,19 @@
                     android:text="@string/health_profile"
                     android:textColor="#FFFFFF" />
 
+                <Button
+                    android:id="@+id/btn_video"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="145dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="#008000"
+                    android:paddingVertical="25dp"
+                    android:paddingStart="-25dp"
+                    android:paddingEnd="15dp"
+                    android:text="@string/video"
+                    android:textColor="#FFFFFF" />
+
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
