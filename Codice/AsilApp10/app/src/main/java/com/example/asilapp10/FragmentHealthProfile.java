@@ -51,6 +51,7 @@ import java.util.stream.Collectors;
 
 public class FragmentHealthProfile extends Fragment {
 
+    // Queste chiavi servono per poter prendere i valori contenuti nei campi in Firestore
     private static final String KEY_HEART = "Heartbeat rate";
     public static final String KEY_PRESSURE = "Pressure";
     public static final String KEY_DIABETES = "Diabetes";
@@ -147,6 +148,8 @@ public class FragmentHealthProfile extends Fragment {
         user = mAuth.getCurrentUser();
 
         String userId = (user != null) ? user.getUid() : "";
+
+        // Inizializzo la variabile counterEditText
 
         DocumentReference docRef = db.collection("Pathologies")
                 .document(userId);
@@ -261,6 +264,8 @@ public class FragmentHealthProfile extends Fragment {
 
         queryLifeStyle(userId);
 
+
+        // Imposta la visibilità di alcuni widget
         buttonMeasure.setOnClickListener(v -> {
 
                 // Impostare la visibilità a GONE
@@ -307,7 +312,7 @@ public class FragmentHealthProfile extends Fragment {
 
         });
 
-
+        // Imposta la visibilità di alcuni widget
         buttonBack.setOnClickListener(v -> {
 
                 // Impostare la visibilità a GONE
@@ -366,6 +371,8 @@ public class FragmentHealthProfile extends Fragment {
 
         buttonBackMeasureHeart.setOnClickListener(v -> showOtherMeasurement());
 
+        //I vari bottoni chiamano le funzioni per simulare le misurazioni mediche
+
         buttonMeasureHeart.setOnClickListener(v -> {
             showImage();
             simulateAndDisplayHeartbeatRate(userId);
@@ -380,6 +387,8 @@ public class FragmentHealthProfile extends Fragment {
         buttonMeasureOxygenation.setOnClickListener(v -> simulateAndDisplayOxygenation(userId));
 
         buttonMeasureTemperature.setOnClickListener(v -> simulateAndDisplayTemperature(userId));
+
+        // I vari bottoni servono per modificare, aggiungere e salvare gli EditText
 
         buttonEditEditText.setOnClickListener(v -> {
             // Crea l'EditText per la password
@@ -497,6 +506,7 @@ public class FragmentHealthProfile extends Fragment {
             dialog.show();
         });
 
+        //Utilizzato per condividere le misurazioni
         buttonShareMeasurement.setOnClickListener(v ->{
 
             // Crea un AlertDialog per confermare la condivisione
@@ -505,7 +515,7 @@ public class FragmentHealthProfile extends Fragment {
             builder.setMessage("Do you want to share your measurement?");
 
             // Imposta i pulsanti di risposta nell'AlertDialog
-            builder.setPositiveButton("YES", (dialog, id) -> shareMeasurement());
+            builder.setPositiveButton(getString(R.string.yes), (dialog, id) -> shareMeasurement());
             builder.setNegativeButton("NO", (dialog, id) -> dialog.dismiss());
 
             // Mostra l'AlertDialog
@@ -513,15 +523,16 @@ public class FragmentHealthProfile extends Fragment {
             dialog.show();
         });
 
+        //Utilizzato per condividere le patologie
         buttonSharePathologies.setOnClickListener(v ->{
 
             // Crea un AlertDialog per confermare la condivisione
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Confirm sharing");
+            builder.setTitle(getString(R.string.confirm_sharing));
             builder.setMessage("Do you want to share your pathologies?");
 
             // Imposta i pulsanti di risposta nell'AlertDialog
-            builder.setPositiveButton("YES", (dialog, id) -> sharePathologies());
+            builder.setPositiveButton(getString(R.string.yes), (dialog, id) -> sharePathologies());
             builder.setNegativeButton("NO", (dialog, id) -> dialog.dismiss());
 
             // Mostra l'AlertDialog
@@ -911,6 +922,17 @@ public class FragmentHealthProfile extends Fragment {
 
     }
 
+    /**
+     * Interroga i dati sanitari dell'utente da Firestore.
+     * Recupera dati come battito cardiaco, pressione, diabete, saturazione di ossigeno, temperatura, e frequenza respiratoria.
+     * Mostra i dati recuperati sulle corrispondenti TextView.
+     * Gestisce il caso in cui i dati non esistano o ci sia un errore nella loro acquisizione.
+     * Inoltre, se abilitato, recupera e visualizza informazioni aggiuntive relative alle patologie.
+     *
+     * @param userId L'ID dell'utente per il quale si vogliono recuperare i dati.
+     */
+
+
     public void queryHealthData(String userId){
         DocumentReference docRef = db.collection("User Measurement Data")
                 .document(userId + " Health Data");
@@ -1049,6 +1071,16 @@ public class FragmentHealthProfile extends Fragment {
         flag = true;
     }
 
+    /**
+     * Interroga il codice medico fornito dall'utente, confrontandolo con un insieme di codici memorizzati in Firestore.
+     * Utilizza un callback per comunicare il risultato della verifica (corrispondenza o meno).
+     * Gestisce il caso in cui il documento non esista o ci sia un errore nella query.
+     *
+     * @param doctorCode Il codice medico fornito per la verifica.
+     * @param callback Il callback utilizzato per restituire il risultato della verifica.
+     */
+
+
     public void queryMedicalCode(String doctorCode, QueryCallback callback) {
 
         db.collection("Medical Code").document(KEY_ID_DOCUMENT).get()
@@ -1094,9 +1126,23 @@ public class FragmentHealthProfile extends Fragment {
 
     }
 
+    /**
+     * Interfaccia di callback utilizzata per restituire i risultati di queryMedicalCode.
+     */
+
     public interface QueryCallback {
         void onQueryCompleted(boolean isMatch);
     }
+
+    /**
+     * Interroga i dati relativi allo stile di vita dell'utente da Firestore.
+     * Recupera informazioni come abitudini alimentari, esercizio fisico, allergie, sonno, fumo, ecc.
+     * Visualizza queste informazioni sulle corrispondenti TextView.
+     * Gestisce il caso in cui il documento non esista o ci sia un errore nella sua acquisizione.
+     *
+     * @param userId L'ID dell'utente per il quale si vogliono recuperare i dati sullo stile di vita.
+     */
+
 
     private void queryLifeStyle(String userId) {
 
@@ -1146,6 +1192,16 @@ public class FragmentHealthProfile extends Fragment {
     Map<Integer, String> editTextData = new HashMap<>();
     // Supponiamo di avere un ArrayList per tenere traccia degli ID eliminati
     ArrayList<Integer> deletedEditTextIds = new ArrayList<>();
+
+
+    /**
+     * Aggiunge un EditText e un bottone di eliminazione al layout.
+     * L'utente può inserire testo, che viene poi salvato in Firestore.
+     * Un ID univoco è assegnato all'EditText, che può essere riutilizzato dagli ID eliminati.
+     * Un bottone di eliminazione consente di rimuovere l'EditText e l'ID corrispondente dall'elenco.
+     *
+     * @param userId L'identificativo unico dell'utente, utilizzato per salvare i dati in Firestore.
+     */
 
     public void addEditTextAndDeleteButton(String userId) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -1234,6 +1290,14 @@ public class FragmentHealthProfile extends Fragment {
 
         builder.show();
     }
+
+    /**
+     * Aggiorna Firestore con l'elenco degli ID degli EditText eliminati.
+     * Questo metodo è chiamato dopo l'eliminazione di un EditText per mantenere aggiornato l'elenco degli ID disponibili.
+     *
+     * @param userId L'identificativo unico dell'utente, usato per identificare il documento Firestore corretto.
+     */
+
     public void updateFireStoreWithIdsDeleted(String userId){
         // Aggiorna Firestore con l'ID eliminato
         Map<String, Object> updates = new HashMap<>();
@@ -1245,6 +1309,14 @@ public class FragmentHealthProfile extends Fragment {
                 .addOnFailureListener(e -> Log.w("Firestore", "Errore nell'aggiornamento dell'ID eliminato", e));
 
     }
+
+    /**
+     * Salva i dati dell'utente in Firestore.
+     * [Dettagli aggiuntivi non disponibili senza il codice della funzione.]
+     *
+     * @param userId L'identificativo unico dell'utente, utilizzato per identificare il documento Firestore in cui salvare i dati.
+     */
+
     public void saveData(String userId) {
         Map<String, Object> note = new HashMap<>();
         for (Map.Entry<Integer, String> entry : editTextData.entrySet()) {

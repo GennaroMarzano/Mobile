@@ -187,4 +187,8 @@
     <string name="thank_you">Thank You!</string>
     <string name="video">Video</string>
     <string name="image_text">Place your finger on the top of the phone as shown in the image, keep sliding your finger until the measurement is taken</string>
+    <string name="confirm_sharing">Confirm sharing</string>
+    <string name="share_personal_data">Do you want to share your personal data?</string>
+    <string name="share_peathologies">Do you want to share your pathologies?</string>
+
 </resources>

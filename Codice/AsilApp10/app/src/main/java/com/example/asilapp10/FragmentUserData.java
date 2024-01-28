@@ -207,11 +207,11 @@ public class FragmentUserData extends Fragment {
 
             // Crea un AlertDialog per confermare la condivisione
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Confirm sharing");
-            builder.setMessage("Do you want to share your personal data?");
+            builder.setTitle(getString(R.string.confirm_sharing));
+            builder.setMessage(getString(R.string.share_personal_data));
 
             // Imposta i pulsanti di risposta nell'AlertDialog
-            builder.setPositiveButton("YES", (dialog, id) -> shareDataUser());
+            builder.setPositiveButton(getString(R.string.yes), (dialog, id) -> shareDataUser());
             builder.setNegativeButton("NO", (dialog, id) -> dialog.dismiss());
 
             // Mostra l'AlertDialog

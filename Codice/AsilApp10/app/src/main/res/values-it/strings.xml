@@ -188,4 +188,9 @@
     <string name="thank_you">Grazie!</string>
     <string name="video">Video</string>
     <string name="image_text">Posiziona il dito sulla parte superiore del telefono come mostrato in figura, continua a far scorrere il dito fino a quando non viene presa la misurazione</string>
+    <string name="confirm_sharing">Conferma</string>
+    <string name="share_personal_data">Vuoi condividere i tuoi dati personali?</string>
+    <string name="share_peathologies">Vuoi condividere le tue patologie?</string>
+
+
 </resources>
