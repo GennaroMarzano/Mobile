@@ -1,10 +1,16 @@
 package com.example.asilapp10;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 
@@ -19,7 +25,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,94 +34,73 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * Activity per visualizzare un grafico a torta (Pie Chart).
- */
-public class ChartPie extends AppCompatActivity {
+public class ChartPieFragment extends Fragment {
+
     AnyChartView anyChartView; // Vista per il grafico a torta
     DatePicker datePickerStart; // DatePicker per la data di inizio
     DatePicker datePickerEnd; // DatePicker per la data di fine
     String startDate = ""; // Data di inizio selezionata
     String endDate = ""; // Data di fine selezionata
-    Button edit, apply, buttonBackHome; // Pulsanti "Edit" e "Apply" e "buttonBackHome"
+    Button edit, apply; // Pulsanti "Edit" e "Apply"
     String[] categories = {"Food", "Medicines", "Other"}; // Categorie per il grafico a torta
     private Pie pie; // Oggetto Pie del grafico
     FirebaseUser user; // Utente autenticato
     FirebaseAuth mAuth; // Oggetto per l'autenticazione
+    String userId;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_chart_pie, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         // Ottiene la data corrente
 
-        Date currentDate = new Date();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        String formattedDate = dateFormat.format(currentDate);
 
-        setContentView(R.layout.fragment_chart_pie);
 
-        anyChartView = findViewById(R.id.any_chart_view); // Inizializza la vista del grafico
-        edit = findViewById(R.id.b_edit_chart_pie); // Inizializza il pulsante "Edit"
+        anyChartView = view.findViewById(R.id.any_chart_view); // Inizializza la vista del grafico
+        edit = view.findViewById(R.id.b_edit_chart_pie); // Inizializza il pulsante "Edit"
 
-        apply = findViewById(R.id.btn_apply_test); // Inizializza il pulsante "Apply"
+        apply = view.findViewById(R.id.btn_apply_test); // Inizializza il pulsante "Apply"
 
-        datePickerStart = findViewById(R.id.d_pie_start); // Inizializza il DatePicker di inizio
-        datePickerEnd = findViewById(R.id.d_pie_end); // Inizializza il DatePicker di fine
+        datePickerStart = view.findViewById(R.id.d_pie_start); // Inizializza il DatePicker di inizio
+        datePickerEnd = view.findViewById(R.id.d_pie_end); // Inizializza il DatePicker di fine
 
         mAuth = FirebaseAuth.getInstance(); // Ottiene l'istanza di FirebaseAuth
         user = mAuth.getCurrentUser(); // Ottiene l'utente corrente
 
-        String userId = (user != null) ? user.getUid() : "";
+        userId = (user != null) ? user.getUid() : "";
+
+
 
         // Ottiene i dati del grafico a torta dal database
+        loadPieChart();
 
-        DocumentReference docRef = db.collection("Chart Pie Data")
-                .document(userId + " FMO");
 
-        docRef.get().addOnSuccessListener(documentSnapshot -> {
-            if (documentSnapshot.exists()) {
-                List<Double> values = new ArrayList<>();
-
-                // Ottiene i dati dalla data formattata corrente
-                //Controlla se i valori sono una istanza di Double e Integer
-
-                Object rawData = documentSnapshot.get(formattedDate);
-                if (rawData instanceof List<?>) {
-                    List<?> rawList = (List<?>) rawData;
-
-                    for (Object item : rawList) {
-                        if (item instanceof Double) {
-                            values.add((Double) item);
-                        } else if (item instanceof Integer) {
-                            values.add(((Integer) item).doubleValue());
-                        }
-                    }
-                }
-                if (values.size() >= 3) {
-                    double[] valuesArray = new double[]{
-                            values.get(0),
-                            values.get(1),
-                            values.get(2)
-                    };
-                    setupPieChart(valuesArray);
-                }
-            }
-        });
 
         // Listener per il pulsante "Edit"
 
         edit.setOnClickListener(v -> {
-            Intent intent = new Intent(ChartPie.this, EditChartPie.class);
+            Intent intent = new Intent(getActivity(), EditChartPie.class);
             startActivity(intent);
-            finish();
         });
 
         // Listener per il pulsante "Apply"
 
-        apply.setOnClickListener(v -> {
+        apply.setOnClickListener(aView -> {
 
             // Ottiene la data di inizio e la data di fine selezionate dall'utente
 
@@ -126,26 +110,19 @@ public class ChartPie extends AppCompatActivity {
             // Imposta i listener per i datepicker per aggiornare le date selezionate
 
             datePickerStart.init(datePickerStart.getYear(), datePickerStart.getMonth(), datePickerStart.getDayOfMonth(),
-                    (view, year, monthOfYear, dayOfMonth) ->
+                    (v, year, monthOfYear, dayOfMonth) ->
                             startDate = getCurrentFormattedDate(year, monthOfYear, dayOfMonth));
 
             datePickerEnd.init(datePickerEnd.getYear(), datePickerEnd.getMonth(), datePickerEnd.getDayOfMonth(),
-                    (view, year, monthOfYear, dayOfMonth) ->
+                    (v, year, monthOfYear, dayOfMonth) ->
                             endDate = getCurrentFormattedDate(year, monthOfYear, dayOfMonth));
 
             // Esegue una query su Firestore per ottenere i dati
 
             performFirestoreQuery(userId);
         });
-
-        // Listener per il pulsante "buttonBackHome"
-        buttonBackHome.setOnClickListener(v ->{
-            Intent intent = new Intent(ChartPie.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        });
-
     }
+
 
     /**
      * Configura e visualizza un grafico a torta (pie chart) con i valori forniti.
@@ -322,5 +299,51 @@ public class ChartPie extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    public void loadPieChart() {
+        Date currentDate = new Date();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String formattedDate = dateFormat.format(currentDate);
+
+        DocumentReference docRef = db.collection("Chart Pie Data")
+                .document(userId + " FMO");
+
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                List<Double> values = new ArrayList<>();
+
+                // Ottiene i dati dalla data formattata corrente
+                //Controlla se i valori sono una istanza di Double e Integer
+
+                Object rawData = documentSnapshot.get(formattedDate);
+                if (rawData instanceof List<?>) {
+                    List<?> rawList = (List<?>) rawData;
+
+                    for (Object item : rawList) {
+                        if (item instanceof Double) {
+                            values.add((Double) item);
+                        } else if (item instanceof Integer) {
+                            values.add(((Integer) item).doubleValue());
+                        }
+                    }
+                }
+                if (values.size() >= 3) {
+                    double[] valuesArray = new double[]{
+                            values.get(0),
+                            values.get(1),
+                            values.get(2)
+                    };
+                    setupPieChart(valuesArray);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadPieChart();
     }
 }
