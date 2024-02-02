@@ -23,7 +23,7 @@ public class FragmentVideo extends Fragment {
     // Ottengo l'istanza di FirebaseStorage per poi ottenere il video tramire il suo pathString
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
-    StorageReference videoRef = storageRef.child("WhatsApp Video 2024-01-26 at 13.54.04.mp4");
+    StorageReference videoRef = storageRef.child("Record_2024-02-02-17-25-37.mp4");
 
     public FragmentVideo() {
         // Required empty public constructor

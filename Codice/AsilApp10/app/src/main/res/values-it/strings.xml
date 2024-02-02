@@ -87,10 +87,10 @@
     <string name="medicines_eu">€</string>
     <string name="other">Altro</string>
     <string name="other_eu">€</string>
-    <string name="click_to_add_medicines">Clicca per aggiungere</string>
-    <string name="click_to_add_other">Clicca per aggiungere</string>
+    <string name="click_to_add_medicines">Clicca per aggiungere €</string>
+    <string name="click_to_add_other">Clicca per aggiungere €</string>
     <string name="add_eu">Aggiungi</string>
-    <string name="click_to_add_food">Clicca per aggiungere</string>
+    <string name="click_to_add_food">Clicca per aggiungere €</string>
     <string name="add_edit_chart">Aggiungi</string>
     <string name="home">Home</string>
     <string name="map">Mappa</string>
@@ -194,6 +194,13 @@
     <string name="pharmacy">Farmacia</string>
     <string name="google_maps">Google Maps</string>
     <string name="other_main">Altro</string>
+    <string name="tutorial_app">Tutorial app</string>
+    <string name="autenticati_con_il_qrcode">Autenticati con il QRCode</string>
+    <string name="medical_code">Inserisci il codice del medico</string>
+    <string name="confirm">CONFERMA</string>
+    <string name="cancel">CANCELLA</string>
+    <string name="share_life_style">Vuoi condividere i tuoi dati sul tuo stile di vita?</string>
+    <string name="share_measuremente">Vuoi condividere le tue misurazioni?</string>
 
 
 </resources>

@@ -25,9 +25,6 @@
             android:name=".EditChartPie"
             android:exported="false" />
         <activity
-            android:name=".ChartPie"
-            android:exported="false" />
-        <activity
             android:name=".Register"
             android:exported="false" />
         <activity

@@ -24,7 +24,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.037" />
+        app:layout_constraintVertical_bias="0.037"
+        android:visibility="invisible"/>
 
     <!-- RelativeLayout principale che contiene i vari elementi di input e pulsanti -->
 
@@ -77,17 +78,6 @@
                 android:textColorHint="@color/black"
                 tools:ignore="Autofill,DuplicateSpeakableTextCheck" />
 
-            <!-- Etichetta unità di misura per il cibo -->
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="-115dp"
-                android:layout_marginBottom="-14dp"
-                android:text="@string/food_eu"
-                android:textColor="#000000"
-                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -127,17 +117,6 @@
                 android:textColorHint="@color/black"
                 tools:ignore="Autofill" />
 
-            <!-- Etichetta unità di misura per le medicine -->
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="-115dp"
-                android:layout_marginBottom="-14dp"
-                android:text="@string/medicines_eu"
-                android:textColor="#000000"
-                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -178,17 +157,6 @@
                 android:textColorHint="@color/black"
                 tools:ignore="Autofill" />
 
-            <!-- Etichetta unità di misura per altre spese -->
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="-115dp"
-                android:layout_marginBottom="-14dp"
-                android:text="@string/other_eu"
-                android:textColor="#000000"
-                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -196,10 +164,10 @@
 
         <Button
             android:id="@+id/btn_add_back"
-            android:layout_width="109dp"
-            android:layout_height="54dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="55dp"
+            android:layout_marginStart="42dp"
             android:layout_marginTop="450dp"
             android:backgroundTint="#3A833C"
             android:text="@string/back"
@@ -212,11 +180,11 @@
 
         <Button
             android:id="@+id/btn_add_add"
-            android:layout_width="109dp"
-            android:layout_height="54dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="450dp"
-            android:layout_marginEnd="55dp"
+            android:layout_marginEnd="42dp"
             android:layout_marginBottom="140dp"
             android:backgroundTint="#3A833C"
             android:text="@string/add_edit_chart"

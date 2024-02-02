@@ -408,7 +408,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="vertical">
+                            android:orientation="horizontal">
 
                             <Button
                                 android:id="@+id/btn_back_edit"
@@ -417,16 +417,10 @@
                                 android:backgroundTint="#3A833C"
                                 android:text="@string/back_user_data"
                                 android:textColor="#FFFFFF"
-                                android:visibility="gone" />
+                                android:visibility="gone"
+                                style="?android:attr/buttonBarButtonStyle" />
 
-                            <Button
-                                android:id="@+id/btn_edit_data"
-                                android:layout_width="134dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="10dp"
-                                android:backgroundTint="#3A833C"
-                                android:text="@string/edit"
-                                android:textColor="#FFFFFF" />
+
 
                         </LinearLayout>
 
@@ -462,6 +456,16 @@
                     </FrameLayout>
 
                     <Button
+                        android:id="@+id/btn_edit_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="#3A833C"
+                        android:layout_marginEnd="100dp"
+                        android:text="@string/edit"
+                        android:textColor="#FFFFFF"
+                        style="?android:attr/buttonBarButtonStyle" />
+
+                    <Button
                         android:id="@+id/btn_share"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -470,6 +474,8 @@
                         android:backgroundTint="#3A833C"
                         android:text="@string/share"
                         android:textColor="#FFFFFF" />
+
+
 
                 </LinearLayout>
 
@@ -486,7 +492,8 @@
                         android:layout_weight="1"
                         android:backgroundTint="#3A833C"
                         android:text="@string/logout_user_data"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        tools:ignore="TextContrastCheck" />
                 </LinearLayout>
 
             </LinearLayout>

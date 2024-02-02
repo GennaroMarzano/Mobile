@@ -86,10 +86,10 @@
     <string name="medicines_eu">€</string>
     <string name="other">Other</string>
     <string name="other_eu">€</string>
-    <string name="click_to_add_medicines">Click to add</string>
-    <string name="click_to_add_other">Click to add</string>
+    <string name="click_to_add_medicines">Click to add €</string>
+    <string name="click_to_add_other">Click to add €</string>
     <string name="add_eu">Add</string>
-    <string name="click_to_add_food">Click to add</string>
+    <string name="click_to_add_food">Click to add €</string>
     <string name="add_edit_chart">Add</string>
     <string name="home">Home</string>
     <string name="map">Map</string>
@@ -193,6 +193,12 @@
     <string name="pharmacy">Pharmacy</string>
     <string name="google_maps">Google Maps</string>
     <string name="other_main">Other</string>
-    <string name="autenticati_con_il_qrcode">Autenticati con il QRCode</string>
+    <string name="autenticati_con_il_qrcode">QR Authentication</string>
+    <string name="tutorial_app">Tutorial app</string>
+    <string name="medical_code">Insert medical code</string>
+    <string name="confirm">CONFIRM</string>
+    <string name="cancel">CANCEL</string>
+    <string name="share_life_style">Do you want to share your life style data?</string>
+    <string name="share_measuremente">Do you want to share your measurement?</string>
 
 </resources>

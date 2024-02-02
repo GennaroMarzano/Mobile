@@ -74,6 +74,15 @@
             android:textStyle="bold"
             android:visibility="gone" />
 
+        <Button
+            android:id="@+id/btn_video"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tutorial_app"
+            android:backgroundTint="#3A833C"
+            android:layout_marginTop="20dp"
+            android:textColor="#FFFFFF"/>
+
 
     </LinearLayout>
 
@@ -98,6 +107,9 @@
         android:id="@+id/BottomNavigationMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#3A833C"
+        app:itemIconTint="#FFFFFF"
+        app:itemTextColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

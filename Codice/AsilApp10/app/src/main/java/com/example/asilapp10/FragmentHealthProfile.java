@@ -398,10 +398,10 @@ public class FragmentHealthProfile extends Fragment {
 
             // Crea l'AlertDialog
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setTitle("Insert Medical Code");
+            builder.setTitle(getString(R.string.medical_code));
             builder.setView(passwordEditText);
 
-            builder.setPositiveButton("CONFIRM", (dialog, which) -> {
+            builder.setPositiveButton(getString(R.string.confirm), (dialog, which) -> {
                 String doctorCode = passwordEditText.getText().toString();
                 doctorCode = doctorCode.isEmpty() ? "0000" : doctorCode;
                 queryMedicalCode(doctorCode, isMatch -> {
@@ -420,7 +420,7 @@ public class FragmentHealthProfile extends Fragment {
                 });
             });
 
-            builder.setNegativeButton("CANCEL", (dialog, which) -> dialog.dismiss());
+            builder.setNegativeButton(getString(R.string.cancel), (dialog, which) -> dialog.dismiss());
 
             // Mostra l'AlertDialog
             builder.show();
@@ -494,11 +494,11 @@ public class FragmentHealthProfile extends Fragment {
 
             // Crea un AlertDialog per confermare la condivisione
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Confirm sharing");
-            builder.setMessage("Do you want to share your life style data?");
+            builder.setTitle(getString(R.string.confirm_sharing));
+            builder.setMessage(getString(R.string.share_life_style));
 
             // Imposta i pulsanti di risposta nell'AlertDialog
-            builder.setPositiveButton("YES", (dialog, id) -> shareLifeStyleUser());
+            builder.setPositiveButton(getString(R.string.yes), (dialog, id) -> shareLifeStyleUser());
             builder.setNegativeButton("NO", (dialog, id) -> dialog.dismiss());
 
             // Mostra l'AlertDialog
@@ -511,8 +511,8 @@ public class FragmentHealthProfile extends Fragment {
 
             // Crea un AlertDialog per confermare la condivisione
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Confirm sharing");
-            builder.setMessage("Do you want to share your measurement?");
+            builder.setTitle(getString(R.string.confirm_sharing));
+            builder.setMessage(getString(R.string.share_measuremente));
 
             // Imposta i pulsanti di risposta nell'AlertDialog
             builder.setPositiveButton(getString(R.string.yes), (dialog, id) -> shareMeasurement());
@@ -529,7 +529,7 @@ public class FragmentHealthProfile extends Fragment {
             // Crea un AlertDialog per confermare la condivisione
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle(getString(R.string.confirm_sharing));
-            builder.setMessage("Do you want to share your pathologies?");
+            builder.setMessage(getString(R.string.share_peathologies));
 
             // Imposta i pulsanti di risposta nell'AlertDialog
             builder.setPositiveButton(getString(R.string.yes), (dialog, id) -> sharePathologies());
